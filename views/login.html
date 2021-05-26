@@ -1,20 +1,49 @@
-<%- include ('partials/head.html')%>
-<div class="container">
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Correo electrónico</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-    </div>
+<!DOCTYPE html>
+<html lang="en">
 
-    <div class="mb-3">
-        <label for="inputPassword" class="form-label">Contraseña</label>
-        <input type="password" class="form-control" id="inputPassword">
-    </div>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in</title>
+</head>
 
-    <div class="mb-3">
-        <div class="col-12">
-            <a class="btn btn-primary" href="/" role="button">Regresar</a>
-            <button class="btn btn-primary" type="submit">Log in</button>  
-        </div>
-    </div>
+<body>
+    <%- include ('partials/head.html')%>
+    <ul>
+        <% if(messages.exito) { %>
+            <li><%= messages.exito %></li>
+      <%  } %>
+    </ul>
+    
 
-</div>
+        <form action="login.html" method="POST">
+            <div class="container">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Correo electrónico</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1"
+                        placeholder="name@example.com">
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputPassword" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="inputPassword">
+                </div>
+
+                <div class="mb-3">
+                    <div class="col-12">
+                        <a class="btn btn-primary" href="/" role="button">Regresar</a>
+                        <button class="btn btn-primary" type="submit" value="login">Log in</button>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <a class="btn btn-link" href="/signup">¿No tienes una cuenta? Regístrate</a>
+                </div>
+
+            </div>
+        </form>
+</body>
+
+</html>
+

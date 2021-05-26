@@ -1,35 +1,72 @@
-<%- include ('partials/head.html')%>
-<div class="container">
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Correo electrónico</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-    </div>
+<!DOCTYPE html>
+<html lang="en">
 
-    <div class="mb-3">
-        <label for="username" class="form-label">Nombre de usuario</label>
-        <input class="form-control" type="text" id= "username" placeholder="Nombre de usuario" aria-label="default input example">
-    </div>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+</head>
 
-    <div class="mb-3">
-        <label for="inputPassword" class="form-label">Contraseña</label>
-        <input type="password" class="form-control" id="inputPassword">
-    </div>
+<body>
+    <%- include ('partials/head.html')%>
 
-    <div class="mb-3">
-        <label for="formFile" class="form-label">Foto de perfil</label>
-        <input class="form-control" type="file" id="formFile">
-      </div>
+        <ul>
+            <% if(typeof errors !='undefined'){ %>
+                <% errors.forEach(error=> { %>
+                    <li>
+                        <%= errors.message %>
+                    </li>
+                    <% }) %>
+                        <% } %>
+        </ul>
+        <form action="/signup" method="POST">
+            <div class="container">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo electrónico</label>
+                    <input type="email" class="form-control" id="email" name= "email" placeholder="name@example.com" required>
+                </div>
 
-    <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Biografía</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-    </div>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Nombre de usuario</label>
+                    <input class="form-control" type="text" id="username" name="username" placeholder="Nombre de usuario"
+                        aria-label="default input example" required>
+                </div>
 
-    <div class="mb-3">
-        <div class="col-12">
-            <a class="btn btn-primary" href="/" role="button">Regresar</a>
-            <button class="btn btn-primary" type="submit">Sign up</button>  
-        </div>
-    </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
 
-</div>
+                <div class="mb-3">
+                    <label for="fotoPerfil" class="form-label">Foto de perfil</label>
+                    <!--<input class="form-control" type="file" id="fotoPerfil">-->
+                    <input class="form-control" type="text" id="fotoPerfil" name= "fotoPerfil" placeholder="Foto de perfil"
+                        aria-label="default input example">
+                </div>
+
+                <div class="mb-3">
+                    <label for="biografia" class="form-label">Biografía</label>
+                    <textarea class="form-control" id="biografia" name="biografia" rows="3"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <div class="col-12">
+                        <a class="btn btn-primary" href="/" role="button">Regresar</a>
+                        <button class="btn btn-primary" type="submit">Sign up</button>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <a class="btn btn-link" href="/login">¿Ya te has registrado? Inicia sesión</a>
+                </div>
+
+            </div>
+
+        </form>
+
+</body>
+
+</html>
+
+
