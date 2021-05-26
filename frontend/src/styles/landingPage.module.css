@@ -1,0 +1,49 @@
+@media (min-width: 320px) {
+    .suscribe{
+        background-color: #EFEFEF;
+    }
+    .titulo{
+        color: #310A31;
+        font-size: 24px;
+        font-weight: 600;
+        padding: 2px 16px;
+        margin-bottom: 40px;
+    }
+    .content{
+        padding: 2px 16px;
+        display: flex;
+        flex-direction: column;
+    }
+    .free{
+        font-size: 18px;
+        font-weight: 600;
+        color: #310A31;
+        padding: 2px 16px;
+    }
+    .titleImage{
+        font-size: 20px;
+        font-weight: 600;
+        color: #310A31;
+    }
+    .titleImage img{
+        padding: 2px 16px;
+    }
+    .value{
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid gray;
+        margin-bottom: 16px;
+    }
+    .option{
+        margin-bottom: 60px;
+    }
+    li{
+        margin-bottom: 10px;
+    }
+    .boton{
+        background: linear-gradient(92.6deg, #7F548F 0%, #7B3795 100%);
+        border-radius: 4px;
+        float: right;
+        border: none;
+    }
+}
