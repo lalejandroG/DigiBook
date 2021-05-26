@@ -15,6 +15,14 @@
             <li><%= messages.exito %></li>
       <%  } %>
     </ul>
+
+    <ul>
+        <% if(messages.error){ %>
+            <li>
+                <%= messages.error %>
+            </li>
+     <% } %>
+    </ul>
     
 
         <form action="login.html" method="POST">
