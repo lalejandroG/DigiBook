@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Navbar from 'react-bootstrap/Navbar'
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import {makeStyles} from "@material-ui/core";
+import {Link, makeStyles} from "@material-ui/core";
 import {Nav, NavDropdown} from "react-bootstrap";
 import MenuDeplegable from "./menu";
 
@@ -16,7 +16,11 @@ const NavI=()=>{
             <Navbar collapseOnSelect expand="lg" className={styles.nav}>
                 <Navbar.Brand className={styles.container}>{' '}
                 <div className={styles.menu}>
-                  <p className={styles.logo}>DigiBook</p>
+                    <Link href="../pages/landingPage">
+                            <a href="/" className={styles.titulo}>
+                                <p className={styles.logo}>DigiBook</p>
+                            </a>
+                    </Link>
                     <div className={styles.icon}>
                         <Navbar.Toggle className="large material-icons" aria-controls="responsive-navbar-nav" id={styles.figura}>menu</Navbar.Toggle>
                     </div>
