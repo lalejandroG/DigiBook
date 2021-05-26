@@ -10,7 +10,7 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 //settings
-app.set('port', 3000);
+app.set('port', 4000);
 
 //listening to port
 app.listen(app.get('port'), () => {

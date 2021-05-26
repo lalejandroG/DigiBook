@@ -12,13 +12,13 @@
     <%- include ('partials/head.html')%>
 
         <ul>
-            <% if(typeof errors !='undefined'){ %>
+            <% if(typeof errors != 'undefined'){ %>
                 <% errors.forEach(error=> { %>
                     <li>
-                        <%= errors.message %>
+                        <%= error.message %>
                     </li>
-                    <% }) %>
-                        <% } %>
+            <%  }); %>
+         <% } %>
         </ul>
         <form action="/signup" method="POST">
             <div class="container">

@@ -1,12 +1,11 @@
-var express = require('express');
-var router = express.Router();
-const path = require('path');
+const express = require('express');
+const router = express.Router();
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 const flash = require('express-flash');
 
 
-const { pool } = require('path').basename('/elephantsql');
+const { pool } = require('./elephantsql');
 
 router.use(express.urlencoded({ extended: false }));
 
@@ -53,19 +52,19 @@ router.post('/signup', async (req, res) => {
     pool.query(
       'SELECT * FROM cuenta WHERE correo = $1', [email], (err, results) => {
         if (err){
-          throw err
+          return console.error('Error executing query', err.stack);
         }
 
         console.log(results.rows);
 
-        if (results.rows.lenght > 0){
-          errors.push({message: "Ese correo ya ha sido registrado"});
+        if (results.rows.length > 0){
+          errors.push({ message: "Ese correo ya ha sido registrado." });
           res.render('signup.html', { errors });
         }else{
           pool.query(
             'INSERT INTO cuenta (correo, username, password, imagen_perfil, biografia) VALUES ($1, $2, $3, $4, $5) RETURNING id_cuenta, password', [email, username, hashedPassword, fotoPerfil, biografia], (err, results) => {
                 if (err){
-                  throw err
+                  return console.error('Error executing query', err.stack);
                 }
                 console.log(results.rows);
                 req.flash('exito', "Ha sido registrado.");
