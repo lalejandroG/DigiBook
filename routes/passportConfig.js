@@ -3,14 +3,14 @@ const { pool } = require('./elephantsql');
 const bcrypt = require('bcrypt');
 
 function initialize(passport){
-    const authenticateUser = (correo, password, done) => {
+    const authenticateUser = (email, password, done) => {
         pool.query(
-            'SELECT * FROM cuenta WHERE correo = $1', [correo], (err, results) => {
+            'SELECT * FROM cuenta WHERE correo = $1', [email], (err, results) => {
                 if(err){
                     return console.error('Error executing query', err.stack);
                 }
 
-                console.log(results,rows);
+                console.log(results.rows);
 
                 if(results.rows.length > 0){
                     const user = results.rows[0];
@@ -26,16 +26,21 @@ function initialize(passport){
                         }
                     });
                 }else{
-                    return done(null, false, {message: "El correo no se encuentra registrado."})
+                    return done(null, false, {message: "El correo no se encuentra registrado."});
                 }
             }
         );
-    }
-    passport.use(new localStrategy({
-        usernameField: 'correo',
-        passwordField: 'password',
+    };
 
-    }, authenticateUser));
+    passport.use(
+        new localStrategy(
+            {
+                usernameField: 'username',
+                passwordField: 'password',
+            }, 
+        authenticateUser
+        )
+    );
 
     passport.serializeUser((user, done) => done(null, user.id_cuenta));
 

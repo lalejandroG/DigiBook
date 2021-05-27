@@ -79,7 +79,7 @@ router.post('/signup', async (req, res) => {
                   return console.error('Error executing query', err.stack);
                 }
                 console.log(results.rows);
-                req.flash('exito', "Ha sido registrado.");
+                req.flash('success_msg', "Ha sido registrado.");
                 res.redirect('/login');
             }
           );
@@ -89,9 +89,9 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-router.post('/login', passport.authenticate('local', {
-  successRedirect: '/home',
-  failureRedirect: '/login',
+router.post('/login', passport.authenticate("local", {
+  successRedirect: "/home",
+  failureRedirect: "/login",
   failureFlash: true
 }));
 
