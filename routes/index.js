@@ -30,17 +30,23 @@ router.get('/', (req, res) => {
 });
 
 /* GET user home page. */
-router.get('/home', (req, res) => {
-  res.render('homeUser.html', { title: 'Digibook' });
+router.get('/home', checkNotAuthenticated, (req, res) => {
+  res.render('homeUser.html', { title: 'Digibook', user: req.user.username });
 });
 
 /* GET login page. */
-router.get('/login', (req, res) => {
+router.get('/login', checkAuthenticated, (req, res) => {
   res.render('login.html', { title: 'login' });
 });
 
+/* GET logout. */
+router.get('/logout', (req, res) => {
+  req.logOut();
+  res.redirect('/');
+});
+
 /* GET signup page. */
-router.get('/signup', (req, res) => {
+router.get('/signup', checkAuthenticated, (req, res) => {
   res.render('signup.html');
 });
 
@@ -94,6 +100,21 @@ router.post('/login', passport.authenticate("local", {
   failureRedirect: "/login",
   failureFlash: true
 }));
+
+function checkAuthenticated(req, res, next) {
+  if (req.isAuthenticated()){
+    return res.redirect('/home');
+  }
+  next();
+}
+
+function checkNotAuthenticated(req, res, next){
+  if (req.isAuthenticated()){
+    return next();
+  }
+
+  res.redirect('/');
+}
 
 
 module.exports = router;
