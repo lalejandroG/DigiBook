@@ -11,7 +11,7 @@ const RecuperarPsw=()=>{
             <div className={styles.suscribe}>
                 <div className={styles.form}>
                     <div>
-                        <p className={styles.titulo}>Regístrate</p>
+                        <p className={styles.titulo}>Recuperar contraseña</p>
                     </div>
                     <div className={styles.content}>
                             <Form>
@@ -21,13 +21,13 @@ const RecuperarPsw=()=>{
                               </Form.Group>
 
                               <Form.Group controlId="formBasicPassword">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" placeholder="Password" />
+                                <Form.Label>New password</Form.Label>
+                                <Form.Control type="password" placeholder=" New password" />
                               </Form.Group>
 
                               <Form.Group controlId="formBasicPassword" className={style.space}>
                                 <Form.Label>Repeat password</Form.Label>
-                                <Form.Control type="password" placeholder="Password" />
+                                <Form.Control type="password" placeholder="Repeat password" />
                               </Form.Group>
 
                               <div className={styles.botones}>

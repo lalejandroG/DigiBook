@@ -3,15 +3,8 @@ import {Button, Form} from "react-bootstrap";
 import diamante from "../assets/Group.png";
 import React from "react";
 import {Link} from "@material-ui/core";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
-const Login=()=>{
-    //
-    // const handleSubmit=()=> {
-    //     return(
-    //
-    //         )
-    // }
+const Store=()=>{
 
     return(
         <>
@@ -32,9 +25,7 @@ const Login=()=>{
                                 <Form.Control type="password" placeholder="Password" />
                               </Form.Group>
                               <div className={styles.botones}>
-                                  <Link href="../pages/store">
-                                      <Button href='/store' className={styles.botonI}>Iniciar Sessión</Button>{' '}
-                                  </Link>
+                                  <Button className={styles.botonI} type="submit">Iniciar Sessión</Button>{' '}
                               </div>
 
                             </Form>
@@ -56,4 +47,5 @@ const Login=()=>{
     )
 }
 
-export default Login;
+export default Store;
+

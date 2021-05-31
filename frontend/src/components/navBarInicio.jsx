@@ -7,9 +7,12 @@ import MenuIcon from '@material-ui/icons/Menu';
 import {Link, makeStyles} from "@material-ui/core";
 import {Nav, NavDropdown} from "react-bootstrap";
 import MenuDeplegable from "./menu";
+import {useLocation} from "react-router-dom";
 
 
 const NavI=()=>{
+
+    let location = useLocation();
 
     return(
         <>
@@ -28,7 +31,7 @@ const NavI=()=>{
                 </Navbar.Brand>
                   <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
-                        <MenuDeplegable/>
+                        <MenuDeplegable path={location.pathname}/>
                     </Nav>
                   </Navbar.Collapse>
             </Navbar>
