@@ -4,10 +4,12 @@ import diamante from "../assets/Group.png";
 import React, {useState} from "react";
 import {useForm} from "react-hook-form";
 import {Link} from "@material-ui/core";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import {useHistory} from "react-router-dom";
 import axios from "axios";
 
-const Login=()=>{
+const Login=function (){
+
+    let history = useHistory()
 
     const {handleSubmit,} = useForm({
         reValidateMode:'onSubmit'
@@ -44,6 +46,8 @@ const Login=()=>{
                 biografia: login.data.biografia,
                 imagen: login.data.imagen
             })
+            history.push('/store')
+
         }else{
             console.log(login.status)
         }
@@ -80,9 +84,7 @@ const Login=()=>{
                                 <Form.Control type="password" name={"password"} placeholder="Password" onChange={handleChange}/>
                               </Form.Group>
                               <div className={styles.botones}>
-                                  {/*<Link href="../pages/store">*/}
-                                      <Button type="submit" className={styles.botonI}>Iniciar Sessión</Button>{' '}
-                                  {/*</Link>*/}
+                                  <Button type="submit" className={styles.botonI}>Iniciar Sessión</Button>{' '}
                               </div>
 
                             </Form>
