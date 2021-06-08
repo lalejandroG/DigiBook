@@ -16,10 +16,14 @@ const Login=()=>{
      const [dato, setData] = useState({
         correo:'',
         password:'',
-        loggeado: false
+        loggeado: false,
+        id:'',
+        admin:false,
+        biografia:'',
+        imagen:''
     });
 
-    const onSubmit=()=> {
+    const onSubmit=async()=> {
 
         let newPostObj = {
         correo: dato.correo,
@@ -29,25 +33,20 @@ const Login=()=>{
         console.log(newPostObj)
 
 
-        axios.post(`http://localhost:5000/login`, { newPostObj })
-        .then(res => {
-        console.log(res);
-        // console.log(res.data);
-      })
+        const login = await axios.post(`http://localhost:5000/login`, newPostObj)
+        console.log("HOLAAA" + login.status)
 
-        // fetch("http://localhost:5000/login", {
-        //     method: "POST",
-        //     body: JSON.stringify(newPostObj),
-        //     headers: {"Content-type": "application/json; charset=UTF-8"}
-        // })
-        //     .then(response => {
-        //         if(response.status === 400){
-        //         response.json()
-        //         console.log(response.json())
-        //         }
-        //     })
-
-
+        if(login.status === 200){
+            setData({
+                loggeado: true,
+                id: login.data.id,
+                admin: login.data.admin,
+                biografia: login.data.biografia,
+                imagen: login.data.imagen
+            })
+        }else{
+            console.log(login.status)
+        }
 
     }
 

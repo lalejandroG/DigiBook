@@ -17,15 +17,14 @@ class IndexController {
     login(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log(req.body);
-            console.log(req.body.newPostObj);
-            console.log(req.body.newPostObj.correo);
-            const user = [];
-            user[0] = [yield elephantsql_1.default.query('SELECT * FROM cuenta as c WHERE c.correo = ?', req.body.newPostObj.correo)];
+            console.log(req.body.correo);
+            const user = yield elephantsql_1.default.query('SELECT * FROM cuenta as c WHERE c.correo = $1', [req.body.correo]);
             console.log("mierda");
-            const userjson = JSON.parse(JSON.stringify(user))[0];
-            if (userjson) {
-                if (req.body.newPostObj.password === userjson.contraseña) {
-                    res.json(user);
+            console.log(user.rowCount);
+            if (user.rowCount != 0) {
+                if (req.body.password === user.rows[0].contraseña) {
+                    console.log(user.rows[0]);
+                    res.json(user.rows[0]);
                 }
                 else {
                     res.status(400).json({ msg: "Credenciales invalidas" });
