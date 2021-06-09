@@ -25,48 +25,63 @@ const Store=(props)=>{
                             <div>
                                   <Button className={styles.botones} >Buscar</Button>{' '}
                             </div>
-                            
+
                     </div>
                     <div className={styles.libros}>
-                        <Card className={styles.libro}>
-                            <Card.Img variant="top" src={libro1} />
-                            <Card.Body className={styles.nombreLibro}>
-                                <Card.Title className={styles.tituloLibro}>Libro1</Card.Title>
-                            </Card.Body>
-                        </Card>
-                        <Card className={styles.libro}>
-                            <Card.Img variant="top" src={libro2} />
-                            <Card.Body className={styles.nombreLibro}>
-                                <Card.Title className={styles.tituloLibro}>Libro1</Card.Title>
-                            </Card.Body>
-                        </Card>
-                        <Card className={styles.libro}>
-                            <Card.Img variant="top" src={libro2} />
-                            <Card.Body className={styles.nombreLibro}>
-                                <Card.Title className={styles.tituloLibro}>Libro1</Card.Title>
-                            </Card.Body>
-                        </Card>
-                        <Card className={styles.libro}>
-                            <Card.Img variant="top" src={libro1} />
-                            <Card.Body className={styles.nombreLibro}>
-                                <Card.Title className={styles.tituloLibro}>Libro1</Card.Title>
-                            </Card.Body>
-                        </Card>
-                        <Card className={styles.libro}>
-                            <Card.Img variant="top" src={libro1} />
-                            <Card.Body className={styles.nombreLibro}>
-                                <Card.Title className={styles.tituloLibro}>Libro1</Card.Title>
-                            </Card.Body>
-                        </Card>
-                        <Card className={styles.libro}>
-                            <Card.Img variant="top" src={libro2} />
-                            <Card.Body className={styles.nombreLibro}>
-                                <Card.Title className={styles.tituloLibro}>Libro1</Card.Title>
-                            </Card.Body>
-                        </Card>
-                    </div>
-                </div>
+                        <div className="col-5">
+                                <Card className={styles.libro}>
+                                    <Card.Img variant="top" src={libro1}/>
+                                    <Card.Body className={styles.nombreLibro}>
+                                        <Card.Title className={styles.tituloLibro}>Libro1</Card.Title>
+                                    </Card.Body>
+                                </Card>
+                        </div>
+                            <div className="col-5">
+                                <Card className={styles.libro}>
+                                    <Card.Img variant="top" src={libro1}/>
+                                    <Card.Body className={styles.nombreLibro}>
+                                        <Card.Title className={styles.tituloLibro}>Libro1</Card.Title>
+                                    </Card.Body>
+                                </Card>
+                        </div>
 
+                            <div className="col-5">
+                                <Card className={styles.libro}>
+                                    <Card.Img variant="top" src={libro1}/>
+                                    <Card.Body className={styles.nombreLibro}>
+                                        <Card.Title className={styles.tituloLibro}>Libro1</Card.Title>
+                                    </Card.Body>
+                                </Card>
+                            </div>
+
+                            <div className="col-5">
+                                <Card className={styles.libro}>
+                                    <Card.Img variant="top" src={libro1}/>
+                                    <Card.Body className={styles.nombreLibro}>
+                                        <Card.Title className={styles.tituloLibro}>Libro1</Card.Title>
+                                    </Card.Body>
+                                </Card>
+                            </div>
+
+                            <div className="col-5">
+                                <Card className={styles.libro}>
+                                    <Card.Img variant="top" src={libro1}/>
+                                    <Card.Body className={styles.nombreLibro}>
+                                        <Card.Title className={styles.tituloLibro}>Libro1</Card.Title>
+                                    </Card.Body>
+                                </Card>
+                            </div>
+
+                            <div className="col-5">
+                                <Card className={styles.libro}>
+                                    <Card.Img variant="top" src={libro1}/>
+                                    <Card.Body className={styles.nombreLibro}>
+                                        <Card.Title className={styles.tituloLibro}>Libro1</Card.Title>
+                                    </Card.Body>
+                                </Card>
+                            </div>
+                        </div>
+                    </div>
 
         </>
 

@@ -53,7 +53,7 @@ const Login=function (){
                       admin: login.data.data.admin,
                       biografia: login.data.data.biografia,
                       imagen: login.data.data.imagen_perfil,
-                      name: login.data.data.data.nombre
+                      name: login.data.data.nombre
                   },
                 });
             }else{
