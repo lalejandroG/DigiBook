@@ -12,6 +12,7 @@ class IndexRoutes {
     }
     config() {
         this.router.post('/login', indexController_1.default.login);
+        this.router.post('/registro', indexController_1.default.register);
     }
 }
 const indexRoutes = new IndexRoutes();

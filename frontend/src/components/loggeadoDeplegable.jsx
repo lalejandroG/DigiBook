@@ -9,7 +9,7 @@ export default function Loggeado (){
             <div className={styles.todo}>
                 <Link href="../pages/profile">
                     <a href="/profile" >
-                        <a className={styles.prueba}>Usuario
+                        <a className={styles.prueba}>
                          <i className={styles.materialIcons} >account_circle</i>
                         </a>
 

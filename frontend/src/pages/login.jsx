@@ -1,6 +1,5 @@
 import styles from "../styles/login.module.css";
 import {Button, Form} from "react-bootstrap";
-import diamante from "../assets/Group.png";
 import React, {useState} from "react";
 import {useForm} from "react-hook-form";
 import {Link} from "@material-ui/core";
@@ -20,7 +19,7 @@ const Login=function (){
         password:'',
         loggeado: false,
         id:'',
-        admin:false,
+        admin:0,
         biografia:'',
         imagen:''
     });
@@ -39,15 +38,16 @@ const Login=function (){
         console.log("HOLAAA" + login.status)
 
         if(login.status === 200){
-            setData({
-                loggeado: true,
-                id: login.data.id,
-                admin: login.data.admin,
-                biografia: login.data.biografia,
-                imagen: login.data.imagen
-            })
-            history.push('/store')
-
+            history.push({
+                  pathname: '/store',
+                  state: {  // location state
+                      loggeado: true,
+                      id: login.data.id_cuenta,
+                      admin: login.data.admin,
+                      biografia: login.data.biografia,
+                      imagen: login.data.imagen_perfil
+                  },
+                });
         }else{
             console.log(login.status)
         }
@@ -88,6 +88,7 @@ const Login=function (){
                               </div>
 
                             </Form>
+                        {}
                     </div>
                     <div className={styles.olvido}>
                         <Link href="../pages/recuperarPsw">

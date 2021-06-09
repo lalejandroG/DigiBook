@@ -4,7 +4,7 @@ import diamante from "../assets/Group.png";
 import React from "react";
 import {Link} from "@material-ui/core";
 
-const Store=()=>{
+const Store=(props)=>{
 
     return(
         <>
