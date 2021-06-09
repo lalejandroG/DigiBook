@@ -46,4 +46,11 @@
         float: right;
         border: none;
     }
+
+    .content{
+        padding: 10px 16px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
 }

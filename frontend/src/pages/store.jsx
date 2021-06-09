@@ -1,45 +1,71 @@
-import styles from "../styles/login.module.css";
+import styles from "../styles/store.module.css";
 import {Button, Form} from "react-bootstrap";
-import diamante from "../assets/Group.png";
+import filtroSimbolo from "../assets/filtroSimbolo.png";
+import libro1 from "../assets/Rectangle 35.png";
+import libro2 from "../assets/Rectangle 38.png";
 import React from "react";
 import {Link} from "@material-ui/core";
+import Image from 'react-bootstrap/Image';
+import Card from 'react-bootstrap/Card';
+import CardDeck from 'react-bootstrap/CardDeck';
+
 
 const Store=(props)=>{
 
     return(
         <>
-            <div className={styles.suscribe}>
-                <div className={styles.form}>
-                    <div>
-                        <p className={styles.titulo}>Iniciar sessión</p>
-                    </div>
+                <div className={styles.fondo}>
                     <div className={styles.content}>
+                            <Image src={filtroSimbolo} alt={"filtroSimbolo"} className={styles.imagen} rounded/>
                             <Form>
-                              <Form.Group controlId="formBasicEmail" className={styles.space}>
-                                <Form.Label>Email address</Form.Label>
-                                <Form.Control type="email" placeholder="Enter email" />
+                              <Form.Group>
+                                <Form.Control className={styles.barraBusqueda} />
                               </Form.Group>
-
-                              <Form.Group controlId="formBasicPassword">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" placeholder="Password" />
-                              </Form.Group>
-                              <div className={styles.botones}>
-                                  <Button className={styles.botonI} type="submit">Iniciar Sessión</Button>{' '}
-                              </div>
-
                             </Form>
+                            <div>
+                                  <Button className={styles.botones} >Buscar</Button>{' '}
+                            </div>
+                            
                     </div>
-                    <div className={styles.olvido}>
-                        <Link href="../pages/recuperarPsw">
-                        <a href="/Recuperar" className={styles.botonO}>
-                            ¿Olvidaste tu contraseña?
-                        </a>
-                    </Link>
+                    <div className={styles.libros}>
+                        <Card className={styles.libro}>
+                            <Card.Img variant="top" src={libro1} />
+                            <Card.Body className={styles.nombreLibro}>
+                                <Card.Title className={styles.tituloLibro}>Libro1</Card.Title>
+                            </Card.Body>
+                        </Card>
+                        <Card className={styles.libro}>
+                            <Card.Img variant="top" src={libro2} />
+                            <Card.Body className={styles.nombreLibro}>
+                                <Card.Title className={styles.tituloLibro}>Libro1</Card.Title>
+                            </Card.Body>
+                        </Card>
+                        <Card className={styles.libro}>
+                            <Card.Img variant="top" src={libro2} />
+                            <Card.Body className={styles.nombreLibro}>
+                                <Card.Title className={styles.tituloLibro}>Libro1</Card.Title>
+                            </Card.Body>
+                        </Card>
+                        <Card className={styles.libro}>
+                            <Card.Img variant="top" src={libro1} />
+                            <Card.Body className={styles.nombreLibro}>
+                                <Card.Title className={styles.tituloLibro}>Libro1</Card.Title>
+                            </Card.Body>
+                        </Card>
+                        <Card className={styles.libro}>
+                            <Card.Img variant="top" src={libro1} />
+                            <Card.Body className={styles.nombreLibro}>
+                                <Card.Title className={styles.tituloLibro}>Libro1</Card.Title>
+                            </Card.Body>
+                        </Card>
+                        <Card className={styles.libro}>
+                            <Card.Img variant="top" src={libro2} />
+                            <Card.Body className={styles.nombreLibro}>
+                                <Card.Title className={styles.tituloLibro}>Libro1</Card.Title>
+                            </Card.Body>
+                        </Card>
                     </div>
                 </div>
-
-            </div>
 
 
         </>
