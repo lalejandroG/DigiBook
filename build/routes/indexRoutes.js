@@ -13,6 +13,7 @@ class IndexRoutes {
     config() {
         this.router.post('/login', indexController_1.default.login);
         this.router.post('/registro', indexController_1.default.register);
+        this.router.post('/recuperar', indexController_1.default.recuperarPsw);
     }
 }
 const indexRoutes = new IndexRoutes();

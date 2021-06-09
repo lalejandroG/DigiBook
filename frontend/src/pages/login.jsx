@@ -45,7 +45,8 @@ const Login=function (){
                       id: login.data.id_cuenta,
                       admin: login.data.admin,
                       biografia: login.data.biografia,
-                      imagen: login.data.imagen_perfil
+                      imagen: login.data.imagen_perfil,
+                      name: login.data.nombre
                   },
                 });
         }else{
@@ -88,7 +89,6 @@ const Login=function (){
                               </div>
 
                             </Form>
-                        {}
                     </div>
                     <div className={styles.olvido}>
                         <Link href="../pages/recuperarPsw">
