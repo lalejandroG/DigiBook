@@ -28,7 +28,7 @@ const Store=(props)=>{
 
                     </div>
                     <div className={styles.libros}>
-                        <div className="col-5">
+                        <div className=".col-md-*" >
                                 <Card className={styles.libro}>
                                     <Card.Img variant="top" src={libro1}/>
                                     <Card.Body className={styles.nombreLibro}>
@@ -36,7 +36,7 @@ const Store=(props)=>{
                                     </Card.Body>
                                 </Card>
                         </div>
-                            <div className="col-5">
+                            <div className=".col-md-*">
                                 <Card className={styles.libro}>
                                     <Card.Img variant="top" src={libro1}/>
                                     <Card.Body className={styles.nombreLibro}>
@@ -45,7 +45,7 @@ const Store=(props)=>{
                                 </Card>
                         </div>
 
-                            <div className="col-5">
+                            <div className=".col-md-*">
                                 <Card className={styles.libro}>
                                     <Card.Img variant="top" src={libro1}/>
                                     <Card.Body className={styles.nombreLibro}>
@@ -54,7 +54,7 @@ const Store=(props)=>{
                                 </Card>
                             </div>
 
-                            <div className="col-5">
+                            <div className=".col-md-*">
                                 <Card className={styles.libro}>
                                     <Card.Img variant="top" src={libro1}/>
                                     <Card.Body className={styles.nombreLibro}>
@@ -63,7 +63,7 @@ const Store=(props)=>{
                                 </Card>
                             </div>
 
-                            <div className="col-5">
+                            <div className=".col-md-*">
                                 <Card className={styles.libro}>
                                     <Card.Img variant="top" src={libro1}/>
                                     <Card.Body className={styles.nombreLibro}>
@@ -72,7 +72,7 @@ const Store=(props)=>{
                                 </Card>
                             </div>
 
-                            <div className="col-5">
+                            <div className=".col-md-*">
                                 <Card className={styles.libro}>
                                     <Card.Img variant="top" src={libro1}/>
                                     <Card.Body className={styles.nombreLibro}>
@@ -81,7 +81,7 @@ const Store=(props)=>{
                                 </Card>
                             </div>
                         </div>
-                    </div>
+                </div>
 
         </>
 

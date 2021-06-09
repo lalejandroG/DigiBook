@@ -1,18 +1,11 @@
 @media (min-width: 320px) {
-    .navbarWrapper {
-        height: 100%;
-        width: 100%;
-        background-color: #FFFFFF;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
     .suscribe{
         height: calc(100vh - 80px);
         background-color: #88B7B5;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        z-index: 0;
     }
     .form{
         background-color: #FFFFFF;

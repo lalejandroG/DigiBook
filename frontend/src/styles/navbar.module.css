@@ -3,18 +3,35 @@
     src: url("../fonts/SedanSC-Regular.ttf");
 }
 
-.navbarWrapper{
-    height: 80px;
-    width: 100%;
+@media (min-width: 991px) {
+    .algo{
+      visibility: hidden;
+    }
+    .nav2{
+        font-size: 1.1em;
+        display: flex;
+        width: 50%;
+        justify-content: space-between;
+        color:whitesmoke;
+        padding-right: 5%;
+    }
 }
+@media (max-width: 420px) {
+    .nav2{
+        visibility: hidden;
+    }
+    #figura{
+        display: flex;
+        justify-content: flex-end;
 
-section.mainSection{
-    height: calc(100vh - 80px);
-    background: linear-gradient(180deg, rgba(23, 23, 23, 0) 0%, rgba(120, 120, 120, 0.7) 100%), url("../assets/fondo.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    top: 80px;
+    }
+     .menu{
+        width: 100%;
+        color: #FFFFFF;
+        display: flex;
+        justify-content: space-between;
+        padding-top: 3%;
+    }
 }
 
 @media (min-width: 320px) {

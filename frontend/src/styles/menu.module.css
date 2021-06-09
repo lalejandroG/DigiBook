@@ -1,3 +1,4 @@
+
 @media (min-width: 320px) {
     .navbarWrapper{
         height: 100%;
@@ -7,6 +8,7 @@
         flex-direction: column;
         justify-content: center;
         font-size: 30px;
+        z-index: 999;
     }
     .boton{
         background: linear-gradient(92.6deg, #7F548F 0%, #7B3795 100%);
