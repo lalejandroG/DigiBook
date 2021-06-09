@@ -1,6 +1,6 @@
 import styles from "../styles/login.module.css";
 import style from "../styles/registro.module.css";
-import {Button, Form} from "react-bootstrap";
+import {Alert, Button, Form} from "react-bootstrap";
 import {Link} from "@material-ui/core";
 import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
@@ -23,7 +23,9 @@ const Registro=()=>{
         admin:0,
         biografia:'',
         imagen:'',
-        nombre:''
+        nombre:'',
+        alerta:'',
+        error: false
     });
 
     const onSubmit=async()=> {
@@ -37,24 +39,37 @@ const Registro=()=>{
         console.log(newPostObj)
 
 
-        const login = await axios.post(`http://localhost:5000/registro`, newPostObj)
-        console.log("HOLAAA" + login.status)
+        try {
+            const login = await axios.post(`http://localhost:5000/registro`, newPostObj)
+            console.log(login.data.data)
+            console.log(login.data.cod)
 
-        if(login.status === 200){
+            if(login.data.cod === "00"){
+                setData({
+                    ...dato,
+                    loggeado: true
+                })
             history.push({
                   pathname: '/store',
                   state: {  // location state
                       loggeado: true,
-                      id: login.data.id_cuenta,
-                      admin: login.data.admin,
-                      biografia: login.data.biografia,
-                      imagen: login.data.imagen_perfil,
-                      name: login.data.nombre
+                      id: login.data.data.id_cuenta,
+                      admin: login.data.data.admin,
+                      biografia: login.data.data.biografia,
+                      imagen: login.data.data.imagen_perfil,
+                      name: login.data.data.data.nombre
                   },
                 });
-        }else{
-            console.log(login.status)
-            console.log(login.data.msg)
+            }else{
+                 setData({
+                    ...dato,
+                    alerta: login.data.msg,
+                    error: true
+                })
+            }
+
+        } catch (error) {
+            console.log(error)
         }
 
     }
@@ -73,6 +88,10 @@ const Registro=()=>{
     return(
         <>
             <div className={styles.suscribe}>
+                {dato.error ?
+                    <Alert variant="danger" className={styles.alertas}>{dato.alerta}</Alert>
+                :''
+                }
                 <div className={styles.form}>
                     <div>
                         <p className={styles.titulo}>Regístrate</p>
