@@ -1,6 +1,6 @@
 import styles from "../styles/login.module.css";
 import style from "../styles/registro.module.css";
-import {Button, Form} from "react-bootstrap";
+import {Alert, Button, Form} from "react-bootstrap";
 import {Link} from "@material-ui/core";
 import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
@@ -25,7 +25,9 @@ const RecuperarPsw=()=>{
         biografia:'',
         imagen:'',
         nombre:'',
-        validado: false
+        validado: true,
+        alerta:'',
+        error: false
     });
 
     const onSubmit=async()=> {
@@ -40,24 +42,41 @@ const RecuperarPsw=()=>{
 
         if(dato.password === dato.passwordValidate){
 
-            console.log("Entro")
+            setData({
+                ...dato,
+                validado: true
+            })
 
-            const login = await axios.post(`http://localhost:5000/recuperar`, newPostObj)
-            console.log("HOLAAA" + login.status)
 
-            if(login.status === 200){
-                history.push( '/login');
-            }else{
-                console.log(login.status)
-                console.log(login.data.msg)
-                window.alert(login.data.msg)
+            try {
+                const login = await axios.post(`http://localhost:5000/recuperar`, newPostObj)
+                console.log(login.data.data)
+                console.log(login.data.cod)
 
+                if(login.data.cod === "00"){
+                    setData({
+                        ...dato,
+                        loggeado: true
+                    })
+                    history.push( '/login');
+
+                }else{
+                     setData({
+                        ...dato,
+                        alerta: login.data.msg,
+                        error: true
+                    })
+                }
+
+            } catch (error) {
+                console.log(error)
             }
+
         }else{
-            // return(
-            //     <div style={{display:"block", color:"red", visibility: "visible"}}>"Las contraseñas deben coincidir"</div>
-            // )
-            window.alert("Las contraseñas deben ser iguales")
+            setData({
+                ...dato,
+                validado: false
+            })
         }
 
     }
@@ -73,9 +92,18 @@ const RecuperarPsw=()=>{
       }
 
 
+
     return(
         <>
             <div className={styles.suscribe}>
+                {!dato.validado ?
+                    <Alert variant="danger" className={styles.alertas}>Las contraseñas deben ser iguales</Alert>
+                :''
+                }
+                {dato.error ?
+                    <Alert variant="danger" className={styles.alertas}>{dato.alerta}</Alert>
+                :''
+                }
                 <div className={styles.form}>
                     <div>
                         <p className={styles.titulo}>Recuperar contraseña</p>
