@@ -12,8 +12,11 @@
         display: flex;
         width: 50%;
         justify-content: space-between;
-        color:whitesmoke;
         padding-right: 5%;
+    }
+    .rutas{
+        text-decoration: none;
+        color:whitesmoke;
     }
 }
 @media (max-width: 420px) {

@@ -32,6 +32,13 @@ const MenuDesplegable =(props)=>{
                     <Button className={styles.boton}>Suscripciones</Button>{' '}
                     <Button className={styles.boton}>Nosotros</Button>{' '}
                     <Button className={styles.boton}>Contáctanos</Button>{' '}
+                    {definirOpciones(props.path) ?
+                        <Link href="../pages/store">
+                            <a href="/store" className={styles.botones} >
+                                <Button className={styles.boton}>Tienda</Button>{' '}
+                            </a>
+                        </Link>
+                    : ''}
                 </div>
                 {definirOpciones(props.path) ? '': <NoLoggeado/>}
 

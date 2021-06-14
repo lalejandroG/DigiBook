@@ -27,17 +27,17 @@ const NavB=()=>{
                         <Navbar.Toggle className="large material-icons" aria-controls="responsive-navbar-nav" id={styles.figura}>menu</Navbar.Toggle>
                     </div>
 
-                    <div className={styles.nav2}>
-                        <Link href="/" scroll={true}>
-                        <a id={styles.inicio}>Suscripciones</a>
-                        </Link>
-                        <Link scroll={true}>
-                            <a id={styles.nosotros}>Nosotros</a>
-                        </Link>
-                        <Link scroll={true}>
-                            <a id={styles.info}>Contáctanos</a>
-                        </Link>
-                    </div>
+                    {/*<div className={styles.nav2}>*/}
+                    {/*    <Link href="/" scroll={true}>*/}
+                    {/*    <a id={styles.suscripciones} className={styles.rutas}>Suscripciones</a>*/}
+                    {/*    </Link>*/}
+                    {/*    <Link scroll={true}>*/}
+                    {/*        <a id={styles.nosotros} className={styles.rutas}>Nosotros</a>*/}
+                    {/*    </Link>*/}
+                    {/*    <Link scroll={true}>*/}
+                    {/*        <a id={styles.info} className={styles.rutas}>Contáctanos</a>*/}
+                    {/*    </Link>*/}
+                    {/*</div>*/}
 
                 </div>
 
