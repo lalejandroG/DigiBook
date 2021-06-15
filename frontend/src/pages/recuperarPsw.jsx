@@ -49,7 +49,7 @@ const RecuperarPsw=()=>{
 
 
             try {
-                const login = await axios.post(`http://localhost:5000/recuperar`, newPostObj)
+                const login = await axios.post(`https://digibook-api.herokuapp.com/recuperar`, newPostObj)
                 console.log(login.data.data)
                 console.log(login.data.cod)
 
