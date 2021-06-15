@@ -1,7 +1,6 @@
 import express, { Application } from 'express';
 import morgan from 'morgan';
-import cors from 'cors';
-import path from 'path';
+import cors from 'cors'
 
 import indexRoutes from './routes/indexRoutes';
 import dotenv from 'dotenv';
@@ -32,9 +31,9 @@ class Server {
     config(): void {
         this.app.set('port', process.env.PORT || 5000);
         this.app.use(morgan('dev'));
-        this.app.use(cors());
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: false }));
+        this.app.use(cors());
     }
 
     routes(): void {
@@ -46,6 +45,8 @@ class Server {
             console.log(`Server on port`, this.app.get('port'));
         });
     }
+
+
 }
 
 const server = new Server();

@@ -5,7 +5,6 @@ class IndexController {
     public async login (req: Request, res: Response) {
         console.log(req.body)
         console.log(req.body.correo)
-
         try {
             const user = await pool.query('SELECT * FROM cuenta as c WHERE c.correo = $1', [req.body.correo])
             console.log(user.rowCount)
@@ -25,7 +24,6 @@ class IndexController {
       public async register (req: Request, res: Response) {
         console.log(req.body)
         console.log(req.body.correo)
-
         try {
             const validacion = await pool.query('SELECT * FROM cuenta as c WHERE c.correo = $1', [req.body.correo])
             console.log(validacion.rowCount)
@@ -62,7 +60,6 @@ class IndexController {
     public async recuperarPsw (req: Request, res: Response) {
         console.log(req.body)
         console.log(req.body.correo)
-
 
         try {
             const datos = await pool.query('SELECT * FROM cuenta as c WHERE c.correo = $1', [req.body.correo])

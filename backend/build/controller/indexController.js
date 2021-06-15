@@ -18,6 +18,7 @@ class IndexController {
         return __awaiter(this, void 0, void 0, function* () {
             console.log(req.body);
             console.log(req.body.correo);
+            res.set("Access-Control-Allow-Origin", "https://digibook-api.herokuapp.com");
             try {
                 const user = yield elephantsql_1.default.query('SELECT * FROM cuenta as c WHERE c.correo = $1', [req.body.correo]);
                 console.log(user.rowCount);
@@ -38,6 +39,7 @@ class IndexController {
         return __awaiter(this, void 0, void 0, function* () {
             console.log(req.body);
             console.log(req.body.correo);
+            res.set("Access-Control-Allow-Origin", "https://digibook-api.herokuapp.com");
             try {
                 const validacion = yield elephantsql_1.default.query('SELECT * FROM cuenta as c WHERE c.correo = $1', [req.body.correo]);
                 console.log(validacion.rowCount);
@@ -71,6 +73,7 @@ class IndexController {
         return __awaiter(this, void 0, void 0, function* () {
             console.log(req.body);
             console.log(req.body.correo);
+            res.set("Access-Control-Allow-Origin", "https://digibook-api.herokuapp.com");
             try {
                 const datos = yield elephantsql_1.default.query('SELECT * FROM cuenta as c WHERE c.correo = $1', [req.body.correo]);
                 console.log(datos.rowCount);
