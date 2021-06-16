@@ -2,12 +2,13 @@ import styles from "../styles/profile.module.css";
 import {Button, Col, Form, Row} from "react-bootstrap";
 import diamante from "../assets/Group.png";
 import React, {useState} from "react";
-import {Container, Link} from "@material-ui/core";
+import {Container, Link, Table} from "@material-ui/core";
 import Image from "react-bootstrap/Image";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import {useForm} from "react-hook-form";
 import axios from "axios";
 import Perfil from "../assets/perfil.png"
+import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 
 const Profile=()=>{
 
@@ -93,7 +94,7 @@ const Profile=()=>{
                         {/*TODO ACA VA LA FOTO DE BD*/}
                         <Image src={Perfil} roundedCircle className={styles.circular} />
                     </Row>
-                    <a className={styles.insertar}>Inserte una foto de perfil</a>
+                    <p className={styles.insertar}>Inserte una foto de perfil</p>
                 </div>
 
                 <div className={styles.datos}>
@@ -101,11 +102,6 @@ const Profile=()=>{
                         <Form.Group controlId="formBasicEmail" className={styles.space}>
                             <Form.Label>Name</Form.Label>
                             <Form.Control type="text" name={"nombre"} defaultValue={"EL NOMBRE"} onChange={handleChange}/>
-                        </Form.Group>
-
-                        <Form.Group controlId="formBasicPassword">
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" name={"correo"} defaultValue={"EL CORREO"} onChange={handleChange}/>
                         </Form.Group>
 
                         <Form.Group controlId="formBasicPassword">
@@ -118,6 +114,42 @@ const Profile=()=>{
                         </div>
                     </Form>
                 </div>
+
+                 <div className={styles.productos}>
+                     <i className={styles.materialIcons2} >add_to_photos</i>
+                     <p>Productos publicados</p>
+
+                     <div className={styles.contenido}>
+                         <Table striped bordered hover responsive className={styles.tabla}>
+                              <thead>
+                                <tr>
+                                  <th>#</th>
+                                  <th>Nombre</th>
+                                  <th>Fecha</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>1</td>
+                                  <td>Mark</td>
+                                  <td>13/04/2021</td>
+                                </tr>
+                                <tr>
+                                  <td>2</td>
+                                  <td>Jacob</td>
+                                  <td>13/04/2021</td>
+                                </tr>
+                                <tr>
+                                  <td>3</td>
+                                  <td>Larry the Bird</td>
+                                  <td>13/04/2021</td>
+                                </tr>
+                              </tbody>
+                         </Table>
+                     </div>
+
+
+                 </div>
 
 
 
