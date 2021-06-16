@@ -37,7 +37,7 @@ const Login=function (){
         console.log(newPostObj)
 
         try {
-            const login = await axios.post(`https://digibook-api.herokuapp.com/login`, newPostObj)
+            const login = await axios.post(`https://digibook-apis.herokuapp.com/login`, newPostObj)
             console.log(login.data.data)
             console.log(login.data.cod)
 

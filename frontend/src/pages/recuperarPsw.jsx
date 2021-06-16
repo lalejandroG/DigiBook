@@ -47,9 +47,9 @@ const RecuperarPsw=()=>{
                 validado: true
             })
 
-
+            console.log("mierda")
             try {
-                const login = await axios.post(`https://digibook-api.herokuapp.com/recuperar`, newPostObj)
+                const login = await axios.post(`https://digibook-apis.herokuapp.com/recuperar`, newPostObj)
                 console.log(login.data.data)
                 console.log(login.data.cod)
 

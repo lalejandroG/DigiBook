@@ -1,43 +1,125 @@
 import styles from "../styles/profile.module.css";
-import {Button, Form} from "react-bootstrap";
+import {Button, Col, Form, Row} from "react-bootstrap";
 import diamante from "../assets/Group.png";
-import React from "react";
-import {Link} from "@material-ui/core";
+import React, {useState} from "react";
+import {Container, Link} from "@material-ui/core";
+import Image from "react-bootstrap/Image";
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import {useForm} from "react-hook-form";
+import axios from "axios";
+import Perfil from "../assets/perfil.png"
 
 const Profile=()=>{
+
+     const {handleSubmit,} = useForm({
+        reValidateMode:'onSubmit'
+     });
+
+     const [dato, setData] = useState({
+        correo:'',
+        biografia:'',
+        nombre:'',
+        imagen:'',
+        alerta:'',
+        error: false
+    });
+
+     const handleChange = e =>{
+          setData({
+              ...dato,
+              [e.target.name] : e.target.value
+          })
+         console.log(dato.password)
+         console.log(dato.correo)
+
+      }
+
+      const onSubmit=async()=> {
+
+        let newPostObj = {
+            correo: dato.correo,
+            biografia: dato.biografia,
+            imagen: dato.imagen,
+            nombre: dato.nombre
+        };
+
+        console.log(newPostObj)
+
+        try {
+            const perfil = await axios.post(`https://digibook-apis.herokuapp.com/edit_perfil`, newPostObj)
+            console.log(perfil.data.data)
+            console.log(perfil.data.cod)
+
+            if(perfil.data.cod === "00"){
+                setData({
+                    ...dato,
+                      biografia: perfil.data.data.biografia,
+                      imagen: perfil.data.data.imagen_perfil,
+                      name: perfil.data.data.nombre,
+                      correo: perfil.data.data.correo
+                })
+            }else{
+                 setData({
+                    ...dato,
+                    alerta: perfil.data.msg,
+                    error: true
+                })
+            }
+
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+
 
     return(
         <>
             <div className={styles.suscribe}>
-                <div className={styles.form}>
-                    <div>
-                        <p className={styles.titulo}>Iniciar sessión</p>
-                    </div>
-                    <div className={styles.content}>
-                            <Form>
-                              <Form.Group controlId="formBasicEmail" className={styles.space}>
-                                <Form.Label>Email address</Form.Label>
-                                <Form.Control type="email" placeholder="Enter email" />
-                              </Form.Group>
-
-                              <Form.Group controlId="formBasicPassword">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" placeholder="Password" />
-                              </Form.Group>
-                              <div className={styles.botones}>
-                                  <Button className={styles.botonI} type="submit">Iniciar Sessión</Button>{' '}
-                              </div>
-
-                            </Form>
-                    </div>
-                    <div className={styles.olvido}>
-                        <Link href="../pages/recuperarPsw">
-                        <a href="/Recuperar" className={styles.botonO}>
-                            ¿Olvidaste tu contraseña?
-                        </a>
-                    </Link>
+                <div className={styles.elementos}>
+                    <div className={styles.favorito}>
+                        <Link href="../pages/favorite">
+                            <a href="/favorite" >
+                                <a className={styles.prueba}>
+                                    <i className={styles.materialIcons} >favorite</i>
+                                </a>
+                            </a>
+                        </Link>
                     </div>
                 </div>
+
+                <div className={styles.foto}>
+                    <Row className={styles.container}>
+                        {/*TODO ACA VA LA FOTO DE BD*/}
+                        <Image src={Perfil} roundedCircle className={styles.circular} />
+                    </Row>
+                    <a className={styles.insertar}>Inserte una foto de perfil</a>
+                </div>
+
+                <div className={styles.datos}>
+                    <Form onSubmit={handleSubmit(onSubmit)}>
+                        <Form.Group controlId="formBasicEmail" className={styles.space}>
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control type="text" name={"nombre"} defaultValue={"EL NOMBRE"} onChange={handleChange}/>
+                        </Form.Group>
+
+                        <Form.Group controlId="formBasicPassword">
+                            <Form.Label>Email address</Form.Label>
+                            <Form.Control type="email" name={"correo"} defaultValue={"EL CORREO"} onChange={handleChange}/>
+                        </Form.Group>
+
+                        <Form.Group controlId="formBasicPassword">
+                            <Form.Label>Biografy</Form.Label>
+                            <Form.Control type="text" name={"biografia"} defaultValue={"LA BIOGRAFIA"} onChange={handleChange}/>
+                        </Form.Group>
+
+                        <div className={styles.botones}>
+                            <Button type="submit" className={styles.botonI}>Actualizar</Button>{' '}
+                        </div>
+                    </Form>
+                </div>
+
+
 
             </div>
 

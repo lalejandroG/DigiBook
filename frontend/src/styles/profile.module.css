@@ -1,0 +1,93 @@
+@media (min-width: 320px) {
+    .suscribe {
+        height: calc(100vh - 80px);
+        display: flex;
+        flex-direction: column;
+        z-index: 0;
+    }
+    .elementos{
+        display: flex;
+        width: 100%;
+        height: 5%;
+        margin-top: 16px;
+        justify-content: flex-end;
+    }
+    .foto{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 15%;
+    }
+    .materialIcons{
+        font-family: 'Material Icons';
+        font-weight: normal;
+        font-style: normal;
+        font-size: 30px;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: flex;
+        width: 30%;
+        justify-content: flex-end;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+        -webkit-font-feature-settings: 'liga';
+        -webkit-font-smoothing: antialiased;
+        margin: 16px 16px;
+        color: darkred;
+    }
+    .content{
+        height: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .container{
+        display: flex;
+        width: 30%;
+        height: 100%;
+        align-items: center;
+    }
+    .circular{
+        border: 1px black solid;
+        width: 120px;
+        height: 120px;
+        display: flex;
+    }
+    .favorito{
+        width: 10%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    .insertar{
+        text-decoration: none;
+        color: #282c34;
+        padding-top: 16px;
+    }
+    .datos{
+        padding: 16px 35px;
+
+    }
+    .botones{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+    }
+    .botonI{
+        background: #EFEFEF;
+        border-radius: 4px;
+        float: right;
+        border: none;
+        margin: 2px 16px;
+        font-size: 15px;
+        color: #9A8A8A;
+        font-weight: 600;
+        font-style: italic;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.3));
+        margin-bottom: 10px;
+    }
+}

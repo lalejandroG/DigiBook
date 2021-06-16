@@ -40,7 +40,7 @@ const Registro=()=>{
 
 
         try {
-            const login = await axios.post(`https://digibook-api.herokuapp.com/registro`, newPostObj)
+            const login = await axios.post(`https://digibook-apis.herokuapp.com/registro`, newPostObj)
             console.log(login.data.data)
             console.log(login.data.cod)
 
