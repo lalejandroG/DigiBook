@@ -13,16 +13,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const elephantsql_1 = __importDefault(require("../elephantsql"));
+const md5_1 = require("ts-md5/dist/md5");
 class IndexController {
     login(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log(req.body);
             console.log(req.body.correo);
-            res.set("Access-Control-Allow-Origin", "https://digibook-api.herokuapp.com");
             try {
                 const user = yield elephantsql_1.default.query('SELECT * FROM cuenta as c WHERE c.correo = $1', [req.body.correo]);
                 console.log(user.rowCount);
-                if (req.body.password === user.rows[0].password) {
+                if (md5_1.Md5.hashStr(req.body.password) === user.rows[0].password) {
+                    console.log(md5_1.Md5.hashStr(req.body.password) + " EN BD: " + user.rows[0].password);
                     console.log(user.rows[0]);
                     res.json({ data: user.rows[0], cod: "00" });
                 }
@@ -39,7 +40,6 @@ class IndexController {
         return __awaiter(this, void 0, void 0, function* () {
             console.log(req.body);
             console.log(req.body.correo);
-            res.set("Access-Control-Allow-Origin", "https://digibook-api.herokuapp.com");
             try {
                 const validacion = yield elephantsql_1.default.query('SELECT * FROM cuenta as c WHERE c.correo = $1', [req.body.correo]);
                 console.log(validacion.rowCount);
@@ -48,7 +48,7 @@ class IndexController {
                 }
                 else {
                     try {
-                        const user = yield elephantsql_1.default.query('INSERT INTO cuenta(correo, password, nombre) VALUES($1, $2, $3)', [req.body.correo, req.body.password, req.body.nombre]);
+                        const user = yield elephantsql_1.default.query('INSERT INTO cuenta(correo, password, nombre) VALUES($1, md5($2), $3)', [req.body.correo, req.body.password, req.body.nombre]);
                         const datos = yield elephantsql_1.default.query('SELECT * FROM cuenta as c WHERE c.correo = $1', [req.body.correo]);
                         console.log(user);
                         if (user.rowCount != 0) {
@@ -73,7 +73,6 @@ class IndexController {
         return __awaiter(this, void 0, void 0, function* () {
             console.log(req.body);
             console.log(req.body.correo);
-            res.set("Access-Control-Allow-Origin", "https://digibook-api.herokuapp.com");
             try {
                 const datos = yield elephantsql_1.default.query('SELECT * FROM cuenta as c WHERE c.correo = $1', [req.body.correo]);
                 console.log(datos.rowCount);
@@ -82,7 +81,7 @@ class IndexController {
                 }
                 else {
                     try {
-                        const user = yield elephantsql_1.default.query('UPDATE cuenta SET password = $1 WHERE correo = $2', [req.body.password, req.body.correo]);
+                        const user = yield elephantsql_1.default.query('UPDATE cuenta SET password = md5($1) WHERE correo = $2', [req.body.password, req.body.correo]);
                         console.log(user);
                         if (user.rowCount != 0) {
                             console.log(datos.rows[0]);

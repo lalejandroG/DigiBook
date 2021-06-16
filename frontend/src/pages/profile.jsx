@@ -147,15 +147,8 @@ const Profile=()=>{
                               </tbody>
                          </Table>
                      </div>
-
-
                  </div>
-
-
-
             </div>
-
-
         </>
 
     )

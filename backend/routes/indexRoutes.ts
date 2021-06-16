@@ -13,6 +13,9 @@ class IndexRoutes {
         this.router.post('/login', indexController.login);
         this.router.post('/registro', indexController.register);
         this.router.post('/recuperar', indexController.recuperarPsw);
+        this.router.post('/profile', indexController.perfil);
+        this.router.post('/detalle', indexController.detalle_producto);
+        this.router.post('/favorite', indexController.favorite);
 
     }
 }

@@ -47,9 +47,10 @@ const RecuperarPsw=()=>{
                 validado: true
             })
 
-            console.log("mierda")
+
             try {
-                const login = await axios.post(`https://digibook-apis.herokuapp.com/recuperar`, newPostObj)
+                const login = await axios.post(`http://localhost:5000/recuperar`, newPostObj)
+                //const login = await axios.post(`https://digibook-apis.herokuapp.com/recuperar`, newPostObj)
                 console.log(login.data.data)
                 console.log(login.data.cod)
 
@@ -58,7 +59,7 @@ const RecuperarPsw=()=>{
                         ...dato,
                         loggeado: true
                     })
-                    history.push( '/login');
+                    window.location.href= '/store'
 
                 }else{
                      setData({

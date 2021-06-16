@@ -40,7 +40,8 @@ const Registro=()=>{
 
 
         try {
-            const login = await axios.post(`https://digibook-apis.herokuapp.com/registro`, newPostObj)
+            const login = await axios.post(`http://localhost:5000/registro`, newPostObj)
+            //const login = await axios.post(`https://digibook-apis.herokuapp.com/registro`, newPostObj)
             console.log(login.data.data)
             console.log(login.data.cod)
 
@@ -49,17 +50,27 @@ const Registro=()=>{
                     ...dato,
                     loggeado: true
                 })
-            history.push({
-                  pathname: '/store',
-                  state: {  // location state
-                      loggeado: true,
+            // history.push({
+            //       pathname: '/store',
+            //       state: {  // location state
+            //           loggeado: true,
+            //           id: login.data.data.id_cuenta,
+            //           admin: login.data.data.admin,
+            //           biografia: login.data.data.biografia,
+            //           imagen: login.data.data.imagen_perfil,
+            //           name: login.data.data.nombre
+            //       },
+            //     });
+                setData({
+                    ...dato,
+                    loggeado: true,
                       id: login.data.data.id_cuenta,
                       admin: login.data.data.admin,
                       biografia: login.data.data.biografia,
                       imagen: login.data.data.imagen_perfil,
-                      name: login.data.data.data.nombre
-                  },
-                });
+                      name: login.data.data.nombre
+                })
+                window.location.href= '/store'
             }else{
                  setData({
                     ...dato,
