@@ -25,6 +25,7 @@
         flex-direction: column;
         margin-bottom: 140px;
         padding: 40px 0;
+        z-index: 999;
 
     }
     .login{

@@ -17,7 +17,7 @@ const MenuDesplegable =(props)=>{
     const definirOpciones=(props)=>{
         console.log(props)
 
-        if(props === "/store" || props === "/profile" ){
+        if(props === "/store" || props === "/profile" ||  props === "/detail"  ){
             return true
         }else{
             return false

@@ -8,9 +8,15 @@ import {Link} from "@material-ui/core";
 import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
 import CardDeck from 'react-bootstrap/CardDeck';
+import {useHistory} from "react-router-dom";
 
 
 const Store=(props)=>{
+    let history = useHistory()
+
+    const detalles = ()=>{
+        window.location.href= '/detail'
+    }
 
     return(
         <>
@@ -28,16 +34,16 @@ const Store=(props)=>{
 
                     </div>
                     <div className={styles.libros}>
-                        <div className=".col-md-*" >
-                                <Card className={styles.libro}>
+                        <div className=".col-md-*" onClick={detalles}>
+                                <Card className={styles.libro} >
                                     <Card.Img variant="top" src={libro1}/>
                                     <Card.Body className={styles.nombreLibro}>
                                         <Card.Title className={styles.tituloLibro}>Libro1</Card.Title>
                                     </Card.Body>
                                 </Card>
                         </div>
-                            <div className=".col-md-*">
-                                <Card className={styles.libro}>
+                            <div className=".col-md-*" onClick={detalles}>
+                                <Card className={styles.libro} >
                                     <Card.Img variant="top" src={libro1}/>
                                     <Card.Body className={styles.nombreLibro}>
                                         <Card.Title className={styles.tituloLibro}>Libro1</Card.Title>
@@ -45,7 +51,7 @@ const Store=(props)=>{
                                 </Card>
                         </div>
 
-                            <div className=".col-md-*">
+                            <div className=".col-md-*" onClick={detalles}>
                                 <Card className={styles.libro}>
                                     <Card.Img variant="top" src={libro1}/>
                                     <Card.Body className={styles.nombreLibro}>
@@ -54,7 +60,7 @@ const Store=(props)=>{
                                 </Card>
                             </div>
 
-                            <div className=".col-md-*">
+                            <div className=".col-md-*" onClick={detalles}>
                                 <Card className={styles.libro}>
                                     <Card.Img variant="top" src={libro1}/>
                                     <Card.Body className={styles.nombreLibro}>
@@ -63,7 +69,7 @@ const Store=(props)=>{
                                 </Card>
                             </div>
 
-                            <div className=".col-md-*">
+                            <div className=".col-md-*" onClick={detalles}>
                                 <Card className={styles.libro}>
                                     <Card.Img variant="top" src={libro1}/>
                                     <Card.Body className={styles.nombreLibro}>
@@ -72,7 +78,7 @@ const Store=(props)=>{
                                 </Card>
                             </div>
 
-                            <div className=".col-md-*">
+                            <div className=".col-md-*" onClick={detalles}>
                                 <Card className={styles.libro}>
                                     <Card.Img variant="top" src={libro1}/>
                                     <Card.Body className={styles.nombreLibro}>
