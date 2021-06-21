@@ -13,13 +13,16 @@ class IndexController {
             if(Md5.hashStr(req.body.password) === user.rows[0].password){
                 console.log(Md5.hashStr(req.body.password) + " EN BD: " +user.rows[0].password)
                 console.log(user.rows[0])
+                await pool.end()
                 res.json({data: user.rows[0], cod: "00"})
             }else{
+                await pool.end()
                 res.json({msg: "Credenciales invalidas", cod: "01"})
             }
 
         } catch (error) {
-            res.json({msg: "Usuario no registrado", cod: "01"})
+            await pool.end()
+            res.json({msg: "No se pudo completar su petición", cod: "01", error: error})
         }
     }
 
@@ -43,18 +46,22 @@ class IndexController {
 
                     if(user.rowCount != 0) {
                         console.log(datos.rows[0])
+                        await pool.end()
                         res.json({data: datos.rows[0], cod: "00"})
 
                     }else{
+                        await pool.end()
                         res.json({msg: "Error al registrar", cod: "01"})
                     }
                 }catch (error) {
-                    res.json({msg: "Usuario ya existe", cod: "01"})
+                    await pool.end()
+                    res.json({msg: "No se pudo completar su petición", cod: "01", error: error})
                 }
             }
 
         } catch (error) {
-            res.json({msg: "Usuario no existe"})
+            await pool.end()
+            res.json({msg: "No se pudo completar su petición", cod: "01", error: error})
         }
 
     }
@@ -77,19 +84,23 @@ class IndexController {
                     console.log(user)
 
                     if(user.rowCount != 0) {
-                    console.log(datos.rows[0])
-                    res.json({data: datos.rows[0], cod: "00"})
+                        console.log(datos.rows[0])
+                        await pool.end()
+                        res.json({data: datos.rows[0], cod: "00"})
 
                     }else{
+                        await pool.end()
                         res.json({msg: "Fallo en recuperar contraseña", cod: "01"})
                     }
                 }catch (error) {
-                    res.json({msg: "Usuario no existe", cod: "01"})
+                    await pool.end()
+                    res.json({msg: "No se pudo completar su petición", cod: "01", error: error})
                 }
             }
 
         } catch (error) {
-            res.json({msg: "Usuario no existe"})
+            await pool.end()
+            res.json({msg: "No se pudo completar su petición", cod: "01", error: error})
         }
 
     }
@@ -103,13 +114,16 @@ class IndexController {
 
             if(user.rowCount === 0){
                 console.log(user.rows[0])
+                await pool.end()
                 res.json({data: user.rows[0], cod: "00"})
             }else{
+                await pool.end()
                 res.json({msg: "Usuario no registrado", cod: "01"})
             }
 
         } catch (error) {
-            res.json({msg: "Usuario no registrado", cod: "01"})
+            await pool.end()
+            res.json({msg: "No se pudo completar su petición", cod: "01", error: error})
         }
     }
 
@@ -124,13 +138,16 @@ class IndexController {
 
             if(producto.rowCount === 0){
                 console.log(producto.rows[0])
+                await pool.end()
                 res.json({data: producto.rows[0], cod: "00"})
             }else{
+                await pool.end()
                 res.json({msg: "Recurso no registrado", cod: "01"})
             }
 
         } catch (error) {
-            res.json({msg: "Recurso no registrado", cod: "01"})
+            await pool.end()
+            res.json({msg: "No se pudo completar su petición", cod: "01", error: error})
         }
     }
 
@@ -145,13 +162,16 @@ class IndexController {
 
             if(!producto){
                 //console.log(producto.rows[0])
+                await pool.end()
                 res.json({data: producto, cod: "00"})
             }else{
+                await pool.end()
                 res.json({msg: "Recurso no registrado", cod: "01"})
             }
 
         } catch (error) {
-            res.json({msg: "Recurso no registrado", cod: "01"})
+            await pool.end()
+            res.json({msg: "No se pudo completar su petición", cod: "01", error: error})
         }
     }
 

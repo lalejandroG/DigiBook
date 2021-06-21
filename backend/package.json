@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.ts",
+    "start": "node src/index.ts",
     "tsc": "tsc",
     "build": "tsc",
-    "dev": "nodemon build/index.js",
+    "dev": "node build/index.js",
     "postinstall": "npm run tsc"
   },
   "keywords": [],
