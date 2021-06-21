@@ -38,11 +38,12 @@ const Registro=()=>{
 
         console.log(newPostObj)
 
+        console.log("Hola")
 
         try {
-            const login = await axios.post(`http://localhost:5000/registro`, newPostObj)
-            //const login = await axios.post(`https://digibook-apis.herokuapp.com/registro`, newPostObj)
-            console.log(login.data.data)
+            //const login = await axios.post(`http://localhost:5000/registro`, newPostObj)
+            const login = await axios.post(`https://digibook-backend.herokuapp.com/registro`, newPostObj)
+            console.log(login.data)
             console.log(login.data.cod)
 
             if(login.data.cod === "00"){
@@ -77,6 +78,9 @@ const Registro=()=>{
                     alerta: login.data.msg,
                     error: true
                 })
+                console.log(login.data.error)
+                console.log(login.data.query)
+                console.log("Hola")
             }
 
         } catch (error) {

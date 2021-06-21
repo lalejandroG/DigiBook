@@ -36,10 +36,12 @@ const Login=function (){
 
         console.log(newPostObj)
 
+        console.log("Hola")
+
         try {
-            //const login = await axios.post(`https://digibook-apis.herokuapp.com/login`, newPostObj)
-            const login = await axios.post(`http://localhost:5000/login`, newPostObj)
-            console.log(login.data.data)
+            const login = await axios.post(`https://digibook-backend.herokuapp.com/login`, newPostObj)
+            //const login = await axios.post(`http://localhost:5000/login`, newPostObj)
+            console.log(login.data)
             console.log(login.data.cod)
 
             if(login.data.cod === "00"){
@@ -74,6 +76,7 @@ const Login=function (){
                     alerta: login.data.msg,
                     error: true
                 })
+                console.log(login.data.error)
             }
 
         } catch (error) {

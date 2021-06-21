@@ -47,11 +47,12 @@ const RecuperarPsw=()=>{
                 validado: true
             })
 
+            console.log("Hola")
 
             try {
-                const login = await axios.post(`http://localhost:5000/recuperar`, newPostObj)
-                //const login = await axios.post(`https://digibook-apis.herokuapp.com/recuperar`, newPostObj)
-                console.log(login.data.data)
+                //const login = await axios.post(`http://localhost:5000/recuperar`, newPostObj)
+                const login = await axios.post(`https://digibook-backend.herokuapp.com/recuperar`, newPostObj)
+                console.log(login.data)
                 console.log(login.data.cod)
 
                 if(login.data.cod === "00"){
@@ -67,6 +68,7 @@ const RecuperarPsw=()=>{
                         alerta: login.data.msg,
                         error: true
                     })
+                    console.log(login.data.error)
                 }
 
             } catch (error) {
