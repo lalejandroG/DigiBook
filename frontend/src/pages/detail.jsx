@@ -105,7 +105,7 @@ const Detail=()=>{
                         <Link href="../pages/favorite">
                             <a href="/favorite" >
                                 <a className={styles.prueba}>
-                                    <i className={styles.materialIcons} >favorite</i>
+                                    <i className={styles.materialIcons}>favorite</i>
                                 </a>
                             </a>
                         </Link>

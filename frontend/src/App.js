@@ -14,6 +14,9 @@ import Store from './pages/store'
 import Profile from './pages/profile'
 import Favorite from './pages/favorite'
 import Detail from './pages/detail'
+import Nosotros from './pages/nosotros'
+import Suscripciones from './pages/suscripciones'
+import Contactanos from './pages/contactanos'
 
 
 function App() {
@@ -30,6 +33,9 @@ function App() {
                       <Route exact path="/profile" component={Navbar}/>
                       <Route exact path="/favorite" component={Navbar}/>
                       <Route exact path="/detail" component={Navbar}/>
+                      <Route exact path="/nosotros" component={Navbar}/>
+                      <Route exact path="/contactanos" component={Navbar}/>
+                      <Route exact path="/suscripciones" component={Navbar}/>
 
 
                     </Switch>
@@ -46,6 +52,9 @@ function App() {
                       <Route exact path="/profile" component={Profile} />
                       <Route exact path="/favorite" component={Favorite}/>
                       <Route exact path="/detail" component={Detail}/>
+                      <Route exact path="/nosotros" component={Nosotros}/>
+                      <Route exact path="/contactanos" component={Contactanos}/>
+                      <Route exact path="/suscripciones" component={Suscripciones}/>
                     </Switch>
               </Router>
           </section>

@@ -27,7 +27,7 @@ const LandigPage=()=>{
 
                     </ul>
                 </div>
-                 <Button className={styles.boton}>GET FREE</Button>{' '}
+                 <a className={styles.boton} href='/login'>GET FREE</a>{' '}
             </div>
             <div>
                 <div className={styles.value}>
@@ -45,7 +45,7 @@ const LandigPage=()=>{
 
                     </ul>
                 </div>
-                 <Button className={styles.boton}>GET PREMIUM</Button>{' '}
+                 <a className={styles.boton}>GET PREMIUM</a>{' '}
             </div>
             </div>
 
