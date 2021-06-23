@@ -11,6 +11,7 @@ import Login from './pages/login'
 import Registro from './pages/registro'
 import Recuperar from './pages/recuperarPsw'
 import Store from './pages/store'
+import Revision from './pages/revision'
 import Profile from './pages/profile'
 import Favorite from './pages/favorite'
 import Detail from './pages/detail'
@@ -27,6 +28,7 @@ function App() {
                       <Route exact path="/registro" component={NavbarInicio} />
                       <Route exact path="/recuperar" component={NavbarInicio} />
                       <Route exact path="/store" component={Navbar}/>
+                      <Route exact path="/revision" component={Navbar}/>
                       <Route exact path="/profile" component={Navbar}/>
                       <Route exact path="/favorite" component={Navbar}/>
                       <Route exact path="/detail" component={Navbar}/>
@@ -43,6 +45,7 @@ function App() {
                       <Route exact path="/registro" component={Registro} />
                       <Route exact path="/recuperar" component={Recuperar} />
                       <Route exact path="/store" component={Store} />
+                      <Route exact path="/revision" component={Revision} />
                       <Route exact path="/profile" component={Profile} />
                       <Route exact path="/favorite" component={Favorite}/>
                       <Route exact path="/detail" component={Detail}/>
