@@ -26,8 +26,8 @@ const Store=(props)=>{
     {
         async function fetchMyAPI() {
             try {
-                //const recurso = await axios.post(`https://digibook-backend.herokuapp.com/revision`)
-                const recurso = await axios.get(`http://localhost:5000/revision`)
+                const recurso = await axios.post(`https://digibook-backend.herokuapp.com/revision`)
+                //const recurso = await axios.get(`http://localhost:5000/revision`)
                 console.log(recurso.data.data.rows)
                 console.log(recurso.data.data.rows[0].imagen)
     
