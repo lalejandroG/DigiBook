@@ -11,7 +11,7 @@ import CardDeck from 'react-bootstrap/CardDeck';
 import {useHistory} from "react-router-dom";
 
 
-const Store=(props)=>{
+const Store=()=>{
 
     const detalles = ()=>{
         window.location.href= '/detail'
