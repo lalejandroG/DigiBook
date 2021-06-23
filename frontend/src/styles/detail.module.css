@@ -1,9 +1,11 @@
 .suscribe {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        z-index: 0;
-        background-color: #88B7B5;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    z-index: 0;
+    background-color: #88B7B5;
+    position: fixed;
+    width: 100%;
     }
 
 @media (min-width: 320px) {

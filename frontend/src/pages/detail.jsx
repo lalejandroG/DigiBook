@@ -1,7 +1,7 @@
 import styles from "../styles/detail.module.css";
 import {Alert, Button, Col, Form, Row} from "react-bootstrap";
 import diamante from "../assets/Group.png";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Container, Link, Table} from "@material-ui/core";
 import Image from "react-bootstrap/Image";
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -13,13 +13,17 @@ import Card from "react-bootstrap/Card";
 import libro1 from "../assets/Rectangle 35.png";
 import StarIcon from '@material-ui/icons/Star';
 
-const Detail=()=>{
+const Detail=(props)=>{
 
      const [dato, setData] = useState({
-        correo:'',
-        biografia:'',
-        nombre:'',
-        imagen:'',
+         avg: '',
+         contenido: '',
+         id_cuenta: '',
+         imagen: '',
+         nombre: '',
+         resumen: '',
+         titulo: '',
+         url: '',
         fav: false
     });
 
@@ -30,28 +34,71 @@ const Detail=()=>{
               ...dato,
               fav: !dato.fav
           })
+
+         console.log("ACA")
       }
 
+      useEffect(()=>
+    {
+        async function fetchMyAPI() {
+            try {
+
+                console.log(props.match.params.id)
+                let newPostObj = {
+                    id: props.match.params.id
+                };
+
+                console.log(newPostObj)
+
+                const recurso = await axios.post(`https://digibook-backend.herokuapp.com/detalle`, newPostObj)
+                //const recurso = await axios.post(`http://localhost:5000/detalle`, newPostObj)
+
+                console.log(recurso.data.cod)
+
+                if(recurso.data.cod === "00"){
+                    setData({
+                        ...dato,
+                        avg: recurso.data.data.rows[0].avg,
+                        contenido: recurso.data.data.rows[0].contenido,
+                        id_cuenta: recurso.data.data.rows[0].id_cuenta,
+                        imagen: recurso.data.data.rows[0].imagen,
+                        nombre: recurso.data.data.rows[0].nombre,
+                        resumen: recurso.data.data.rows[0].resumen,
+                        titulo: recurso.data.data.rows[0].titulo,
+                        url: recurso.data.data.rows[0].url,
+                    })
+
+                }else{
+                    console.log(recurso.data.error)
+                }
+
+            } catch (error) {
+                console.log(error)
+            }
+          }
+
+          fetchMyAPI()
+
+    }, []);
 
     return(
         <>
-            <div className={styles.suscribe}>
+             <div className={styles.suscribe}>
                 <div className={styles.elementos}>
                     <div className={styles.resumen}>
                         <p id={styles.parrafo}>
-                            Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                            Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            {dato.resumen}
                         </p>
                     </div>
                 </div>
 
-                    <div className={styles.favorito} onClick={detalle()}>
+                    <div className={styles.favorito}>
                         <i className={styles.materialIcons} style={{color: dato.fav? "red" : "whitesmoke"}}>favorite</i>
                     </div>
 
 
                 <div className={styles.recurso}>
-                    <Image src={libro1}  className={styles.libro} />
+                    <Image src={dato.imagen} className={styles.libro} />
                     <div className={styles.estrellas}>
                         <i className={styles.materialIcons2} >star</i>
                         <i className={styles.materialIcons2} >star</i>
@@ -68,8 +115,8 @@ const Detail=()=>{
                     <div className={styles.datos}>
                         <Form>
                             <Form.Group controlId="formBasicEmail" className={styles.space}>
-                                <Form.Label>Carla Rodríguez</Form.Label>
-                                <Form.Control type="text" value={"LA RESEÑA"} />
+                                <Form.Label>{dato.nombre}</Form.Label>
+                                <Form.Control type="text" value={dato.contenido} />
                             </Form.Group>
 
                             <Link href="../pages/comments">

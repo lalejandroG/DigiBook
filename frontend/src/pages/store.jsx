@@ -10,28 +10,30 @@ import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
 import CardDeck from 'react-bootstrap/CardDeck';
 import axios from "axios";
+import { useParams } from 'react-router-dom'
 
-const Store=()=>{
+const Store=(props)=>{
 
     const [dato, setData] = useState({
         recursos: [45]
     });
 
-    const detalles = ()=>{
-        window.location.href= '/detail'
+    const detalles = (id)=>{
+        //window.location.href= `http://localhost:3000/detail/${id}`
+        window.location.href= `https://digibook-ffb1b.web.app/detail/${id}`
     }
 
     useEffect(()=>
     {
+        console.log("POR FIS "+ props.match.params.id)
         async function fetchMyAPI() {
             try {
-                const recurso = await axios.post(`https://digibook-backend.herokuapp.com/store`)
+                const recurso = await axios.get(`https://digibook-backend.herokuapp.com/store`)
                 //const recurso = await axios.get(`http://localhost:5000/store`)
                 console.log(recurso.data.data.rows)
                 console.log(recurso.data.data.rows[0].imagen)
 
                 if(recurso.data.cod === "00"){
-                    console.log("Entra al set Data")
                     setData({
                         ...dato,
                         recursos: recurso.data.data.rows
@@ -39,7 +41,7 @@ const Store=()=>{
                     console.log(dato.recursos)
 
                 }else{
-                    console.log("Flipo en colores")
+                    console.log(recurso.data.error)
                 }
 
             } catch (error) {
@@ -48,14 +50,12 @@ const Store=()=>{
           }
 
           fetchMyAPI()
-          console.log(dato.recursos)
-          console.log("hola")
 
     }, []);
 
     const libros = () => (
     dato.recursos.map((key) =>(
-            <div className=".col-md-*" onClick={detalles}>
+            <div className=".col-md-*" onClick={(e) => detalles(key.id_recurso, e)}>
                 <Card key={key.id_recurso} className={styles.libro} >
                     <Card.Img className={styles.img} variant="top" src={key.imagen}/>
                     <Card.Body className={styles.nombreLibro}>

@@ -25,16 +25,26 @@ class IndexController {
                 if (md5_1.Md5.hashStr(req.body.password) === user.rows[0].password) {
                     console.log(md5_1.Md5.hashStr(req.body.password) + " EN BD: " + user.rows[0].password);
                     console.log(user.rows[0]);
-                    yield elephantsql_1.default.end();
                     res.json({ data: user.rows[0], cod: "00" });
                 }
                 else {
-                    yield elephantsql_1.default.end();
                     res.json({ msg: "Credenciales invalidas", cod: "01" });
                 }
             }
             catch (error) {
-                yield elephantsql_1.default.end();
+                res.json({ msg: "Credenciales invalidas", cod: "01", error: error });
+            }
+        });
+    }
+    getRecurso(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const recurso = yield elephantsql_1.default.query('SELECT * FROM recurso');
+                console.log(recurso.rows);
+                res.send({ data: recurso, cod: "00" });
+            }
+            catch (error) {
+                console.log(error);
                 res.json({ msg: "No se pudo completar su petición", cod: "01", error: error });
             }
         });
@@ -56,22 +66,18 @@ class IndexController {
                         console.log(user);
                         if (user.rowCount != 0) {
                             console.log(datos.rows[0]);
-                            yield elephantsql_1.default.end();
                             res.json({ data: datos.rows[0], cod: "00" });
                         }
                         else {
-                            yield elephantsql_1.default.end();
                             res.json({ msg: "Error al registrar", cod: "01" });
                         }
                     }
                     catch (error) {
-                        yield elephantsql_1.default.end();
                         res.json({ msg: "No se pudo completar su petición", cod: "01", error: error });
                     }
                 }
             }
             catch (error) {
-                yield elephantsql_1.default.end();
                 res.json({ msg: "No se pudo completar su petición", cod: "01", error: error });
             }
         });
@@ -92,22 +98,18 @@ class IndexController {
                         console.log(user);
                         if (user.rowCount != 0) {
                             console.log(datos.rows[0]);
-                            yield elephantsql_1.default.end();
                             res.json({ data: datos.rows[0], cod: "00" });
                         }
                         else {
-                            yield elephantsql_1.default.end();
                             res.json({ msg: "Fallo en recuperar contraseña", cod: "01" });
                         }
                     }
                     catch (error) {
-                        yield elephantsql_1.default.end();
                         res.json({ msg: "No se pudo completar su petición", cod: "01", error: error });
                     }
                 }
             }
             catch (error) {
-                yield elephantsql_1.default.end();
                 res.json({ msg: "No se pudo completar su petición", cod: "01", error: error });
             }
         });
@@ -121,64 +123,47 @@ class IndexController {
                 console.log(user.rowCount);
                 if (user.rowCount === 0) {
                     console.log(user.rows[0]);
-                    yield elephantsql_1.default.end();
                     res.json({ data: user.rows[0], cod: "00" });
                 }
                 else {
-                    yield elephantsql_1.default.end();
                     res.json({ msg: "Usuario no registrado", cod: "01" });
                 }
             }
             catch (error) {
-                yield elephantsql_1.default.end();
                 res.json({ msg: "No se pudo completar su petición", cod: "01", error: error });
             }
         });
     }
     detalle_producto(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            //TODO ARREGLAR ESTO PORQUE HAY UN SOLO RECURSO CON ESE ID PERO VARIOS COMENTARIO ASI QUE NO SE QUE RETORNA
             console.log(req.body);
-            console.log(req.body.correo);
+            console.log(req.body.id);
             try {
-                const producto = yield elephantsql_1.default.query('SELECT r.resumen, r.titulo, r.imagen, r.url, c.id_cuenta, c.contenido, avg(c.calificacion), cu.nombre FROM recurso as r, comentario as c, cuenta as cu WHERE r.id_recurso = $1 AND c.id_recurso = $1 AND cu.id_cuenta = c.id_cuenta ', [req.body.id]);
-                console.log(producto.rowCount);
-                if (producto.rowCount === 0) {
-                    console.log(producto.rows[0]);
-                    yield elephantsql_1.default.end();
-                    res.json({ data: producto.rows[0], cod: "00" });
-                }
-                else {
-                    yield elephantsql_1.default.end();
-                    res.json({ msg: "Recurso no registrado", cod: "01" });
-                }
+                const recurso = yield elephantsql_1.default.query('SELECT r.resumen, r.titulo, r.imagen, r.url, co.id_cuenta, co.contenido, avg(co.calificacion), cu.nombre FROM recurso as r, comentario as co, cuenta as cu WHERE r.id_recurso = $1 AND co.id_recurso = $1 AND cu.id_cuenta = co.id_cuenta GROUP BY co.calificacion, r.resumen, r.titulo, r.imagen, r.url, co.id_cuenta, co.contenido, cu.nombre ORDER BY co.contenido LIMIT 1 ', [req.body.id]);
+                console.log(recurso.rows);
+                res.json({ data: recurso, cod: "00" });
             }
             catch (error) {
-                yield elephantsql_1.default.end();
+                console.log(error);
                 res.json({ msg: "No se pudo completar su petición", cod: "01", error: error });
             }
         });
     }
     favorite(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            //TODO ARREGLAR ESTO PORQUE DEBE DEVOLVER UN ARRAY
-            console.log(req.body);
-            console.log(req.body.correo);
             try {
-                const producto = [yield elephantsql_1.default.query('SELECT f.id_recurso, r.titulo, r.imagen, FROM favoritos as f, recurso as r WHERE f.id_cuenta = $1 AND r.id_recurso = f.id_recurso ', [req.body.id])];
-                //console.log(producto.rowCount)
-                if (!producto) {
-                    //console.log(producto.rows[0])
-                    yield elephantsql_1.default.end();
-                    res.json({ data: producto, cod: "00" });
+                const fav = yield elephantsql_1.default.query('SELECT * FROM favoritos WHERE id_cuenta = $1', [req.body.id]);
+                if (fav.rowCount != 0) {
+                    const recurso = yield elephantsql_1.default.query('SELECT * FROM recurso');
+                    console.log(recurso.rows);
+                    res.send({ data: recurso, cod: "00" });
                 }
                 else {
-                    yield elephantsql_1.default.end();
-                    res.json({ msg: "Recurso no registrado", cod: "01" });
+                    res.json({ msg: "No posee favoritos", cod: "01", error: "No posee favoritos" });
                 }
             }
             catch (error) {
-                yield elephantsql_1.default.end();
+                console.log(error);
                 res.json({ msg: "No se pudo completar su petición", cod: "01", error: error });
             }
         });
