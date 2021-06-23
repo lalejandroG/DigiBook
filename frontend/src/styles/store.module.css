@@ -18,6 +18,12 @@
 .imagen{
     margin-bottom: 40px;
 }
+.img{
+    overflow: hidden;
+    width: 200px;
+    height: 220px;
+    overflow: hidden;
+}
 .barraBusqueda{
     border: 1px solid #670967;
     box-sizing: border-box;
@@ -39,13 +45,16 @@
     /*padding: 0 10px;*/
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    margin: 0 16px;
+    
     /*display: flex;*/
     /*justify-content: space-between;*/
 
 }
-.libro{
+.libro{ 
     padding-top: 10px;
+
 }
 
 .nombreLibro{

@@ -58,7 +58,7 @@ const Store=(props)=>{
     dato.recursos.map((key) =>(
             <div className=".col-md-*" onClick={detalles}>
                 <Card key={key.id_recurso} className={styles.libro} >
-                    <Card.Img variant="top" src={key.imagen}/>
+                    <Card.Img className={styles.img} variant="top" src={key.imagen}/>
                     <Card.Body className={styles.nombreLibro}>
                         <Card.Title className={styles.tituloLibro}>{key.titulo}</Card.Title>
                     </Card.Body>
