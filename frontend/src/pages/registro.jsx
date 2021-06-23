@@ -79,7 +79,6 @@ const Registro=()=>{
                     error: true
                 })
                 console.log(login.data.error)
-                console.log(login.data.query)
                 console.log("Hola")
             }
 

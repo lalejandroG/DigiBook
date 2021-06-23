@@ -20,9 +20,8 @@
 }
 .img{
     overflow: hidden;
-    width: 200px;
-    height: 220px;
-    overflow: hidden;
+    width: 180px;
+    height: 200px;
 }
 .barraBusqueda{
     border: 1px solid #670967;
@@ -47,12 +46,12 @@
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 0 16px;
-    
+
     /*display: flex;*/
     /*justify-content: space-between;*/
 
 }
-.libro{ 
+.libro{
     padding-top: 10px;
 
 }

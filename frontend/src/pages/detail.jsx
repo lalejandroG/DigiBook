@@ -1,7 +1,7 @@
 import styles from "../styles/detail.module.css";
-import {Button, Col, Form, Row} from "react-bootstrap";
+import {Alert, Button, Col, Form, Row} from "react-bootstrap";
 import diamante from "../assets/Group.png";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Container, Link, Table} from "@material-ui/core";
 import Image from "react-bootstrap/Image";
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -13,95 +13,92 @@ import Card from "react-bootstrap/Card";
 import libro1 from "../assets/Rectangle 35.png";
 import StarIcon from '@material-ui/icons/Star';
 
-const Detail=()=>{
-
-     const {handleSubmit,} = useForm({
-        reValidateMode:'onSubmit'
-     });
+const Detail=(props)=>{
 
      const [dato, setData] = useState({
-        correo:'',
-        biografia:'',
-        nombre:'',
-        imagen:'',
-        alerta:'',
-        error: false
+         avg: '',
+         contenido: '',
+         id_cuenta: '',
+         imagen: '',
+         nombre: '',
+         resumen: '',
+         titulo: '',
+         url: '',
+        fav: false
     });
 
-     const handleChange = e =>{
-          setData({
-              ...dato,
-              [e.target.name] : e.target.value
-          })
-         console.log(dato.password)
-         console.log(dato.correo)
 
+     const detalle = () =>{
+
+         setData({
+              ...dato,
+              fav: !dato.fav
+          })
+
+         console.log("ACA")
       }
 
-      const onSubmit=async()=> {
+      useEffect(()=>
+    {
+        async function fetchMyAPI() {
+            try {
 
-        let newPostObj = {
-            correo: dato.correo,
-            biografia: dato.biografia,
-            imagen: dato.imagen,
-            nombre: dato.nombre
-        };
+                console.log(props.match.params.id)
+                let newPostObj = {
+                    id: props.match.params.id
+                };
 
-        console.log(newPostObj)
+                console.log(newPostObj)
 
-        try {
-            const perfil = await axios.post(`https://digibook-apis.herokuapp.com/edit_perfil`, newPostObj)
-            console.log(perfil.data.data)
-            console.log(perfil.data.cod)
+                const recurso = await axios.post(`https://digibook-backend.herokuapp.com/detalle`, newPostObj)
+                //const recurso = await axios.post(`http://localhost:5000/detalle`, newPostObj)
 
-            if(perfil.data.cod === "00"){
-                setData({
-                    ...dato,
-                      biografia: perfil.data.data.biografia,
-                      imagen: perfil.data.data.imagen_perfil,
-                      name: perfil.data.data.nombre,
-                      correo: perfil.data.data.correo
-                })
-            }else{
-                 setData({
-                    ...dato,
-                    alerta: perfil.data.msg,
-                    error: true
-                })
+                console.log(recurso.data.cod)
+
+                if(recurso.data.cod === "00"){
+                    setData({
+                        ...dato,
+                        avg: recurso.data.data.rows[0].avg,
+                        contenido: recurso.data.data.rows[0].contenido,
+                        id_cuenta: recurso.data.data.rows[0].id_cuenta,
+                        imagen: recurso.data.data.rows[0].imagen,
+                        nombre: recurso.data.data.rows[0].nombre,
+                        resumen: recurso.data.data.rows[0].resumen,
+                        titulo: recurso.data.data.rows[0].titulo,
+                        url: recurso.data.data.rows[0].url,
+                    })
+
+                }else{
+                    console.log(recurso.data.error)
+                }
+
+            } catch (error) {
+                console.log(error)
             }
+          }
 
-        } catch (error) {
-            console.log(error)
-        }
+          fetchMyAPI()
 
-    }
-
+    }, []);
 
     return(
         <>
-            <div className={styles.suscribe}>
+             <div className={styles.suscribe}>
                 <div className={styles.elementos}>
                     <div className={styles.resumen}>
                         <p id={styles.parrafo}>
-                            Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                            Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            {dato.resumen}
                         </p>
                     </div>
                 </div>
 
                     <div className={styles.favorito}>
-                        <Link href="../pages/favorite">
-                            <a href="/favorite" >
-                                <a className={styles.prueba}>
-                                    <i className={styles.materialIcons} >favorite</i>
-                                </a>
-                            </a>
-                        </Link>
+                        <i className={styles.materialIcons} style={{color: dato.fav? "red" : "whitesmoke"}}>favorite</i>
                     </div>
 
 
                 <div className={styles.recurso}>
-                    <Image src={libro1}  className={styles.libro} />
+                    <Image src={dato.imagen} className={styles.libro} />
                     <div className={styles.estrellas}>
                         <i className={styles.materialIcons2} >star</i>
                         <i className={styles.materialIcons2} >star</i>
@@ -116,10 +113,10 @@ const Detail=()=>{
                     <p id={styles.titulo}>Reseñas</p>
 
                     <div className={styles.datos}>
-                        <Form onSubmit={handleSubmit(onSubmit)}>
+                        <Form>
                             <Form.Group controlId="formBasicEmail" className={styles.space}>
-                                <Form.Label>Carla Rodríguez</Form.Label>
-                                <Form.Control type="text" value={"LA RESEÑA"} />
+                                <Form.Label>{dato.nombre}</Form.Label>
+                                <Form.Control type="text" value={dato.contenido} />
                             </Form.Group>
 
                             <Link href="../pages/comments">
