@@ -1,11 +1,12 @@
-@media (min-width: 320px) {
-    .suscribe {
-        height: calc(100vh - 80px);
+.suscribe {
+        height: 100%;
         display: flex;
         flex-direction: column;
         z-index: 0;
         background-color: #88B7B5;
     }
+
+@media (min-width: 320px) {
 
     .elementos {
         display: flex;

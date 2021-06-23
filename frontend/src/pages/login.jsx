@@ -3,13 +3,11 @@ import {Alert, Button, Form} from "react-bootstrap";
 import React, {useState} from "react";
 import {useForm} from "react-hook-form";
 import {Link} from "@material-ui/core";
-import {useHistory} from "react-router-dom";
 import axios from "axios";
 import Store from "./store"
 
 const Login=function (){
 
-    let history = useHistory()
 
     const {handleSubmit,} = useForm({
         reValidateMode:'onSubmit'
@@ -47,28 +45,14 @@ const Login=function (){
             if(login.data.cod === "00"){
                 setData({
                     ...dato,
-                    loggeado: true
-                })
-            // history.push({
-            //       pathname: '/store',
-            //       state: {  // location state
-            //           loggeado: true,
-            //           id: login.data.data.id_cuenta,
-            //           admin: login.data.data.admin,
-            //           biografia: login.data.data.biografia,
-            //           imagen: login.data.data.imagen_perfil,
-            //           name: login.data.data.nombre
-            //       },
-            //     });
-                setData({
-                    ...dato,
                     loggeado: true,
-                      id: login.data.data.id_cuenta,
-                      admin: login.data.data.admin,
-                      biografia: login.data.data.biografia,
-                      imagen: login.data.data.imagen_perfil,
-                      name: login.data.data.nombre
+                    id: login.data.data.id_cuenta,
+                    admin: login.data.data.admin,
+                    biografia: login.data.data.biografia,
+                    imagen: login.data.data.imagen_perfil,
+                    name: login.data.data.nombre
                 })
+
                 window.location.href= '/store'
             }else{
                  setData({

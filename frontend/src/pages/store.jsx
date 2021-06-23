@@ -12,7 +12,6 @@ import {useHistory} from "react-router-dom";
 
 
 const Store=(props)=>{
-    let history = useHistory()
 
     const detalles = ()=>{
         window.location.href= '/detail'

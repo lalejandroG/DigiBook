@@ -1,5 +1,5 @@
 import styles from "../styles/detail.module.css";
-import {Button, Col, Form, Row} from "react-bootstrap";
+import {Alert, Button, Col, Form, Row} from "react-bootstrap";
 import diamante from "../assets/Group.png";
 import React, {useState} from "react";
 import {Container, Link, Table} from "@material-ui/core";
@@ -15,66 +15,22 @@ import StarIcon from '@material-ui/icons/Star';
 
 const Detail=()=>{
 
-     const {handleSubmit,} = useForm({
-        reValidateMode:'onSubmit'
-     });
-
      const [dato, setData] = useState({
         correo:'',
         biografia:'',
         nombre:'',
         imagen:'',
-        alerta:'',
-        error: false
+        fav: false
     });
 
-     const handleChange = e =>{
-          setData({
+
+     const detalle = () =>{
+
+         setData({
               ...dato,
-              [e.target.name] : e.target.value
+              fav: !dato.fav
           })
-         console.log(dato.password)
-         console.log(dato.correo)
-
       }
-
-      const onSubmit=async()=> {
-
-        let newPostObj = {
-            correo: dato.correo,
-            biografia: dato.biografia,
-            imagen: dato.imagen,
-            nombre: dato.nombre
-        };
-
-        console.log(newPostObj)
-
-        try {
-            const perfil = await axios.post(`https://digibook-apis.herokuapp.com/edit_perfil`, newPostObj)
-            console.log(perfil.data.data)
-            console.log(perfil.data.cod)
-
-            if(perfil.data.cod === "00"){
-                setData({
-                    ...dato,
-                      biografia: perfil.data.data.biografia,
-                      imagen: perfil.data.data.imagen_perfil,
-                      name: perfil.data.data.nombre,
-                      correo: perfil.data.data.correo
-                })
-            }else{
-                 setData({
-                    ...dato,
-                    alerta: perfil.data.msg,
-                    error: true
-                })
-            }
-
-        } catch (error) {
-            console.log(error)
-        }
-
-    }
 
 
     return(
@@ -89,14 +45,8 @@ const Detail=()=>{
                     </div>
                 </div>
 
-                    <div className={styles.favorito}>
-                        <Link href="../pages/favorite">
-                            <a href="/favorite" >
-                                <a className={styles.prueba}>
-                                    <i className={styles.materialIcons} >favorite</i>
-                                </a>
-                            </a>
-                        </Link>
+                    <div className={styles.favorito} onClick={detalle()}>
+                        <i className={styles.materialIcons} style={{color: dato.fav? "red" : "whitesmoke"}}>favorite</i>
                     </div>
 
 
@@ -116,7 +66,7 @@ const Detail=()=>{
                     <p id={styles.titulo}>Reseñas</p>
 
                     <div className={styles.datos}>
-                        <Form onSubmit={handleSubmit(onSubmit)}>
+                        <Form>
                             <Form.Group controlId="formBasicEmail" className={styles.space}>
                                 <Form.Label>Carla Rodríguez</Form.Label>
                                 <Form.Control type="text" value={"LA RESEÑA"} />
