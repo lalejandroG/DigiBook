@@ -15,6 +15,8 @@ const Registro=()=>{
         reValidateMode:'onSubmit'
     });
 
+    const [loggeado, setLoggeado] = useState(false)
+
      const [dato, setData] = useState({
         correo:'',
         password:'',
@@ -71,7 +73,17 @@ const Registro=()=>{
                       imagen: login.data.data.imagen_perfil,
                       name: login.data.data.nombre
                 })
-                window.location.href= '/store'
+                window.postMessage(dato.loggeado, '/store')
+                window.postMessage(dato.loggeado, '/profile')
+                window.postMessage(dato.loggeado, '/favorite')
+                window.postMessage(dato.loggeado, '/detail')
+                                
+                setLoggeado(dato.loggeado)
+
+                if(loggeado == true) {
+                    window.location.href= '/store'
+                }
+
             }else{
                  setData({
                     ...dato,

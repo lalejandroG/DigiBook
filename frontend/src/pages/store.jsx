@@ -3,7 +3,7 @@ import {Button, Form} from "react-bootstrap";
 import filtroSimbolo from "../assets/filtroSimbolo.png";
 import libro1 from "../assets/Rectangle 35.png";
 import libro2 from "../assets/Rectangle 38.png";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {Link} from "@material-ui/core";
 import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
@@ -16,6 +16,18 @@ const Store=(props)=>{
 
     const detalles = ()=>{
         window.location.href= '/detail'
+    }
+
+    const [loggeado, setLoggeado] = useState(false)
+
+    useEffect(() => {
+        window.addEventListener('message', (e) => {
+            setLoggeado(e.data)
+        })
+    }, [])
+
+    if(loggeado == false) {
+        window.location.href= '/login'
     }
 
     return(

@@ -8,6 +8,18 @@ import {Padding} from "@material-ui/core/TableCell/TableCell";
 
 const Favorites=()=>{
 
+    const [loggeado, setLoggeado] = useState(false)
+
+    useEffect(() => {
+        window.addEventListener('message', (e) => {
+            setLoggeado(e.data)
+        })
+    }, [])
+
+    if(loggeado == false) {
+        window.location.href= '/login'
+    }
+
     return(
         <>
             <div className={styles.suscribe}>

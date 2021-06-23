@@ -28,12 +28,12 @@ class Server {
         this.routes();
     }
     config() {
-        this.app.set('port', process.env.PORT || 5000);
+        this.app.set('port', process.env.PORT || 5001);
         this.app.use(morgan_1.default('dev'));
         this.app.use(express_1.default.json());
         this.app.use(express_1.default.urlencoded({ extended: false }));
-        this.app.use(cors_1.default({ credentials: true, origin: "http://localhost:3000" }));
-        //this.app.use(cors({credentials: true, origin:"https://digibook-ffb1b.web.app"}));
+        //this.app.use(cors({credentials: true, origin:"http://localhost:3000"}))
+        this.app.use(cors_1.default({ credentials: true, origin: "https://digibook-ffb1b.web.app" }));
     }
     routes() {
         this.app.use(indexRoutes_1.default);

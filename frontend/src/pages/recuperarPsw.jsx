@@ -15,6 +15,8 @@ const RecuperarPsw=()=>{
         reValidateMode:'onSubmit'
     });
 
+    const [loggeado, setLoggeado] = useState(false)
+
      const [dato, setData] = useState({
         correo:'',
         password:'',
@@ -60,7 +62,15 @@ const RecuperarPsw=()=>{
                         ...dato,
                         loggeado: true
                     })
-                    window.location.href= '/store'
+                    window.postMessage(dato.loggeado, '/store')
+                    window.postMessage(dato.loggeado, '/profile')
+                    window.postMessage(dato.loggeado, '/favorite')
+                    window.postMessage(dato.loggeado, '/detail')
+                    setLoggeado(dato.loggeado)
+
+                    if(loggeado == true) {
+                        window.location.href= '/store'
+                    }
 
                 }else{
                      setData({

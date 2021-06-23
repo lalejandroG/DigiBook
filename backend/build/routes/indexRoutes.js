@@ -14,6 +14,9 @@ class IndexRoutes {
         this.router.post('/login', indexController_1.default.login);
         this.router.post('/registro', indexController_1.default.register);
         this.router.post('/recuperar', indexController_1.default.recuperarPsw);
+        this.router.post('/profile', indexController_1.default.perfil);
+        this.router.post('/detalle', indexController_1.default.detalle_producto);
+        this.router.post('/favorite', indexController_1.default.favorite);
     }
 }
 const indexRoutes = new IndexRoutes();

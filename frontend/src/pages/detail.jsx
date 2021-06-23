@@ -19,6 +19,18 @@ const Detail=()=>{
         reValidateMode:'onSubmit'
      });
 
+     const [loggeado, setLoggeado] = useState(false)
+
+     useEffect(() => {
+         window.addEventListener('message', (e) => {
+             setLoggeado(e.data)
+         })
+     }, [])
+ 
+     if(loggeado == false) {
+         window.location.href= '/login'
+     }
+
      const [dato, setData] = useState({
         correo:'',
         biografia:'',
