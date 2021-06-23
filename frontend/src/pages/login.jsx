@@ -1,6 +1,6 @@
 import styles from "../styles/login.module.css";
 import {Alert, Button, Form} from "react-bootstrap";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {useForm} from "react-hook-form";
 import {Link} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
@@ -41,8 +41,8 @@ const Login=function (){
         console.log("Hola")
 
         try {
-            const login = await axios.post(`https://digibook-backend.herokuapp.com/login`, newPostObj)
-            //const login = await axios.post(`http://localhost:5001/login`, newPostObj)
+            //const login = await axios.post(`https://digibook-backend.herokuapp.com/login`, newPostObj)
+            const login = await axios.post(`http://localhost:5001/login`, newPostObj)
             console.log(login.data)  
             console.log(login.data.cod)
 
@@ -80,6 +80,8 @@ const Login=function (){
 
                 if(loggeado == true) {
                     window.location.href= '/store'
+                }else{
+                    window.location.href= '/login'   
                 }
                 
 

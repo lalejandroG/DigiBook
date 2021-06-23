@@ -1,7 +1,7 @@
 import styles from "../styles/detail.module.css";
 import {Button, Col, Form, Row} from "react-bootstrap";
 import diamante from "../assets/Group.png";
-import React, {useState} from "react";
+import React, { useEffect, useState } from "react";
 import {Container, Link, Table} from "@material-ui/core";
 import Image from "react-bootstrap/Image";
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -28,7 +28,7 @@ const Detail=()=>{
      }, [])
  
      if(loggeado == false) {
-         window.location.href= '/login'
+         window.location.href= '/'
      }
 
      const [dato, setData] = useState({
@@ -62,7 +62,8 @@ const Detail=()=>{
         console.log(newPostObj)
 
         try {
-            const perfil = await axios.post(`https://digibook-apis.herokuapp.com/edit_perfil`, newPostObj)
+            //const perfil = await axios.post(`https://digibook-apis.herokuapp.com/edit_perfil`, newPostObj)
+            const perfil = await axios.post(`http://localhost:5001/edit_perfil`, newPostObj)
             console.log(perfil.data.data)
             console.log(perfil.data.cod)
 

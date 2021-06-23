@@ -27,7 +27,7 @@ const Store=(props)=>{
     }, [])
 
     if(loggeado == false) {
-        window.location.href= '/login'
+        window.location.href= '/'
     }
 
     return(

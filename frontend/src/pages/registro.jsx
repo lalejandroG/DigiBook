@@ -43,8 +43,8 @@ const Registro=()=>{
         console.log("Hola")
 
         try {
-            //const login = await axios.post(`http://localhost:5000/registro`, newPostObj)
-            const login = await axios.post(`https://digibook-backend.herokuapp.com/registro`, newPostObj)
+            const login = await axios.post(`http://localhost:5001/registro`, newPostObj)
+            //const login = await axios.post(`https://digibook-backend.herokuapp.com/registro`, newPostObj)
             console.log(login.data)
             console.log(login.data.cod)
 

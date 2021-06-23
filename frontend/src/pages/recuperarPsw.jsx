@@ -2,7 +2,7 @@ import styles from "../styles/login.module.css";
 import style from "../styles/registro.module.css";
 import {Alert, Button, Form} from "react-bootstrap";
 import {Link} from "@material-ui/core";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {useHistory} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import axios from "axios";
@@ -52,8 +52,8 @@ const RecuperarPsw=()=>{
             console.log("Hola")
 
             try {
-                //const login = await axios.post(`http://localhost:5000/recuperar`, newPostObj)
-                const login = await axios.post(`https://digibook-backend.herokuapp.com/recuperar`, newPostObj)
+                const login = await axios.post(`http://localhost:5001/recuperar`, newPostObj)
+                //const login = await axios.post(`https://digibook-backend.herokuapp.com/recuperar`, newPostObj)
                 console.log(login.data)
                 console.log(login.data.cod)
 

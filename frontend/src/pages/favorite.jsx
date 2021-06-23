@@ -1,6 +1,6 @@
 import Navbar from "react-bootstrap/Navbar";
 import styles from "../styles/landingPage.module.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {Button} from "react-bootstrap";
 import diamante from "../assets/Group.png";
 import {Padding} from "@material-ui/core/TableCell/TableCell";
@@ -17,7 +17,7 @@ const Favorites=()=>{
     }, [])
 
     if(loggeado == false) {
-        window.location.href= '/login'
+        window.location.href= '/'
     }
 
     return(
