@@ -151,19 +151,11 @@ class IndexController {
 
     public async perfil (req: Request, res: Response) {
         console.log(req.body)
-        console.log(req.body.correo)
         try {
-            const user = await pool.query('SELECT * FROM cuenta as c WHERE c.id_cuenta = $1', [req.body.id])
-            console.log(user.rowCount)
+            const user = await pool.query('SELECT cu.nombre, cu.imagen_perfil, cu.admin, cu.biografia, r.titulo, r.fecha, r.aprobado FROM cuenta as cu, recurso as r WHERE cu.id_cuenta = $1 AND r.id_cuenta_publicador = $1', [req.body.id])
+            console.log(user.rows)
 
-            if(user.rowCount === 0){
-                console.log(user.rows[0])
-
-                res.json({data: user.rows[0], cod: "00"})
-            }else{
-
-                res.json({msg: "Usuario no registrado", cod: "01"})
-            }
+            res.json({data: user, cod: "00"})
 
         } catch (error) {
 
@@ -225,7 +217,21 @@ class IndexController {
             res.json({msg: "No se pudo completar su petición", cod: "01", error: error})
         }
     }
+    public async edit_profile (req: Request, res: Response) {
 
+        console.log(req.body)
+        console.log(req.body.id)
+        try {
+            await pool.query('UPDATE cuenta SET nombre = $1, biografia = $2 WHERE id_cuenta = $3 ', [req.body.nombre, req.body.biografia, req.body.id])
+
+            res.json({cod: "00"})
+
+        } catch (error) {
+
+            console.log(error)
+            res.json({msg: "No se pudo completar su petición", cod: "01", error: error})
+        }
+    }
 
 }
 

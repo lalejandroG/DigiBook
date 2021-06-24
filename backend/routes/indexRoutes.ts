@@ -20,6 +20,7 @@ class IndexRoutes {
         this.router.post('/detalle', indexController.detalle_producto);
         this.router.post('/favorite', indexController.favorite);
         this.router.post('/comments', indexController.comments);
+        this.router.post('/edit_profile', indexController.edit_profile);
 
     }
 }

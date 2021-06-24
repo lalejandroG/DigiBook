@@ -21,6 +21,7 @@ class IndexRoutes {
         this.router.post('/detalle', indexController_1.default.detalle_producto);
         this.router.post('/favorite', indexController_1.default.favorite);
         this.router.post('/comments', indexController_1.default.comments);
+        this.router.post('/edit_profile', indexController_1.default.edit_profile);
     }
 }
 const indexRoutes = new IndexRoutes();

@@ -27,7 +27,7 @@ const MenuDesplegable =(props)=>{
     return(
         <>
             <div className={styles.navbarWrapper}>
-                {definirOpciones(props.path) ? <Loggeado/>: ''}
+                {definirOpciones(props.path) ? <Loggeado path={props.path}/>: ''}
                 <div className={styles.botones}>
                     <Button className={styles.boton}>Suscripciones</Button>{' '}
                     <Button className={styles.boton}>Nosotros</Button>{' '}

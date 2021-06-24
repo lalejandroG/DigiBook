@@ -24,9 +24,9 @@ const Comments=(props)=>{
         async function fetchMyAPI() {
             try {
 
-                console.log(props.match.params.id)
+                console.log(props.match.params.id_r)
                 let newPostObj = {
-                    id: props.match.params.id
+                    id: props.match.params.id_r
                 };
 
                 console.log(newPostObj)

@@ -43,9 +43,9 @@ const Detail=(props)=>{
         async function fetchMyAPI() {
             try {
 
-                console.log(props.match.params.id)
+                console.log(props.match.params.id_r)
                 let newPostObj = {
-                    id: props.match.params.id
+                    id: props.match.params.id_r
                 };
 
                 console.log(newPostObj)
@@ -120,10 +120,10 @@ const Detail=(props)=>{
                                 <Form.Control type="text" value={dato.contenido} />
                             </Form.Group>
 
-                            {/*<Link href={`https://digibook-ffb1b.web.app/comments/${props.match.params.id}`}>*/}
-                            <Link href={`http://localhost:3000/comments/${props.match.params.id}`}>
-                                <a id={styles.mas} href={`http://localhost:3000/comments/${props.match.params.id}`}> Ver más</a>
-                            {/*    <a id={styles.mas} href={`https://digibook-ffb1b.web.app/comments/${props.match.params.id}`}> Ver más</a>*/}
+                            {/*<Link href={`https://digibook-ffb1b.web.app/comments/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${props.match.params.id_r}`}>*/}
+                            <Link href={`http://localhost:3000/comments/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${props.match.params.id_r}`}>
+                                <a id={styles.mas} href={`http://localhost:3000/comments/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${props.match.params.id_r}`}> Ver más</a>
+                            {/*    <a id={styles.mas} href={`https://digibook-ffb1b.web.app/comments/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${props.match.params.id_r}`}> Ver más</a>*/}
                             </Link>
 
                         <div className={styles.botones}>

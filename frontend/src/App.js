@@ -30,10 +30,10 @@ function App() {
                       <Route exact path="/recuperar" component={NavbarInicio} />
                       <Route exact path="/store/:id" component={Navbar}/>
                       <Route exact path="/revision" component={Navbar}/>
-                      <Route exact path="/profile" component={Navbar}/>
-                      <Route exact path="/favorite" component={Navbar}/>
-                      <Route exact path="/detail/:id" component={Navbar}/>
-                      <Route exact path="/comments/:id" component={Navbar}/>
+                      <Route exact path="/profile/:id" component={Navbar}/>
+                      <Route exact path="/favorite/:id" component={Navbar}/>
+                      <Route exact path="/detail/:id/:id_r" component={Navbar}/>
+                      <Route exact path="/comments/:id/:id_r" component={Navbar}/>
 
 
                     </Switch>
@@ -48,10 +48,10 @@ function App() {
                       <Route exact path="/recuperar" component={Recuperar} />
                       <Route exact path="/store/:id" component={Store} />
                       <Route exact path="/revision" component={Revision} />
-                      <Route exact path="/profile" component={Profile} />
-                      <Route exact path="/favorite" component={Favorite}/>
-                      <Route exact path="/detail/:id" component={Detail}/>
-                      <Route exact path="/comments/:id" component={Comments} />
+                      <Route exact path="/profile/:id" component={Profile} />
+                      <Route exact path="/favorite/:id" component={Favorite}/>
+                      <Route exact path="/detail/:id/:id_r" component={Detail}/>
+                      <Route exact path="/comments/:id/:id_r" component={Comments} />
                     </Switch>
               </Router>
           </section>
