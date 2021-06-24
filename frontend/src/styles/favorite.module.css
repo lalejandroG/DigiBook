@@ -80,5 +80,9 @@
     .favs{
         display: flex;
     }
+    .icono{
+        width: 100%;
+        height: 5%;
+    }
 }
 

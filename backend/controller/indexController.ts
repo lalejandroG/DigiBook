@@ -183,16 +183,10 @@ class IndexController {
     public async favorite (req: Request, res: Response) {
 
         try {
-            const fav = await pool.query('SELECT * FROM favoritos WHERE id_cuenta = $1', [req.body.id])
+            const fav = await pool.query('SELECT f.id_recurso, r.titulo, r.imagen FROM favoritos as f, recurso as r WHERE f.id_cuenta = $1 AND r.id_recurso = f.id_recurso ', [req.body.id])
+            console.log(fav.rows)
 
-            if(fav.rowCount != 0){
-                const recurso = await pool.query('SELECT * FROM recurso')
-                console.log(recurso.rows)
-                res.send({data: recurso, cod: "00"})
-
-            }else{
-                res.json({msg: "No posee favoritos", cod: "01", error: "No posee favoritos"})
-            }
+            res.send({data: fav, cod: "00"})
 
         } catch (error) {
 
@@ -223,6 +217,22 @@ class IndexController {
         console.log(req.body.id)
         try {
             await pool.query('UPDATE cuenta SET nombre = $1, biografia = $2 WHERE id_cuenta = $3 ', [req.body.nombre, req.body.biografia, req.body.id])
+
+            res.json({cod: "00"})
+
+        } catch (error) {
+
+            console.log(error)
+            res.json({msg: "No se pudo completar su petición", cod: "01", error: error})
+        }
+    }
+
+     public async eliminar_favs (req: Request, res: Response) {
+
+        console.log(req.body)
+        console.log(req.body.id)
+        try {
+            await pool.query('DELETE FROM favoritos WHERE id_cuenta = $1 AND id_recurso = $2 ', [req.body.id, req.body.id_recurso])
 
             res.json({cod: "00"})
 

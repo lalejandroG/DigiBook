@@ -173,15 +173,9 @@ class IndexController {
     favorite(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const fav = yield elephantsql_1.default.query('SELECT * FROM favoritos WHERE id_cuenta = $1', [req.body.id]);
-                if (fav.rowCount != 0) {
-                    const recurso = yield elephantsql_1.default.query('SELECT * FROM recurso');
-                    console.log(recurso.rows);
-                    res.send({ data: recurso, cod: "00" });
-                }
-                else {
-                    res.json({ msg: "No posee favoritos", cod: "01", error: "No posee favoritos" });
-                }
+                const fav = yield elephantsql_1.default.query('SELECT f.id_recurso, r.titulo, r.imagen FROM favoritos as f, recurso as r WHERE f.id_cuenta = $1 AND r.id_recurso = f.id_recurso ', [req.body.id]);
+                console.log(fav.rows);
+                res.send({ data: fav, cod: "00" });
             }
             catch (error) {
                 console.log(error);
@@ -210,6 +204,20 @@ class IndexController {
             console.log(req.body.id);
             try {
                 yield elephantsql_1.default.query('UPDATE cuenta SET nombre = $1, biografia = $2 WHERE id_cuenta = $3 ', [req.body.nombre, req.body.biografia, req.body.id]);
+                res.json({ cod: "00" });
+            }
+            catch (error) {
+                console.log(error);
+                res.json({ msg: "No se pudo completar su petición", cod: "01", error: error });
+            }
+        });
+    }
+    eliminar_favs(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log(req.body);
+            console.log(req.body.id);
+            try {
+                yield elephantsql_1.default.query('DELETE FROM favoritos WHERE id_cuenta = $1 AND id_recurso = $2 ', [req.body.id, req.body.id_recurso]);
                 res.json({ cod: "00" });
             }
             catch (error) {
