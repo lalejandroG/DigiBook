@@ -11,8 +11,13 @@ import Card from 'react-bootstrap/Card';
 import CardDeck from 'react-bootstrap/CardDeck';
 import axios from "axios";
 import { useParams } from 'react-router-dom'
+import {useForm} from "react-hook-form";
 
 const Store=(props)=>{
+
+    const {handleSubmit} = useForm({
+        reValidateMode:'onSubmit'
+    });
 
     const [dato, setData] = useState({
         recursos: [45]
@@ -21,6 +26,38 @@ const Store=(props)=>{
     const detalles = (id)=>{
         //window.location.href= `http://localhost:3000/detail/${id}`
         window.location.href= `https://digibook-ffb1b.web.app/detail/${id}`
+    }
+
+    const onSubmit=async()=> {
+        let newPostObj = {
+            busqueda: dato.barraBusqueda
+            };
+        console.log(newPostObj)
+        try {
+            const busqueda = await axios.post(`https://digibook-backend.herokuapp.com/busqueda`, newPostObj)
+            //const busqueda = await axios.post(`http://localhost:5000/busqueda`, newPostObj)
+            console.log(busqueda.data)
+            console.log(busqueda.data.cod)
+
+            if(busqueda.data.cod === "00"){
+                setData({
+                    ...dato,
+                    recursos: busqueda.data.data.rows
+                })
+            }else{
+                console.log(busqueda.data.error)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const handleChange = e =>{
+        setData({
+            ...dato,
+            [e.target.name] : e.target.value
+        })
+       console.log(dato.barraBusqueda)
     }
 
     useEffect(()=>
@@ -70,16 +107,13 @@ const Store=(props)=>{
         <>
                 <div className={styles.fondo}>
                     <div className={styles.content}>
-                            <Image src={filtroSimbolo} alt={"filtroSimbolo"} className={styles.imagen} rounded/>
-                            <Form>
-                              <Form.Group>
-                                <Form.Control className={styles.barraBusqueda} />
-                              </Form.Group>
-                            </Form>
-                            <div>
-                                  <Button className={styles.botones} >Buscar</Button>{' '}
-                            </div>
-
+                        <Image src={filtroSimbolo} alt={"filtroSimbolo"} className={styles.imagen} rounded/>
+                        <Form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+                            <Form.Group>
+                                <Form.Control name={"barraBusqueda"} className={styles.barraBusqueda} onChange={handleChange} />
+                            </Form.Group>   
+                            <Button type="submit" className={styles.botones} >Buscar</Button>{' '}
+                        </Form>
                     </div>
                     <div className={styles.libros}>
                         {dato.recursos && libros()}
