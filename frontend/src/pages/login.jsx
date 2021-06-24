@@ -99,7 +99,6 @@ const Login=function (){
                               <div className={styles.botones}>
                                   <Button type="submit" className={styles.botonI}>Iniciar Sessión</Button>{' '}
                               </div>
-
                             </Form>
                     </div>
                     <div className={styles.olvido}>

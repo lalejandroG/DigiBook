@@ -24,8 +24,8 @@ const Store=(props)=>{
     });
 
     const detalles = (id)=>{
-        window.location.href= `http://localhost:3000/detail/${id}`
-        //window.location.href= `https://digibook-ffb1b.web.app/detail/${id}`
+        //window.location.href= `http://localhost:3000/detail/${id}`
+        window.location.href= `https://digibook-ffb1b.web.app/detail/${id}`
     }
 
     const onSubmit=async()=> {
@@ -65,8 +65,8 @@ const Store=(props)=>{
         console.log("POR FIS "+ props.match.params.id)
         async function fetchMyAPI() {
             try {
-                //const recurso = await axios.get(`https://digibook-backend.herokuapp.com/store`)
-                const recurso = await axios.get(`http://localhost:5000/store`)
+                const recurso = await axios.get(`https://digibook-backend.herokuapp.com/revision`)
+                //const recurso = await axios.get(`http://localhost:5000/revision`)
                 console.log(recurso.data.data.rows)
                 console.log(recurso.data.data.rows[0].imagen)
 
@@ -103,26 +103,26 @@ const Store=(props)=>{
           ))
         );
 
-    return(
-        <>
-                <div className={styles.fondo}>
-                    <div className={styles.content}>
-                        <Image src={filtroSimbolo} alt={"filtroSimbolo"} className={styles.imagen} rounded/>
-                        <Form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-                            <Form.Group>
-                                <Form.Control name={"barraBusqueda"} className={styles.barraBusqueda} onChange={handleChange} />
-                            </Form.Group>   
-                            <Button type="submit" className={styles.botones} >Buscar</Button>{' '}
-                        </Form>
+        return(
+            <>
+                    <div className={styles.fondo}>
+                        <div className={styles.content}>
+                            <Image src={filtroSimbolo} alt={"filtroSimbolo"} className={styles.imagen} rounded/>
+                            <Form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+                                <Form.Group>
+                                    <Form.Control name={"barraBusqueda"} className={styles.barraBusqueda} onChange={handleChange} />
+                                </Form.Group>   
+                                <Button type="submit" className={styles.botones} >Buscar</Button>{' '}
+                            </Form>
+                        </div>
+                        <div className={styles.libros}>
+                            {dato.recursos && libros()}
+                        </div>
                     </div>
-                    <div className={styles.libros}>
-                        {dato.recursos && libros()}
-                    </div>
-                </div>
-
-        </>
-
-    )
+    
+            </>
+    
+        )
 }
 
 export default Store;
