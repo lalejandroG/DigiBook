@@ -123,7 +123,7 @@ const Detail=(props)=>{
                             {/*<Link href={`https://digibook-ffb1b.web.app/comments/${props.match.params.id}`}>*/}
                             <Link href={`http://localhost:3000/comments/${props.match.params.id}`}>
                                 <a id={styles.mas} href={`http://localhost:3000/comments/${props.match.params.id}`}> Ver más</a>
-                                {/*<a id={styles.mas} href={`https://digibook-ffb1b.web.app/comments/${props.match.params.id}`}> Ver más</a>*/}
+                            {/*    <a id={styles.mas} href={`https://digibook-ffb1b.web.app/comments/${props.match.params.id}`}> Ver más</a>*/}
                             </Link>
 
                         <div className={styles.botones}>

@@ -25,7 +25,7 @@ const Store=(props)=>{
 
     const detalles = (id)=>{
         window.location.href= `http://localhost:3000/detail/${id}`
-        //window.location.href= `https://digibook-ffb1b.web.app/detail/${id}`
+        // window.location.href= `https://digibook-ffb1b.web.app/detail/${id}`
     }
 
     const onSubmit=async()=> {
@@ -34,8 +34,8 @@ const Store=(props)=>{
             };
         console.log(newPostObj)
         try {
-            const busqueda = await axios.post(`https://digibook-backend.herokuapp.com/busqueda`, newPostObj)
-            //const busqueda = await axios.post(`http://localhost:5000/busqueda`, newPostObj)
+            // const busqueda = await axios.post(`https://digibook-backend.herokuapp.com/busqueda`, newPostObj)
+            const busqueda = await axios.post(`http://localhost:5000/busqueda`, newPostObj)
             console.log(busqueda.data)
             console.log(busqueda.data.cod)
 
@@ -65,7 +65,7 @@ const Store=(props)=>{
         console.log("POR FIS "+ props.match.params.id)
         async function fetchMyAPI() {
             try {
-                //const recurso = await axios.get(`https://digibook-backend.herokuapp.com/store`)
+                // const recurso = await axios.get(`https://digibook-backend.herokuapp.com/store`)
                 const recurso = await axios.get(`http://localhost:5000/store`)
                 console.log(recurso.data.data.rows)
                 console.log(recurso.data.data.rows[0].imagen)
@@ -111,7 +111,7 @@ const Store=(props)=>{
                         <Form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
                             <Form.Group>
                                 <Form.Control name={"barraBusqueda"} className={styles.barraBusqueda} onChange={handleChange} />
-                            </Form.Group>   
+                            </Form.Group>
                             <Button type="submit" className={styles.botones} >Buscar</Button>{' '}
                         </Form>
                     </div>

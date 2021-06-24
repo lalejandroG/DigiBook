@@ -39,7 +39,35 @@ class IndexController {
     getRecurso(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const recurso = yield elephantsql_1.default.query('SELECT * FROM recurso');
+                const recurso = yield elephantsql_1.default.query('SELECT * FROM recurso WHERE aprobado = True');
+                console.log(recurso.rows);
+                res.send({ data: recurso, cod: "00" });
+            }
+            catch (error) {
+                console.log(error);
+                res.json({ msg: "No se pudo completar su petición", cod: "01", error: error });
+            }
+        });
+    }
+    getBusqueda(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                var queryText = "SELECT * FROM recurso WHERE aprobado = True AND (titulo LIKE '%" + req.body.busqueda + "%' OR resumen LIKE '%" + req.body.busqueda + "%')";
+                console.log(queryText);
+                const recurso = yield elephantsql_1.default.query(queryText);
+                console.log(recurso.rows);
+                res.send({ data: recurso, cod: "00" });
+            }
+            catch (error) {
+                console.log(error);
+                res.json({ msg: "No se pudo completar su petición", cod: "01", error: error });
+            }
+        });
+    }
+    getRevisiones(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const recurso = yield elephantsql_1.default.query('SELECT * FROM recurso WHERE aprobado = False');
                 console.log(recurso.rows);
                 res.send({ data: recurso, cod: "00" });
             }

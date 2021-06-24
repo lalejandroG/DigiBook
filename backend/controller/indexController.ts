@@ -29,7 +29,37 @@ class IndexController {
     public async getRecurso (req: Request, res: Response) {
 
         try {
-            const recurso = await pool.query('SELECT * FROM recurso')
+            const recurso = await pool.query('SELECT * FROM recurso WHERE aprobado = True')
+            console.log(recurso.rows)
+            res.send({data: recurso, cod: "00"})
+
+        } catch (error) {
+
+            console.log(error)
+            res.json({msg: "No se pudo completar su petición", cod: "01", error: error})
+        }
+    }
+
+    public async getBusqueda (req: Request, res: Response) {
+
+        try {
+            var queryText = "SELECT * FROM recurso WHERE aprobado = True AND (titulo LIKE '%" + req.body.busqueda +"%' OR resumen LIKE '%" + req.body.busqueda +"%')"
+            console.log(queryText)
+            const recurso = await pool.query(queryText)
+            console.log(recurso.rows)
+            res.send({data: recurso, cod: "00"})
+
+        } catch (error) {
+
+            console.log(error)
+            res.json({msg: "No se pudo completar su petición", cod: "01", error: error})
+        }
+    }
+
+    public async getRevisiones (req: Request, res: Response) {
+
+        try {
+            const recurso = await pool.query('SELECT * FROM recurso WHERE aprobado = False')
             console.log(recurso.rows)
             res.send({data: recurso, cod: "00"})
 

@@ -16,8 +16,7 @@ import StarIcon from '@material-ui/icons/Star';
 const Comments=(props)=>{
 
      const [dato, setData] = useState({
-         comenntarios: [45],
-         favs: []
+         comenntarios: [45]
     });
 
       useEffect(()=>
@@ -42,15 +41,6 @@ const Comments=(props)=>{
                         ...dato,
                         comenntarios: recurso.data.data.rows
                     })
-
-                     // dato.comenntarios.map((key)=>(
-                     //      for (let i = 0; i < num.calificacion; i++)
-                     //          favs.
-                     // ))
-
-
-
-
 
                 }else{
                     console.log(recurso.data.error)
@@ -100,7 +90,9 @@ const Comments=(props)=>{
                     <div className={styles.datos}>
                          <div className=".col-md-*">
                             {dato.comenntarios && comenntarios()}
-
+                             <div className={styles.botones}>
+                                <Button type="submit" className={styles.botonI}>Escribir reseña</Button>{' '}
+                            </div>
                          </div>
                     </div>
 

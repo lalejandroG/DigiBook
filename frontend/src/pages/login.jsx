@@ -33,8 +33,8 @@ const Login=function (){
         console.log(newPostObj)
 
         try {
-            //const login = await axios.post(`https://digibook-backend.herokuapp.com/login`, newPostObj)
-            const login = await axios.post(`http://localhost:5000/login`, newPostObj)
+            const login = await axios.post(`https://digibook-backend.herokuapp.com/login`, newPostObj)
+            //const login = await axios.post(`http://localhost:5000/login`, newPostObj)
             console.log(login.data)
             console.log(login.data.cod)
 
@@ -45,8 +45,8 @@ const Login=function (){
                     id: login.data.data.id_cuenta,
                 })
 
-                //window.location.href= `https://digibook-ffb1b.web.app/store/${login.data.data.id_cuenta}`
-                window.location.href= `http://localhost:3000/store/${login.data.data.id_cuenta}`
+                window.location.href= `https://digibook-ffb1b.web.app/store/${login.data.data.id_cuenta}`
+                //window.location.href= `http://localhost:3000/store/${login.data.data.id_cuenta}`
 
             }else{
                  setData({

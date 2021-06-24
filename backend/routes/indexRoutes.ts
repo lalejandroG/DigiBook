@@ -12,6 +12,8 @@ class IndexRoutes {
     config(): void {
         this.router.post('/login', indexController.login);
         this.router.get('/store', indexController.getRecurso);
+        this.router.get('/revision', indexController.getRevisiones);
+        this.router.post('/busqueda', indexController.getBusqueda);
         this.router.post('/registro', indexController.register);
         this.router.post('/recuperar', indexController.recuperarPsw);
         this.router.post('/profile', indexController.perfil);
