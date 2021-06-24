@@ -179,6 +179,23 @@ class IndexController {
         }
     }
 
+    public async comments (req: Request, res: Response) {
+
+        console.log(req.body)
+        console.log(req.body.id)
+        try {
+           const comments = await pool.query('SELECT co.id_cuenta, co.contenido, cu.nombre, co.calificacion FROM comentario as co, cuenta as cu WHERE co.id_recurso = $1 AND cu.id_cuenta = co.id_cuenta ', [req.body.id])
+            console.log(comments.rows)
+
+            res.json({data: comments, cod: "00"})
+
+        } catch (error) {
+
+            console.log(error)
+            res.json({msg: "No se pudo completar su petición", cod: "01", error: error})
+        }
+    }
+
 
 }
 

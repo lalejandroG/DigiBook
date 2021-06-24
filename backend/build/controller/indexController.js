@@ -168,6 +168,21 @@ class IndexController {
             }
         });
     }
+    comments(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log(req.body);
+            console.log(req.body.id);
+            try {
+                const comments = yield elephantsql_1.default.query('SELECT co.id_cuenta, co.contenido, cu.nombre, co.calificacion FROM comentario as co, cuenta as cu WHERE co.id_recurso = $1 AND cu.id_cuenta = co.id_cuenta ', [req.body.id]);
+                console.log(comments.rows);
+                res.json({ data: comments, cod: "00" });
+            }
+            catch (error) {
+                console.log(error);
+                res.json({ msg: "No se pudo completar su petición", cod: "01", error: error });
+            }
+        });
+    }
 }
 const indexController = new IndexController();
 exports.default = indexController;

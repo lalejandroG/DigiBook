@@ -14,6 +14,7 @@ import Store from './pages/store'
 import Profile from './pages/profile'
 import Favorite from './pages/favorite'
 import Detail from './pages/detail'
+import Comments from './pages/comments'
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
                       <Route exact path="/profile" component={Navbar}/>
                       <Route exact path="/favorite" component={Navbar}/>
                       <Route exact path="/detail/:id" component={Navbar}/>
+                      <Route exact path="/comments/:id" component={Navbar}/>
 
 
                     </Switch>
@@ -46,6 +48,7 @@ function App() {
                       <Route exact path="/profile" component={Profile} />
                       <Route exact path="/favorite" component={Favorite}/>
                       <Route exact path="/detail/:id" component={Detail}/>
+                      <Route exact path="/comments/:id" component={Comments} />
                     </Switch>
               </Router>
           </section>

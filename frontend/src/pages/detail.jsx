@@ -50,10 +50,11 @@ const Detail=(props)=>{
 
                 console.log(newPostObj)
 
-                const recurso = await axios.post(`https://digibook-backend.herokuapp.com/detalle`, newPostObj)
-                //const recurso = await axios.post(`http://localhost:5000/detalle`, newPostObj)
+                //const recurso = await axios.post(`https://digibook-backend.herokuapp.com/detalle`, newPostObj)
+                const recurso = await axios.post(`http://localhost:5000/detalle`, newPostObj)
 
                 console.log(recurso.data.cod)
+                console.log(recurso.data.data.rows[0].avg)
 
                 if(recurso.data.cod === "00"){
                     setData({
@@ -100,11 +101,11 @@ const Detail=(props)=>{
                 <div className={styles.recurso}>
                     <Image src={dato.imagen} className={styles.libro} />
                     <div className={styles.estrellas}>
-                        <i className={styles.materialIcons2} >star</i>
-                        <i className={styles.materialIcons2} >star</i>
-                        <i className={styles.materialIcons2} >star</i>
-                        <i className={styles.materialIcons2} >star</i>
-                        <i className={styles.materialIcons2} >star</i>
+                        <i className={styles.materialIcons2} style={{color: dato.avg >=1 ? "yellow" : "whitesmoke" }}>star</i>
+                        <i className={styles.materialIcons2} style={{color: dato.avg >=2 ? "yellow" : "whitesmoke" }}>star</i>
+                        <i className={styles.materialIcons2} style={{color: dato.avg >=3 ? "yellow" : "whitesmoke" }}>star</i>
+                        <i className={styles.materialIcons2} style={{color: dato.avg >=4 ? "yellow" : "whitesmoke" }}>star</i>
+                        <i className={styles.materialIcons2} style={{color: dato.avg >=5 ? "yellow" : "whitesmoke" }}>star</i>
 
                     </div>
                 </div>
@@ -119,8 +120,10 @@ const Detail=(props)=>{
                                 <Form.Control type="text" value={dato.contenido} />
                             </Form.Group>
 
-                            <Link href="../pages/comments">
-                                <a id={styles.mas} href="/comments"> Ver más</a>
+                            {/*<Link href={`https://digibook-ffb1b.web.app/comments/${props.match.params.id}`}>*/}
+                            <Link href={`http://localhost:3000/comments/${props.match.params.id}`}>
+                                <a id={styles.mas} href={`http://localhost:3000/comments/${props.match.params.id}`}> Ver más</a>
+                                {/*<a id={styles.mas} href={`https://digibook-ffb1b.web.app/comments/${props.match.params.id}`}> Ver más</a>*/}
                             </Link>
 
                         <div className={styles.botones}>

@@ -19,8 +19,8 @@ const Store=(props)=>{
     });
 
     const detalles = (id)=>{
-        //window.location.href= `http://localhost:3000/detail/${id}`
-        window.location.href= `https://digibook-ffb1b.web.app/detail/${id}`
+        window.location.href= `http://localhost:3000/detail/${id}`
+        //window.location.href= `https://digibook-ffb1b.web.app/detail/${id}`
     }
 
     useEffect(()=>
@@ -28,8 +28,8 @@ const Store=(props)=>{
         console.log("POR FIS "+ props.match.params.id)
         async function fetchMyAPI() {
             try {
-                const recurso = await axios.get(`https://digibook-backend.herokuapp.com/store`)
-                //const recurso = await axios.get(`http://localhost:5000/store`)
+                //const recurso = await axios.get(`https://digibook-backend.herokuapp.com/store`)
+                const recurso = await axios.get(`http://localhost:5000/store`)
                 console.log(recurso.data.data.rows)
                 console.log(recurso.data.data.rows[0].imagen)
 

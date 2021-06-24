@@ -17,7 +17,7 @@ const MenuDesplegable =(props)=>{
     const definirOpciones=(props)=>{
         console.log(props)
 
-        if(props === "/store" || props === "/profile" ||  props === "/detail" ||  props === "/favorite"   ){
+        if(props.includes("/store/") || props.includes("/profile/") ||  props.includes("/detail/") || props.includes("/favorite/") ||  props.includes("/comments/")  ){
             return true
         }else{
             return false
@@ -33,8 +33,10 @@ const MenuDesplegable =(props)=>{
                     <Button className={styles.boton}>Nosotros</Button>{' '}
                     <Button className={styles.boton}>Contáctanos</Button>{' '}
                     {definirOpciones(props.path) ?
-                        <Link href="../pages/store">
-                            <a href="/store" className={styles.botones} >
+                        // <Link href={`https://digibook-ffb1b.web.app${props.path}`}>
+                        <Link href={`http://localhost:3000/store${props.path.substring((props.path.length - 2), props.path.length)}`}>
+                            <a href={`http://localhost:3000/store${props.path.substring((props.path.length - 2), props.path.length)}`} className={styles.botones} >
+                            {/*<a href={`https://digibook-ffb1b.web.app${props.path}`} className={styles.botones} >*/}
                                 <Button className={styles.boton}>Tienda</Button>{' '}
                             </a>
                         </Link>
