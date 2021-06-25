@@ -12,11 +12,17 @@ import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 import Card from "react-bootstrap/Card";
 import libro1 from "../assets/Rectangle 35.png";
 import StarIcon from '@material-ui/icons/Star';
+import ModalComments from "../components/modalComments";
+import {Label} from "@material-ui/icons";
 
 const Comments=(props)=>{
 
      const [dato, setData] = useState({
-         comenntarios: [45]
+         comentarios: [45]
+    });
+
+      const {handleSubmit} = useForm({
+        reValidateMode:'onSubmit'
     });
 
       useEffect(()=>
@@ -39,7 +45,7 @@ const Comments=(props)=>{
                 if(recurso.data.cod === "00"){
                     setData({
                         ...dato,
-                        comenntarios: recurso.data.data.rows
+                        comentarios: recurso.data.data.rows
                     })
 
                 }else{
@@ -57,13 +63,13 @@ const Comments=(props)=>{
 
 
        const comenntarios = () => (
-            dato.comenntarios.map((key) =>(
+            dato.comentarios.map((key) =>(
                 <Form className={styles.form}>
                     <Form.Group controlId="formBasicEmail" className={styles.space}>
-                        <Form.Label>{key.nombre}</Form.Label>
-                        <Form.Control type="text" value={key.contenido} />
+                        <Form.Label className={styles.autor}>{key.nombre}</Form.Label>
+                        <Form.Label className={styles.comment}>{key.contenido}</Form.Label>
                     </Form.Group>
-                    {dato.comenntarios && estrellas(key.calificacion)}
+                    {dato.comentarios && estrellas(key.calificacion)}
                 </Form>
           ))
         );
@@ -89,10 +95,8 @@ const Comments=(props)=>{
 
                     <div className={styles.datos}>
                          <div className=".col-md-*">
-                            {dato.comenntarios && comenntarios()}
-                             <div className={styles.botones}>
-                                <Button type="submit" className={styles.botonI}>Escribir reseña</Button>{' '}
-                            </div>
+                            {dato.comentarios && comenntarios()}
+                            <ModalComments id={props.match.params.id} id_r={props.match.params.id_r}/>
                          </div>
                     </div>
 

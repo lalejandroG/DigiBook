@@ -22,6 +22,7 @@ class IndexRoutes {
         this.router.post('/comments', indexController.comments);
         this.router.post('/edit_profile', indexController.edit_profile);
         this.router.post('/eliminar_fav', indexController.eliminar_favs);
+        this.router.post('/comentar', indexController.comentar);
 
     }
 }

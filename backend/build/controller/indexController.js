@@ -226,6 +226,20 @@ class IndexController {
             }
         });
     }
+    comentar(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log(req.body);
+            console.log(req.body.id);
+            try {
+                yield elephantsql_1.default.query('INSERT INTO comentario (id_cuenta, id_recurso, contenido, calificacion)  VALUES ($1, $2, $3, $4) ', [req.body.id, req.body.id_r, req.body.comentario, req.body.calificacion]);
+                res.json({ cod: "00" });
+            }
+            catch (error) {
+                console.log(error);
+                res.json({ msg: "No se pudo completar su petición", cod: "01", error: error });
+            }
+        });
+    }
 }
 const indexController = new IndexController();
 exports.default = indexController;
