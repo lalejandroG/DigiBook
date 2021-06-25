@@ -23,6 +23,7 @@ class IndexRoutes {
         this.router.post('/comments', indexController_1.default.comments);
         this.router.post('/edit_profile', indexController_1.default.edit_profile);
         this.router.post('/eliminar_fav', indexController_1.default.eliminar_favs);
+        this.router.post('/agregar_fav', indexController_1.default.agregar_favs);
         this.router.post('/comentar', indexController_1.default.comentar);
     }
 }

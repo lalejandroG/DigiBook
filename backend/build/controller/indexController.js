@@ -161,8 +161,16 @@ class IndexController {
             console.log(req.body.id);
             try {
                 const recurso = yield elephantsql_1.default.query('SELECT r.resumen, r.titulo, r.imagen, r.url, co.id_cuenta, co.contenido, avg(co.calificacion), cu.nombre FROM recurso as r, comentario as co, cuenta as cu WHERE r.id_recurso = $1 AND co.id_recurso = $1 AND cu.id_cuenta = co.id_cuenta GROUP BY co.calificacion, r.resumen, r.titulo, r.imagen, r.url, co.id_cuenta, co.contenido, cu.nombre ORDER BY co.contenido LIMIT 1 ', [req.body.id]);
+                const fav = yield elephantsql_1.default.query('SELECT * FROM favoritos WHERE id_recurso = $1 AND id_cuenta = $2 ', [req.body.id, req.body.id_c]);
+                const premium = yield elephantsql_1.default.query('SELECT premium FROM cuenta WHERE id_cuenta = $1 ', [req.body.id_c]);
                 console.log(recurso.rows);
-                res.json({ data: recurso, cod: "00" });
+                console.log(premium.rows);
+                if (fav.rows.length > 0) {
+                    res.json({ data: recurso, fav: true, premium: premium.rows[0].premium, cod: "00" });
+                }
+                else {
+                    res.json({ data: recurso, fav: false, premium: premium.rows[0].premium, cod: "00" });
+                }
             }
             catch (error) {
                 console.log(error);
@@ -218,6 +226,20 @@ class IndexController {
             console.log(req.body.id);
             try {
                 yield elephantsql_1.default.query('DELETE FROM favoritos WHERE id_cuenta = $1 AND id_recurso = $2 ', [req.body.id, req.body.id_recurso]);
+                res.json({ cod: "00" });
+            }
+            catch (error) {
+                console.log(error);
+                res.json({ msg: "No se pudo completar su petición", cod: "01", error: error });
+            }
+        });
+    }
+    agregar_favs(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log(req.body);
+            console.log(req.body.id);
+            try {
+                yield elephantsql_1.default.query('INSERT INTO favoritos (id_cuenta, id_recurso)  VALUES ($1, $2) ', [req.body.id, req.body.id_recurso]);
                 res.json({ cod: "00" });
             }
             catch (error) {

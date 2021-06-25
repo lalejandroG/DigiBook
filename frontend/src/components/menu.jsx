@@ -32,11 +32,11 @@ const MenuDesplegable =(props)=>{
                     <Button className={styles.boton}>Suscripciones</Button>{' '}
                     <Button className={styles.boton}>Nosotros</Button>{' '}
                     <Button className={styles.boton}>Contáctanos</Button>{' '}
-                    {definirOpciones(props.path) ?
-                        // <Link href={`https://digibook-ffb1b.web.app${props.path}`}>
-                        <Link href={`http://localhost:3000/store${props.path.substring((props.path.length - 2), props.path.length)}`}>
-                            <a href={`http://localhost:3000/store${props.path.substring((props.path.length - 2), props.path.length)}`} className={styles.botones} >
-                            {/*<a href={`https://digibook-ffb1b.web.app${props.path}`} className={styles.botones} >*/}
+                    {definirOpciones(props.path) && !props.path.includes("/store/")?
+                        // <Link href={`https://digibook-ffb1b.web.app/store${props.path.substring((props.path.length - 4), props.path.length -2)}`}>
+                        <Link href={`http://localhost:3000/store${props.path.substring((props.path.length - 4), props.path.length -2)}`}>
+                            <a href={`http://localhost:3000/store${props.path.substring((props.path.length - 4), props.path.length -2)}`} className={styles.botones} >
+                            {/*<a href={`https://digibook-ffb1b.web.app/store${props.path.substring((props.path.length - 4), props.path.length -2)}`} className={styles.botones} >*/}
                                 <Button className={styles.boton}>Tienda</Button>{' '}
                             </a>
                         </Link>

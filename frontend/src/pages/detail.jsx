@@ -12,6 +12,7 @@ import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 import Card from "react-bootstrap/Card";
 import libro1 from "../assets/Rectangle 35.png";
 import StarIcon from '@material-ui/icons/Star';
+import ModalComments from "../components/modalComments";
 
 const Detail=(props)=>{
 
@@ -24,7 +25,8 @@ const Detail=(props)=>{
          resumen: '',
          titulo: '',
          url: '',
-        fav: false
+         fav: false,
+         premium: false
     });
 
 
@@ -44,8 +46,10 @@ const Detail=(props)=>{
             try {
 
                 console.log(props.match.params.id_r)
+                console.log(props.match.params.id)
                 let newPostObj = {
-                    id: props.match.params.id_r
+                    id: props.match.params.id_r,
+                    id_c: props.match.params.id
                 };
 
                 console.log(newPostObj)
@@ -54,6 +58,8 @@ const Detail=(props)=>{
                 const recurso = await axios.post(`http://localhost:5000/detalle`, newPostObj)
 
                 console.log(recurso.data.cod)
+                console.log(recurso.data.fav)
+                console.log(recurso.data.premium)
                 console.log(recurso.data.data.rows[0].avg)
 
                 if(recurso.data.cod === "00"){
@@ -67,6 +73,8 @@ const Detail=(props)=>{
                         resumen: recurso.data.data.rows[0].resumen,
                         titulo: recurso.data.data.rows[0].titulo,
                         url: recurso.data.data.rows[0].url,
+                        fav: recurso.data.fav,
+                        premium: recurso.data.premium
                     })
 
                 }else{
@@ -82,6 +90,49 @@ const Detail=(props)=>{
 
     }, []);
 
+     const cambioStyle = async() =>{
+
+         let newPostObj = {
+             id: props.match.params.id,
+             id_recurso: props.match.params.id_r
+         };
+
+         if(dato.fav){
+             try {
+
+                console.log(newPostObj)
+
+                //const recurso = await axios.post(`https://digibook-backend.herokuapp.com/eliminar_fav`, newPostObj)
+                const recurso = await axios.post(`http://localhost:5000/eliminar_fav`, newPostObj)
+
+                console.log(recurso.data.cod)
+
+                if(recurso.data.cod === "01"){
+                    console.log(recurso.data.error)
+                }
+
+            } catch (error) {
+                console.log(error)
+            }
+
+        }else{
+             try {
+
+                //const recurso = await axios.post(`https://digibook-backend.herokuapp.com/agregar_fav`, newPostObj)
+                const recurso = await axios.post(`http://localhost:5000/agregar_fav`, newPostObj)
+
+                console.log(recurso.data.cod)
+
+                if(recurso.data.cod === "01"){
+                    console.log(recurso.data.error)
+                }
+
+            } catch (error) {
+                console.log(error)
+            }
+        }
+     }
+
     return(
         <>
              <div className={styles.suscribe}>
@@ -93,8 +144,8 @@ const Detail=(props)=>{
                     </div>
                 </div>
 
-                    <div className={styles.favorito}>
-                        <i className={styles.materialIcons} style={{color: dato.fav? "red" : "whitesmoke"}}>favorite</i>
+                    <div className={styles.favorito} onClick={cambioStyle}>
+                        <i className={styles.materialIcons} style={{color: dato.fav? "red" : "whitesmoke"}} >favorite</i>
                     </div>
 
 
@@ -127,9 +178,11 @@ const Detail=(props)=>{
                             </Link>
 
                         <div className={styles.botones}>
-                            <Button type="submit" className={styles.botonS}>Descargar</Button>{' '}
-                            <Button type="submit" className={styles.botonI}>Escribir reseña</Button>{' '}
+                            {dato.premium?
+                                <Button type="submit" className={styles.botonI}>Descargar</Button>
+                             : ''}
                         </div>
+                            <ModalComments id={props.match.params.id} id_r={props.match.params.id_r}/>
                         </Form>
                     </div>
 
