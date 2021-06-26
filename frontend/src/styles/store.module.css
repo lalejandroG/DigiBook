@@ -6,23 +6,36 @@
     z-index: 0;
 
 }
+
+.barraBusqueda{
+    margin: 0;
+}
 .content{
-    padding: 16px 5px 0 5px;
+    padding: 16px 5px 16px 5px;
     display: flex;
     flex-direction: row;
-    /*justify-content: space-between;*/
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
 }
 .form{
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
 }
 .space{
     margin-bottom: 40px;
 }
+.carta{
+    width: 100%;
+}
 .imagen{
-    margin-bottom: 40px;
+size: 6px;
+padding: 0;
 }
 .img{
     overflow: hidden;
@@ -52,7 +65,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin: 0 16px;
+    margin: 16px 16px;
 
     /*display: flex;*/
     /*justify-content: space-between;*/
