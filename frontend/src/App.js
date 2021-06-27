@@ -16,6 +16,7 @@ import Profile from './pages/profile'
 import Favorite from './pages/favorite'
 import Detail from './pages/detail'
 import Comments from './pages/comments'
+import Pago from './pages/pago'
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
               <Router>
                   <Switch>
                       <Route exact path='/' component={Navbar}/>
+                      <Route exact path='/pago' component={NavbarInicio}/>
                       <Route exact path="/login" component={NavbarInicio} />
                       <Route exact path="/registro" component={NavbarInicio} />
                       <Route exact path="/recuperar" component={NavbarInicio} />
@@ -43,6 +45,7 @@ function App() {
               <Router>
                   <Switch>
                       <Route exact path='/' component={LandingPage} />
+                      <Route exact path='/pago' component={Pago} />
                       <Route exact path="/login" component={Login} />
                       <Route exact path="/registro" component={Registro} />
                       <Route exact path="/recuperar" component={Recuperar} />

@@ -4,6 +4,7 @@ import React from "react";
 import {Button} from "react-bootstrap";
 import diamante from "../assets/Group.png";
 import {Padding} from "@material-ui/core/TableCell/TableCell";
+import {Link} from "@material-ui/core";
 
 
 const LandigPage=()=>{
@@ -27,7 +28,13 @@ const LandigPage=()=>{
 
                     </ul>
                 </div>
-                 <Button className={styles.boton}>GET FREE</Button>{' '}
+                    <Link href="../pages/login">
+                    <a href="/login">
+                        <a className={styles.prueba}>
+                            <Button className={styles.boton}>GET FREE</Button>{' '}
+                        </a>
+                    </a>
+                </Link>
             </div>
             <div>
                 <div className={styles.value}>
@@ -45,7 +52,14 @@ const LandigPage=()=>{
 
                     </ul>
                 </div>
-                 <Button className={styles.boton}>GET PREMIUM</Button>{' '}
+                <Link href="../pages/pago">
+                    <a href="/pago">
+                        <a className={styles.prueba}>
+                            <Button className={styles.boton}>GET PREMIUM</Button>{' '}
+                        </a>
+                    </a>
+                </Link>
+
             </div>
             </div>
 
