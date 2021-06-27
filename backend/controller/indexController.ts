@@ -152,7 +152,7 @@ class IndexController {
     public async perfil (req: Request, res: Response) {
         console.log(req.body)
         try {
-            const user = await pool.query('SELECT cu.nombre, cu.imagen_perfil, cu.admin, cu.biografia, r.titulo, r.fecha, r.aprobado FROM cuenta as cu, recurso as r WHERE cu.id_cuenta = $1 AND r.id_cuenta_publicador = $1', [req.body.id])
+            const user = await pool.query('SELECT cu.nombre, cu.imagen_perfil, cu.premium, cu.biografia, r.titulo, r.fecha, r.aprobado FROM cuenta as cu, recurso as r WHERE cu.id_cuenta = $1 AND r.id_cuenta_publicador = $1', [req.body.id])
             console.log(user.rows)
 
             res.json({data: user, cod: "00"})

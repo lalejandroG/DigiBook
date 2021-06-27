@@ -22,7 +22,7 @@ const Profile=(props)=> {
         nombre: '',
         imagen: '',
         alerta: '',
-        admin: false,
+        premium: false,
         error: false,
         recursos: []
     });
@@ -52,7 +52,7 @@ const Profile=(props)=> {
                         imagen: recurso.data.data.rows[0].imagen_perfil,
                         nombre: recurso.data.data.rows[0].nombre,
                         biografia: recurso.data.data.rows[0].biografia,
-                        admin: recurso.data.data.rows[0].admin,
+                        premium: recurso.data.data.rows[0].premium,
                         recursos: recurso.data.data.rows
                     })
 
@@ -168,7 +168,7 @@ const Profile=(props)=> {
                     </Form>
                 </div>
 
-                {dato.admin ?
+                {dato.premium ?
                     <div className={styles.productos}>
                         <i className={styles.materialIcons2}>add_to_photos</i>
                         <p>Productos publicados</p>
