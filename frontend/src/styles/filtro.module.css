@@ -11,7 +11,7 @@
 }
 
 .titulo{
-    margin: 25px 0px 25px 0px;
+    margin: 25px 0 25px 0;
     width: 255px;
     height: 35.46px;
     left: calc(50% - 255px/2 + 4.5px);

@@ -262,6 +262,20 @@ class IndexController {
             }
         });
     }
+    aprobar(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log(req.body);
+            console.log(req.body.id);
+            try {
+                yield elephantsql_1.default.query('UPDATE recurso SET aprobado = true WHERE id_recurso = $1 ', [req.body.id]);
+                res.json({ cod: "00" });
+            }
+            catch (error) {
+                console.log(error);
+                res.json({ msg: "No se pudo completar su petición", cod: "01", error: error });
+            }
+        });
+    }
 }
 const indexController = new IndexController();
 exports.default = indexController;

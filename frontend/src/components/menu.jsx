@@ -17,7 +17,7 @@ const MenuDesplegable =(props)=>{
     const definirOpciones=(props)=>{
         console.log(props)
 
-        if(props.includes("/store/") || props.includes("/profile/") ||  props.includes("/detail/") || props.includes("/favorite/") ||  props.includes("/comments/")  ){
+        if(props.includes("/store/") || props.includes("/profile/") ||  props.includes("/detail/") || props.includes("/favorite/") ||  props.includes("/comments/")  || props.includes("/revision/")  ){
             return true
         }else{
             return false
@@ -32,7 +32,7 @@ const MenuDesplegable =(props)=>{
                     <Button className={styles.boton}>Suscripciones</Button>{' '}
                     <Button className={styles.boton}>Nosotros</Button>{' '}
                     <Button className={styles.boton}>Contáctanos</Button>{' '}
-                    {definirOpciones(props.path) && !props.path.includes("/store/")?
+                    {definirOpciones(props.path) && !props.path.includes("/store/") && !props.path.includes("/revision/")?
                         // <Link href={`https://digibook-ffb1b.web.app/store${props.path.substring((props.path.length - 4), props.path.length -2)}`}>
                         <Link href={`http://localhost:3000/store${props.path.substring((props.path.length - 4), props.path.length -2)}`}>
                             <a href={`http://localhost:3000/store${props.path.substring((props.path.length - 4), props.path.length -2)}`} className={styles.botones} >

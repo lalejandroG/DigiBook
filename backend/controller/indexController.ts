@@ -282,6 +282,22 @@ class IndexController {
         }
     }
 
+    public async aprobar (req: Request, res: Response) {
+
+        console.log(req.body)
+        console.log(req.body.id)
+        try {
+            await pool.query('UPDATE recurso SET aprobado = true WHERE id_recurso = $1 ', [req.body.id])
+
+            res.json({cod: "00"})
+
+        } catch (error) {
+
+            console.log(error)
+            res.json({msg: "No se pudo completar su petición", cod: "01", error: error})
+        }
+    }
+
 }
 
  const indexController = new IndexController();

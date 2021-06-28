@@ -44,9 +44,16 @@ const Login=function (){
                     loggeado: true,
                     id: login.data.data.id_cuenta,
                 })
+                if(login.data.data.admin === true){
+                    // window.location.href= `https://digibook-ffb1b.web.app/revision/${login.data.data.id_cuenta}`
+                    window.location.href= `http://localhost:3000/revision/${login.data.data.id_cuenta}`
 
-                // window.location.href= `https://digibook-ffb1b.web.app/store/${login.data.data.id_cuenta}`
-                window.location.href= `http://localhost:3000/store/${login.data.data.id_cuenta}`
+                }else{
+                    // window.location.href= `https://digibook-ffb1b.web.app/store/${login.data.data.id_cuenta}`
+                    window.location.href= `http://localhost:3000/store/${login.data.data.id_cuenta}`
+                }
+
+
 
             }else{
                  setData({

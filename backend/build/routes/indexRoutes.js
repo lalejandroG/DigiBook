@@ -25,6 +25,7 @@ class IndexRoutes {
         this.router.post('/eliminar_fav', indexController_1.default.eliminar_favs);
         this.router.post('/agregar_fav', indexController_1.default.agregar_favs);
         this.router.post('/comentar', indexController_1.default.comentar);
+        this.router.post('/aprobar', indexController_1.default.aprobar);
     }
 }
 const indexRoutes = new IndexRoutes();
