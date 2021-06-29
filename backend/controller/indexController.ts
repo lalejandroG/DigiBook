@@ -1,4 +1,4 @@
-import { Request, Response} from 'express';
+import { query, Request, Response} from 'express';
 import pool from '../elephantsql'
 import {Md5} from 'ts-md5/dist/md5'
 
@@ -29,9 +29,23 @@ class IndexController {
     public async getRecurso (req: Request, res: Response) {
 
         try {
-            const recurso = await pool.query('SELECT * FROM recurso WHERE aprobado = True')
+            const recurso = await pool.query('SELECT * FROM recurso WHERE aprobado = True AND eliminado = false')
             console.log(recurso.rows)
             res.send({data: recurso, cod: "00"})
+
+        } catch (error) {
+
+            console.log(error)
+            res.json({msg: "No se pudo completar su petición", cod: "01", error: error})
+        }
+    }
+
+    public async getCategoria (req: Request, res: Response) {
+
+        try {
+            const categoria = await pool.query('SELECT * FROM categoria')
+            console.log(categoria.rows)
+            res.send({data: categoria, cod: "00"})
 
         } catch (error) {
 
@@ -43,7 +57,39 @@ class IndexController {
     public async getBusqueda (req: Request, res: Response) {
 
         try {
-            var queryText = "SELECT * FROM recurso WHERE aprobado = True AND (titulo LIKE '%" + req.body.busqueda +"%' OR resumen LIKE '%" + req.body.busqueda +"%')"
+            var queryText = "SELECT recurso.*, ROUND(avg(comentario.calificacion), 0) AS promedio FROM recurso INNER JOIN comentario ON recurso.id_recurso = comentario.id_recurso WHERE aprobado = True AND (titulo LIKE '%" + req.body.busqueda +"%' OR resumen LIKE '%" + req.body.busqueda +"%')"
+            var textCategoria = []
+            var textEstrellas = []
+            var num:number = 0
+            var bool = false
+            for (num=0;num<req.body.idsCategorias.length; num++) {
+                if (req.body.checksCategorias[num] == 1) {
+                    textCategoria[textCategoria.length] = req.body.idsCategorias[num];
+                }
+            }
+            if(textCategoria.length>0){
+                queryText= queryText+" AND recurso.id_recurso IN (SELECT id_recurso FROM recurso_categoria WHERE id_categoria IN ("+textCategoria.toString()+") GROUP BY id_recurso)"
+            }
+            for (num=0;num<req.body.estrellas.length; num++) {
+                if (req.body.estrellas[num] == 1) {
+                    textEstrellas[textEstrellas.length] = num;
+                }
+            }
+            queryText= queryText+" GROUP BY recurso.id_recurso"
+            if(textEstrellas.length>0){
+
+            }
+            for (let i of textEstrellas) {
+                if(bool){
+                    queryText = queryText+" OR "
+                }
+                else{
+                    queryText = queryText+" HAVING "
+                }
+                bool=true
+                queryText = queryText+"(ROUND(avg(comentario.calificacion), 0)="+(i)+")"
+            }
+
             console.log(queryText)
             const recurso = await pool.query(queryText)
             console.log(recurso.rows)
@@ -59,7 +105,7 @@ class IndexController {
     public async getRevisiones (req: Request, res: Response) {
 
         try {
-            const recurso = await pool.query('SELECT * FROM recurso WHERE aprobado = False')
+            const recurso = await pool.query('SELECT * FROM recurso WHERE aprobado = False AND eliminado = false')
             console.log(recurso.rows)
             res.send({data: recurso, cod: "00"})
 
@@ -152,7 +198,7 @@ class IndexController {
     public async perfil (req: Request, res: Response) {
         console.log(req.body)
         try {
-            const user = await pool.query('SELECT cu.nombre, cu.imagen_perfil, cu.premium, cu.biografia, r.titulo, r.fecha, r.aprobado FROM cuenta as cu, recurso as r WHERE cu.id_cuenta = $1 AND r.id_cuenta_publicador = $1', [req.body.id])
+            const user = await pool.query('SELECT cu.nombre, cu.imagen_perfil, cu.admin, cu.premium, cu.biografia, r.titulo, r.fecha, r.aprobado, r.imagen, r.id_recurso FROM cuenta as cu, recurso as r WHERE cu.id_cuenta = $1 AND r.id_cuenta_publicador = $1 AND r.eliminado = false', [req.body.id])
             console.log(user.rows)
 
             res.json({data: user, cod: "00"})
@@ -288,6 +334,39 @@ class IndexController {
         console.log(req.body.id)
         try {
             await pool.query('UPDATE recurso SET aprobado = true WHERE id_recurso = $1 ', [req.body.id])
+
+            res.json({cod: "00"})
+
+        } catch (error) {
+
+            console.log(error)
+            res.json({msg: "No se pudo completar su petición", cod: "01", error: error})
+        }
+    }
+
+    public async usuarios (req: Request, res: Response) {
+
+        try {
+            const premium = await pool.query('SELECT * FROM cuenta WHERE premium = true')
+            const free = await pool.query('SELECT * FROM cuenta WHERE premium = false')
+            console.log(premium.rows)
+            console.log(free.rows)
+
+            res.send({premium: premium, free: free, cod: "00"})
+
+        } catch (error) {
+
+            console.log(error)
+            res.json({msg: "No se pudo completar su petición", cod: "01", error: error})
+        }
+    }
+
+    public async eliminar (req: Request, res: Response) {
+
+        console.log(req.body)
+        console.log(req.body.id)
+        try {
+            await pool.query('UPDATE recurso SET eliminado = true WHERE id_recurso = $1 ', [req.body.id])
 
             res.json({cod: "00"})
 

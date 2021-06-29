@@ -7,7 +7,6 @@ import Image from "react-bootstrap/Image";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import {useForm} from "react-hook-form";
 import axios from "axios";
-import Perfil from "../assets/perfil.png"
 import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 import Card from "react-bootstrap/Card";
 import libro1 from "../assets/Rectangle 35.png";

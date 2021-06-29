@@ -34,7 +34,7 @@ class Server {
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: false }));
         this.app.use(cors({credentials: true, origin:"http://localhost:3000"}))
-        //this.app.use(cors({credentials: true, origin:"https://digibook-ffb1b.web.app"}));
+        // this.app.use(cors({credentials: true, origin:"https://digibook-ffb1b.web.app"}));
     }
 
     routes(): void {

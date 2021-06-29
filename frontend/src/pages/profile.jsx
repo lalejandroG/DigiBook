@@ -7,9 +7,9 @@ import Image from "react-bootstrap/Image";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import {useForm} from "react-hook-form";
 import axios from "axios";
-import Perfil from "../assets/perfil.png"
 import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 import Card from "react-bootstrap/Card";
+import ModalSubirRecurso from "../components/modalSubirRecurso";
 
 const Profile=(props)=> {
 
@@ -111,15 +111,15 @@ const Profile=(props)=> {
 
     }
 
-     const libros = () => (
-        dato.recursos.map((key) =>(
+    const libros = () => (
+        dato.recursos.map((key) => (
             <tr key={key.id_recurso}>
                 <td>{key.titulo}</td>
                 <td>{key.fecha.split('T')[0]}</td>
                 <td>{key.aprobado ? "SI" : "NO"}</td>
             </tr>
-          ))
-     );
+        ))
+    );
 
 
     return (
@@ -128,9 +128,11 @@ const Profile=(props)=> {
                 <div className={styles.elementos}>
                     <div className={styles.favorito}>
                         {/*<Link href={`https://digibook-ffb1b.web.app/favorite/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}`}>*/}
-                        <Link href={`http://localhost:3000/favorite/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}`}>
-                            <a id={styles.mas} href={`http://localhost:3000/favorite/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}`}>
-                            {/*<a id={styles.mas} href={`https://digibook-ffb1b.web.app/favorite/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}`}>*/}
+                        <Link
+                            href={`http://localhost:3000/favorite/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}`}>
+                            <a id={styles.mas}
+                               href={`http://localhost:3000/favorite/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}`}>
+                                {/*<a id={styles.mas} href={`https://digibook-ffb1b.web.app/favorite/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}`}>*/}
                                 <a className={styles.prueba}>
                                     <i className={styles.materialIcons}>favorite</i>
                                 </a>
@@ -170,7 +172,7 @@ const Profile=(props)=> {
 
                 {dato.premium ?
                     <div className={styles.productos}>
-                        <i className={styles.materialIcons2}>add_to_photos</i>
+                        <ModalSubirRecurso id={props.match.params.id}/>
                         <p>Productos publicados</p>
 
                         <div className={styles.contenido}>
@@ -183,7 +185,7 @@ const Profile=(props)=> {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    {dato.recursos && libros()}
+                                {dato.recursos && libros()}
                                 </tbody>
                             </Table>
                         </div>

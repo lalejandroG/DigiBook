@@ -12,6 +12,7 @@ class IndexRoutes {
     config(): void {
         this.router.post('/login', indexController.login);
         this.router.get('/store', indexController.getRecurso);
+        this.router.get('/categoria', indexController.getCategoria);
         this.router.get('/revision', indexController.getRevisiones);
         this.router.post('/busqueda', indexController.getBusqueda);
         this.router.post('/registro', indexController.register);
@@ -25,6 +26,8 @@ class IndexRoutes {
         this.router.post('/agregar_fav', indexController.agregar_favs);
         this.router.post('/comentar', indexController.comentar);
         this.router.post('/aprobar', indexController.aprobar);
+        this.router.get('/usuarios', indexController.usuarios);
+        this.router.post('/eliminar_recurso', indexController.eliminar);
 
     }
 }

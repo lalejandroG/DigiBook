@@ -18,11 +18,9 @@ const NavB=()=>{
             <Navbar collapseOnSelect expand="lg" className={styles.nav}>
                 <Navbar.Brand className={styles.container}>{' '}
                 <div className={styles.menu}>
-                    <Link href="../pages/landingPage">
-                            <a href="/" className={styles.titulo}>
-                                <p className={styles.logo}>DigiBook</p>
-                            </a>
-                    </Link>
+                     <p className={styles.titulo}>
+                         <p className={styles.logo}>DigiBook</p>
+                     </p>
                     <div className={styles.icon}>
                         <Navbar.Toggle className="large material-icons" aria-controls="responsive-navbar-nav" id={styles.figura}>menu</Navbar.Toggle>
                     </div>

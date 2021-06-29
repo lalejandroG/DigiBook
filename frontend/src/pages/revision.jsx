@@ -16,43 +16,10 @@ import styles2 from "../styles/filtro.module.css";
 
 const Revision=(props)=>{
 
-    const {handleSubmit} = useForm({
-        reValidateMode:'onSubmit'
-    });
-
     const [dato, setData] = useState({
         recursos: [45],
         aprobados: []
     });
-
-    const detalles = (id)=>{
-        window.location.href= `http://localhost:3000/detail/${id}`
-        //window.location.href= `https://digibook-ffb1b.web.app/detail/${id}`
-    }
-
-    const onSubmit=async()=> {
-        let newPostObj = {
-            busqueda: dato.barraBusqueda
-            };
-        console.log(newPostObj)
-        try {
-            //const busqueda = await axios.post(`https://digibook-backend.herokuapp.com/busqueda`, newPostObj)
-            const busqueda = await axios.post(`http://localhost:5000/busqueda`, newPostObj)
-            console.log(busqueda.data)
-            console.log(busqueda.data.cod)
-
-            if(busqueda.data.cod === "00"){
-                setData({
-                    ...dato,
-                    recursos: busqueda.data.data.rows
-                })
-            }else{
-                console.log(busqueda.data.error)
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    }
 
     const handleChange = e =>{
         if(e.target.checked){
@@ -71,7 +38,6 @@ const Revision=(props)=>{
 
     useEffect(()=>
     {
-        console.log("POR FIS "+ props.match.params.id)
         async function fetchMyAPI() {
             try {
                 //const recurso = await axios.get(`https://digibook-backend.herokuapp.com/revision`)
@@ -147,6 +113,9 @@ const Revision=(props)=>{
         return(
             <>
                     <div className={styles.fondo}>
+                        <label id={styles.titulo}>
+                            Aprobar recursos subidos
+                        </label>
                         <div className={styles.libros}>
                             {dato.recursos && libros()}
                         </div>

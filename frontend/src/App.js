@@ -17,6 +17,7 @@ import Favorite from './pages/favorite'
 import Detail from './pages/detail'
 import Comments from './pages/comments'
 import Pago from './pages/pago'
+import Usuarios from './pages/usuarios'
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
                       <Route exact path="/recuperar" component={NavbarInicio} />
                       <Route exact path="/store/:id" component={Navbar}/>
                       <Route exact path="/revision/:id" component={Navbar}/>
+                      <Route exact path="/usuarios/:id" component={Navbar}/>
                       <Route exact path="/profile/:id" component={Navbar}/>
                       <Route exact path="/favorite/:id" component={Navbar}/>
                       <Route exact path="/detail/:id/:id_r" component={Navbar}/>
@@ -51,6 +53,7 @@ function App() {
                       <Route exact path="/recuperar" component={Recuperar} />
                       <Route exact path="/store/:id" component={Store} />
                       <Route exact path="/revision/:id" component={Revision} />
+                      <Route exact path="/usuarios/:id" component={Usuarios} />
                       <Route exact path="/profile/:id" component={Profile} />
                       <Route exact path="/favorite/:id" component={Favorite}/>
                       <Route exact path="/detail/:id/:id_r" component={Detail}/>

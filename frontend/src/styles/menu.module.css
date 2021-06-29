@@ -23,8 +23,7 @@
     .botones{
         display: flex;
         flex-direction: column;
-        margin-bottom: 140px;
-        padding: 40px 0;
+        /*margin-bottom: 140px;*/
         z-index: 999;
 
     }
@@ -85,6 +84,12 @@
         display: flex;
         justify-content: flex-end;
         border: none;
+    }
+    .urls{
+        display: flex;
+        flex-direction: column;
+        height: 50%;
+        justify-content: space-around;
     }
 
 }

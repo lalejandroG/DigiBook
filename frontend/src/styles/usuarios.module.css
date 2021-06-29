@@ -1,0 +1,60 @@
+.container{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    padding-left: 16px;
+}
+.circular{
+    border: 1px black solid;
+    width: 90px;
+    height: 90px;
+    display: flex;
+}
+.fondo{
+    background-color: #FFFFFF;
+    height: calc(100vh - 80px);
+    width: 100%;
+    z-index: 0;
+
+}
+.libro{
+    padding-top: 10px;
+    margin-bottom: 10px;
+
+}
+.titulo{
+    font-size: 20px;
+    padding: 16px 16px 0 16px;
+}
+.nombre{
+    padding: 0 16px;
+}
+.foto{
+    display: flex;
+    width: 100%;
+    height: 15%;
+}
+.icono{
+    width: 100%;
+    height: 5%;
+}
+.materialIcons{
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 30px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: flex;
+    width: 30%;
+    justify-content: flex-end;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+    margin: 16px 16px;
+    color: darkred;
+}
