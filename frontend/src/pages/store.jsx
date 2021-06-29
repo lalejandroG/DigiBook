@@ -37,8 +37,8 @@ const Store=(props)=> {
     });
 
     const detalles = (id) => {
-        //window.location.href= `http://localhost:3000/detail/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${id}`
-        window.location.href = `https://digibook-ffb1b.web.app/detail/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${id}`
+        window.location.href= `http://localhost:3000/detail/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${id}`
+        //window.location.href = `https://digibook-ffb1b.web.app/detail/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${id}`
     }
 
     const onSubmit = async () => {
@@ -50,8 +50,8 @@ const Store=(props)=> {
         };
         console.log(newPostObj)
         try {
-            const busqueda = await axios.post(`https://digibook-backend.herokuapp.com/busqueda`, newPostObj)
-            //const busqueda = await axios.post(`http://localhost:5000/busqueda`, newPostObj)
+            //const busqueda = await axios.post(`https://digibook-backend.herokuapp.com/busqueda`, newPostObj)
+            const busqueda = await axios.post(`http://localhost:5000/busqueda`, newPostObj)
             console.log(busqueda.data)
             console.log(busqueda.data.cod)
 

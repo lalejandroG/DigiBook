@@ -24,7 +24,8 @@ const Profile=(props)=> {
         alerta: '',
         premium: false,
         error: false,
-        recursos: []
+        recursos: [],
+        archivo: ""
     });
 
     useEffect(() => {
@@ -40,7 +41,8 @@ const Profile=(props)=> {
 
                 //const recurso = await axios.post(`https://digibook-backend.herokuapp.com/profile`, newPostObj)
                 const recurso = await axios.post(`http://localhost:5000/profile`, newPostObj)
-
+                const publicados = await axios.post(`http://localhost:5000/publicados`, newPostObj)
+                
                 // //const datos = await axios.post(`https://digibook-backend.herokuapp.com/published`, newPostObj)
                 // const datos = await axios.post(`http://localhost:5000/published`, newPostObj)
 
@@ -53,7 +55,7 @@ const Profile=(props)=> {
                         nombre: recurso.data.data.rows[0].nombre,
                         biografia: recurso.data.data.rows[0].biografia,
                         premium: recurso.data.data.rows[0].premium,
-                        recursos: recurso.data.data.rows
+                        recursos: publicados.data.data.rows
                     })
 
 
@@ -121,6 +123,15 @@ const Profile=(props)=> {
         ))
     );
 
+	const changeHandler = (e) => {
+        setData({
+            ...dato,
+            archivo: e.target.value
+        })
+        console.log(e.target.value)
+        console.log(dato.archivo)
+	};
+
 
     return (
         <>
@@ -147,7 +158,7 @@ const Profile=(props)=> {
                     <Row className={styles.container}>
                         <Image src={dato.imagen} roundedCircle className={styles.circular}/>
                     </Row>
-                    <p className={styles.insertar}>Inserte una foto de perfil</p>
+                    <Form.Control onChange={changeHandler} type= 'file' className={styles.insertar}></Form.Control>
                 </div>
 
                 <div className={styles.datos}>

@@ -7,6 +7,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import Modal from "@material-ui/core/Modal";
 import {makeStyles} from "@material-ui/core/styles";
+import axios from "axios";
 
 
 function getDisplayCardNumber(numberInput) {
@@ -304,6 +305,45 @@ const ModalCreditCard = (props) => {
     initialState
   );
 
+  const clicker = async () => {
+
+    let newPostObj = {
+      correo: props.correo,
+      password: props.password
+      };
+      console.log(newPostObj)
+      try {
+          // const login = await axios.post(`https://digibook-backend.herokuapp.com/login`, newPostObj)
+          const login = await axios.post(`http://localhost:5000/login`, newPostObj)
+          console.log(login.data)
+          console.log(login.data.cod)
+          if(login.data.cod === "00"){
+                
+                let newPostObj2 = {
+                     id: login.data.data.id_cuenta,
+                     name: cardInfo.name,
+                     number: cardInfo.number,
+                     expiryMonth: cardInfo.expiryMonth,
+                     expiryYear: cardInfo.expiryYear,
+                     cvv: cardInfo.cvv
+                    
+                 };
+                 console.log(newPostObj2)
+                     try {
+                         //const busqueda = await axios.post(`https://digibook-backend.herokuapp.com/insertarFactura`, newPostObj2)
+                         const busqueda = await axios.post(`http://localhost:5000/insertarFactura`, newPostObj2)
+                     } catch (error) {
+                         console.log(error)
+                     }
+          }else{
+              console.log(login.data.error)
+          }
+      } catch (error) {
+          console.log(error)
+      }
+
+}
+
   return (
       <>
       <div className={styles.botones2} onClick={handleOpen}>
@@ -330,7 +370,7 @@ const ModalCreditCard = (props) => {
                         <CreditCard cardInfo={cardInfo}/>
                         <CardForm cardInfo={cardInfo} onChange={handleOnChange}/>
                         <div className={styles.botones2} >
-                            <Button className={styles.botonI2}>Pagar</Button>
+                            <Button onClick={clicker} className={styles.botonI2}>Pagar</Button>
                         </div>
                     </div>
                 </Fade>
