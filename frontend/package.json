@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+    "chokidar": "^3.5.2",
     "cors": "^2.8.5",
     "materialize-css": "^1.0.0-rc.2",
     "react": "^17.0.2",
