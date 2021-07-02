@@ -18,6 +18,8 @@ import Detail from './pages/detail'
 import Comments from './pages/comments'
 import Pago from './pages/pago'
 import Usuarios from './pages/usuarios'
+import FirebaseFileUpload from './pages/prueba';
+
 
 
 function App() {
@@ -31,6 +33,7 @@ function App() {
                       <Route exact path="/login" component={NavbarInicio} />
                       <Route exact path="/registro" component={NavbarInicio} />
                       <Route exact path="/recuperar" component={NavbarInicio} />
+                      <Route exact path="/prueba" component={NavbarInicio} />
                       <Route exact path="/store/:id" component={Navbar}/>
                       <Route exact path="/revision/:id" component={Navbar}/>
                       <Route exact path="/usuarios/:id" component={Navbar}/>
@@ -51,6 +54,7 @@ function App() {
                       <Route exact path="/login" component={Login} />
                       <Route exact path="/registro" component={Registro} />
                       <Route exact path="/recuperar" component={Recuperar} />
+                      <Route exact path="/prueba" component={FirebaseFileUpload} />
                       <Route exact path="/store/:id" component={Store} />
                       <Route exact path="/revision/:id" component={Revision} />
                       <Route exact path="/usuarios/:id" component={Usuarios} />
