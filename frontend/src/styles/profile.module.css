@@ -5,21 +5,24 @@
         flex-direction: column;
         z-index: 0;
     }
-    .elementos{
+
+    .elementos {
         display: flex;
         width: 100%;
         height: 5%;
         margin-top: 16px;
         justify-content: flex-end;
     }
-    .foto{
+
+    .foto {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         height: 20%;
     }
-    .materialIcons{
+
+    .materialIcons {
         font-family: 'Material Icons';
         font-weight: normal;
         font-style: normal;
@@ -38,7 +41,8 @@
         margin: 16px 16px;
         color: darkred;
     }
-    .materialIcons2{
+
+    .materialIcons2 {
         font-family: 'Material Icons';
         font-weight: normal;
         font-style: normal;
@@ -57,48 +61,56 @@
         margin: 16px 16px;
         color: #282c34;
     }
-    .content{
+
+    .content {
         height: 100%;
         display: flex;
         justify-content: center;
     }
-    .container{
+
+    .container {
         display: flex;
         width: 30%;
         height: 100%;
         align-items: center;
         padding-left: 16px;
     }
-    .circular{
+
+    .circular {
         border: 1px black solid;
         width: 90px;
         height: 90px;
         display: flex;
     }
-    .favorito{
+
+    .favorito {
         width: 10%;
         display: flex;
         justify-content: flex-end;
         align-items: center;
     }
-    .insertar{
+
+    .insertar {
         text-decoration: none;
         color: #282c34;
         padding-top: 16px;
         padding-bottom: 16px;
         width: 270px;
     }
-    .datos{
+
+    .datos {
         padding: 16px 35px;
 
     }
-    .botones{
+
+    .botones {
         width: 100%;
         display: flex;
         justify-content: flex-end;
         margin-top: 30px;
     }
-    .botonI{
+
+    .botonI {
         background: #EFEFEF;
         border-radius: 4px;
         float: right;
@@ -111,7 +123,8 @@
         filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.3));
         margin-bottom: 10px;
     }
-    .productos{
+
+    .productos {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -120,14 +133,21 @@
         width: 100%;
         padding-top: 16px;
     }
-    .tabla{
+
+    .tabla {
         display: flex;
         justify-content: center;
         background-color: #4e555b;
         color: whitesmoke;
     }
-    .contenido{
-        padding: 16px 35px;
+
+    .contenido {
+        padding: 1px 35px;
         width: 100%;
+        height: 140px;
+        position: relative;
+        overflow: auto;
     }
+
+
 }

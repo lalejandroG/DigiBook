@@ -4,27 +4,30 @@ import {Button, Form} from "react-bootstrap";
 import filtroSimbolo from "../assets/filtroSimbolo.png";
 import libro1 from "../assets/Rectangle 35.png";
 import libro2 from "../assets/Rectangle 38.png";
-import React, { Component, useEffect }  from "react";
-import { useState }  from "react";
+import React, {Component, useEffect} from "react";
+import {useState} from "react";
 import {Link} from "@material-ui/core";
 import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
 import CardDeck from 'react-bootstrap/CardDeck';
 import axios from "axios";
-import { useParams } from 'react-router-dom'
+import {useParams} from 'react-router-dom'
 import {useForm} from "react-hook-form";
 import Navbar from "react-bootstrap/Navbar";
 import {Nav, NavDropdown} from "react-bootstrap";
 import MenuDeplegable from "../components/menu";
-import { useLocation } from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 import Accordion from 'react-bootstrap/Accordion';
 import RemoveIcon from '@material-ui/icons/Remove';
+import ModalSubirRecurso from "../components/modalSubirRecurso";
 
-const Store=(props)=> {
+const Store = (props) => {
 
     const {handleSubmit} = useForm({
         reValidateMode: 'onSubmit'
     });
+
+    let location = useLocation();
 
     const [dato, setData] = useState({
         recursos: [45],
@@ -37,7 +40,7 @@ const Store=(props)=> {
     });
 
     const detalles = (id) => {
-        window.location.href= `http://localhost:3000/detail/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${id}`
+        window.location.href = `http://localhost:3000/detail/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${id}`
         //window.location.href = `https://digibook-ffb1b.web.app/detail/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${id}`
     }
 
@@ -156,7 +159,10 @@ const Store=(props)=> {
             //const recurso = await axios.post(`https://digibook-backend.herokuapp.com/eliminar_recurso`, newPostObj)
             const recurso = await axios.post(`http://localhost:5000/eliminar_recurso`, newPostObj)
 
-            if (recurso.data.cod === "01") {
+            if (recurso.data.cod === "00") {
+                window.location.href = window.location.href
+
+            } else {
                 console.log(recurso.data.error)
             }
 
@@ -314,11 +320,12 @@ const Store=(props)=> {
                 <div className={styles.libros}>
                     {dato.recursos && libros()}
                 </div>
-                {dato.admin?
-                    <div className={styles.botones2} >
-                        <Button className={styles.botonI2} >Cargar recurso</Button>
+                {dato.admin ?
+                    <div className={styles.botones2}>
+                        <ModalSubirRecurso id={props.match.params.id} path={location.pathname}/>
+
                     </div>
-                : ''}
+                    : ''}
             </div>
 
         </>

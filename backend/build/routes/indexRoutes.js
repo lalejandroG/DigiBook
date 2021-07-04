@@ -19,6 +19,8 @@ class IndexRoutes {
         this.router.post('/registro', indexController_1.default.register);
         this.router.post('/recuperar', indexController_1.default.recuperarPsw);
         this.router.post('/profile', indexController_1.default.perfil);
+        this.router.post('/publicados', indexController_1.default.publicados);
+        this.router.post('/insertarFactura', indexController_1.default.insertarFactura);
         this.router.post('/detalle', indexController_1.default.detalle_producto);
         this.router.post('/favorite', indexController_1.default.favorite);
         this.router.post('/comments', indexController_1.default.comments);
@@ -29,6 +31,9 @@ class IndexRoutes {
         this.router.post('/aprobar', indexController_1.default.aprobar);
         this.router.get('/usuarios', indexController_1.default.usuarios);
         this.router.post('/eliminar_recurso', indexController_1.default.eliminar);
+        this.router.post('/cargar', indexController_1.default.cargar);
+        this.router.post('/descargar', indexController_1.default.descargar);
+        this.router.post('/cargar_perfil', indexController_1.default.cargar_perfil);
     }
 }
 const indexRoutes = new IndexRoutes();

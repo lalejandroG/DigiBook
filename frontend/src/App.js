@@ -6,7 +6,7 @@ import NavbarInicio from "./components/navBarInicio";
 import LandingPage from "./pages/landingPage";
 import styles from "./styles/navbar.module.css";
 import {Figure, Image} from "react-bootstrap";
-import {BrowserRouter as Router,Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Login from './pages/login'
 import Registro from './pages/registro'
 import Recuperar from './pages/recuperarPsw'
@@ -21,53 +21,52 @@ import Usuarios from './pages/usuarios'
 import FirebaseFileUpload from './pages/prueba';
 
 
-
 function App() {
-  return (
-      <>
-          <div className={styles.navbarWrapper}>
-              <Router>
-                  <Switch>
-                      <Route exact path='/' component={Navbar}/>
-                      <Route exact path='/pago' component={NavbarInicio}/>
-                      <Route exact path="/login" component={NavbarInicio} />
-                      <Route exact path="/registro" component={NavbarInicio} />
-                      <Route exact path="/recuperar" component={NavbarInicio} />
-                      <Route exact path="/prueba" component={NavbarInicio} />
-                      <Route exact path="/store/:id" component={Navbar}/>
-                      <Route exact path="/revision/:id" component={Navbar}/>
-                      <Route exact path="/usuarios/:id" component={Navbar}/>
-                      <Route exact path="/profile/:id" component={Navbar}/>
-                      <Route exact path="/favorite/:id" component={Navbar}/>
-                      <Route exact path="/detail/:id/:id_r" component={Navbar}/>
-                      <Route exact path="/comments/:id/:id_r" component={Navbar}/>
+    return (
+        <>
+            <div className={styles.navbarWrapper}>
+                <Router>
+                    <Switch>
+                        <Route exact path='/' component={Navbar}/>
+                        <Route exact path='/pago' component={NavbarInicio}/>
+                        <Route exact path="/login" component={NavbarInicio}/>
+                        <Route exact path="/registro" component={NavbarInicio}/>
+                        <Route exact path="/recuperar" component={NavbarInicio}/>
+                        <Route exact path="/descarga/:id_r" component={Navbar}/>
+                        <Route exact path="/store/:id" component={Navbar}/>
+                        <Route exact path="/revision/:id" component={Navbar}/>
+                        <Route exact path="/usuarios/:id" component={Navbar}/>
+                        <Route exact path="/profile/:id" component={Navbar}/>
+                        <Route exact path="/favorite/:id" component={Navbar}/>
+                        <Route exact path="/detail/:id/:id_r" component={Navbar}/>
+                        <Route exact path="/comments/:id/:id_r" component={Navbar}/>
 
 
                     </Switch>
-              </Router>
-          </div>
-          <section className={styles.mainSection}>
-              <Router>
-                  <Switch>
-                      <Route exact path='/' component={LandingPage} />
-                      <Route exact path='/pago' component={Pago} />
-                      <Route exact path="/login" component={Login} />
-                      <Route exact path="/registro" component={Registro} />
-                      <Route exact path="/recuperar" component={Recuperar} />
-                      <Route exact path="/prueba" component={FirebaseFileUpload} />
-                      <Route exact path="/store/:id" component={Store} />
-                      <Route exact path="/revision/:id" component={Revision} />
-                      <Route exact path="/usuarios/:id" component={Usuarios} />
-                      <Route exact path="/profile/:id" component={Profile} />
-                      <Route exact path="/favorite/:id" component={Favorite}/>
-                      <Route exact path="/detail/:id/:id_r" component={Detail}/>
-                      <Route exact path="/comments/:id/:id_r" component={Comments} />
+                </Router>
+            </div>
+            <section className={styles.mainSection}>
+                <Router>
+                    <Switch>
+                        <Route exact path='/' component={LandingPage}/>
+                        <Route exact path='/pago' component={Pago}/>
+                        <Route exact path="/login" component={Login}/>
+                        <Route exact path="/registro" component={Registro}/>
+                        <Route exact path="/recuperar" component={Recuperar}/>
+                        <Route exact path="/descarga/:id_r" component={FirebaseFileUpload}/>
+                        <Route exact path="/store/:id" component={Store}/>
+                        <Route exact path="/revision/:id" component={Revision}/>
+                        <Route exact path="/usuarios/:id" component={Usuarios}/>
+                        <Route exact path="/profile/:id" component={Profile}/>
+                        <Route exact path="/favorite/:id" component={Favorite}/>
+                        <Route exact path="/detail/:id/:id_r" component={Detail}/>
+                        <Route exact path="/comments/:id/:id_r" component={Comments}/>
                     </Switch>
-              </Router>
-          </section>
+                </Router>
+            </section>
 
-      </>
-  );
+        </>
+    );
 }
 
 export default App;

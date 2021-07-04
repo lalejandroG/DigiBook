@@ -10,12 +10,16 @@ import axios from "axios";
 import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 import Card from "react-bootstrap/Card";
 import ModalSubirRecurso from "../components/modalSubirRecurso";
+import {useLocation} from "react-router-dom";
+import {storage} from "./base";
 
-const Profile=(props)=> {
+const Profile = (props) => {
 
     const {handleSubmit,} = useForm({
         reValidateMode: 'onSubmit'
     });
+
+    let location = useLocation();
 
     const [dato, setData] = useState({
         biografia: '',
@@ -27,6 +31,9 @@ const Profile=(props)=> {
         recursos: [],
         archivo: ""
     });
+
+    const [image, setImage] = useState(null);
+
 
     useEffect(() => {
         async function fetchMyAPI() {
@@ -42,7 +49,7 @@ const Profile=(props)=> {
                 //const recurso = await axios.post(`https://digibook-backend.herokuapp.com/profile`, newPostObj)
                 const recurso = await axios.post(`http://localhost:5000/profile`, newPostObj)
                 const publicados = await axios.post(`http://localhost:5000/publicados`, newPostObj)
-                
+
                 // //const datos = await axios.post(`https://digibook-backend.herokuapp.com/published`, newPostObj)
                 // const datos = await axios.post(`http://localhost:5000/published`, newPostObj)
 
@@ -99,7 +106,10 @@ const Profile=(props)=> {
 
             console.log(perfil.data.cod)
 
-            if (perfil.data.cod === "01") {
+            if (perfil.data.cod === "00") {
+                window.location.href = window.location.href
+
+            } else {
                 setData({
                     ...dato,
                     alerta: perfil.data.msg,
@@ -123,14 +133,64 @@ const Profile=(props)=> {
         ))
     );
 
-	const changeHandler = (e) => {
+    const changeHandler = (e) => {
         setData({
             ...dato,
             archivo: e.target.value
         })
         console.log(e.target.value)
         console.log(dato.archivo)
-	};
+    };
+
+    const handleChange2 = e => {
+        if (e.target.files[0]) {
+            setImage(e.target.files[0]);
+        }
+    };
+
+    const handleUpload = () => {
+        const uploadTask = storage.ref(`images/${image.name}`).put(image);
+        uploadTask.on(
+            "state_changed",
+            snapshot => {
+            },
+            error => {
+                console.log(error);
+            },
+            () => {
+                storage.ref("images").child(image.name).getDownloadURL().then(url => {
+                    console.log(url);
+                    subir(url)
+                });
+            }
+        );
+    };
+
+    const subir = async (url) => {
+
+        let newPostObj = {
+            imagen: url,
+            id: props.match.params.id
+        };
+
+        try {
+            // const login = await axios.post(`https://digibook-backend.herokuapp.com/cargar_perfil`, newPostObj)
+            const login = await axios.post(`http://localhost:5000/cargar_perfil`, newPostObj)
+            console.log(login.data.cod)
+
+            if (login.data.cod === "00") {
+                alert("Foto de perfil cambiada con exito  ");
+                window.location.href = window.location.href
+
+            } else {
+                alert("La foto de perfil no pudo ser cambiada  ");
+            }
+
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
 
 
     return (
@@ -158,7 +218,14 @@ const Profile=(props)=> {
                     <Row className={styles.container}>
                         <Image src={dato.imagen} roundedCircle className={styles.circular}/>
                     </Row>
-                    <Form.Control onChange={changeHandler} type= 'file' className={styles.insertar}></Form.Control>
+                    <div>
+                        <br/>
+                        <input type="file" onChange={handleChange2}/>
+                        <button onClick={handleUpload}
+                        >Upload
+                        </button>
+                        <br/>
+                    </div>
                 </div>
 
                 <div className={styles.datos}>
@@ -183,7 +250,7 @@ const Profile=(props)=> {
 
                 {dato.premium ?
                     <div className={styles.productos}>
-                        <ModalSubirRecurso id={props.match.params.id}/>
+                        <ModalSubirRecurso id={props.match.params.id} path={location.pathname}/>
                         <p>Productos publicados</p>
 
                         <div className={styles.contenido}>

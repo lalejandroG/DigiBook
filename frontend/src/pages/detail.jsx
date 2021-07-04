@@ -12,35 +12,25 @@ import Card from "react-bootstrap/Card";
 import libro1 from "../assets/Rectangle 35.png";
 import StarIcon from '@material-ui/icons/Star';
 import ModalComments from "../components/modalComments";
+import ModalDescargarRecurso from "../components/modalDescargar";
 
-const Detail=(props)=>{
+const Detail = (props) => {
 
-     const [dato, setData] = useState({
-         avg: '',
-         contenido: '',
-         id_cuenta: '',
-         imagen: '',
-         nombre: '',
-         resumen: '',
-         titulo: '',
-         url: '',
-         fav: false,
-         premium: false
+    const [dato, setData] = useState({
+        avg: '',
+        contenido: '',
+        id_cuenta: '',
+        imagen: '',
+        nombre: '',
+        resumen: '',
+        titulo: '',
+        url: '',
+        fav: false,
+        premium: false
     });
 
 
-     const detalle = () =>{
-
-         setData({
-              ...dato,
-              fav: !dato.fav
-          })
-
-         console.log("ACA")
-      }
-
-      useEffect(()=>
-    {
+    useEffect(() => {
         async function fetchMyAPI() {
             try {
 
@@ -61,7 +51,7 @@ const Detail=(props)=>{
                 console.log(recurso.data.premium)
                 console.log(recurso.data.data.rows[0].avg)
 
-                if(recurso.data.cod === "00"){
+                if (recurso.data.cod === "00") {
                     setData({
                         ...dato,
                         avg: recurso.data.data.rows[0].avg,
@@ -76,28 +66,28 @@ const Detail=(props)=>{
                         premium: recurso.data.premium
                     })
 
-                }else{
+                } else {
                     console.log(recurso.data.error)
                 }
 
             } catch (error) {
                 console.log(error)
             }
-          }
+        }
 
-          fetchMyAPI()
+        fetchMyAPI()
 
     }, []);
 
-     const cambioStyle = async() =>{
+    const cambioStyle = async () => {
 
-         let newPostObj = {
-             id: props.match.params.id,
-             id_recurso: props.match.params.id_r
-         };
+        let newPostObj = {
+            id: props.match.params.id,
+            id_recurso: props.match.params.id_r
+        };
 
-         if(dato.fav){
-             try {
+        if (dato.fav) {
+            try {
 
                 console.log(newPostObj)
 
@@ -106,7 +96,10 @@ const Detail=(props)=>{
 
                 console.log(recurso.data.cod)
 
-                if(recurso.data.cod === "01"){
+                if (recurso.data.cod === "00") {
+                    window.location.href = window.location.href
+
+                } else {
                     console.log(recurso.data.error)
                 }
 
@@ -114,27 +107,31 @@ const Detail=(props)=>{
                 console.log(error)
             }
 
-        }else{
-             try {
+        } else {
+            try {
 
                 //const recurso = await axios.post(`https://digibook-backend.herokuapp.com/agregar_fav`, newPostObj)
                 const recurso = await axios.post(`http://localhost:5000/agregar_fav`, newPostObj)
 
                 console.log(recurso.data.cod)
 
-                if(recurso.data.cod === "01"){
+                if (recurso.data.cod === "00") {
+                    window.location.href = window.location.href
+
+                } else {
                     console.log(recurso.data.error)
+
                 }
 
             } catch (error) {
                 console.log(error)
             }
         }
-     }
+    }
 
-    return(
+    return (
         <>
-             <div className={styles.suscribe}>
+            <div className={styles.suscribe}>
                 <div className={styles.elementos}>
                     <div className={styles.resumen}>
                         <p id={styles.parrafo}>
@@ -143,19 +140,24 @@ const Detail=(props)=>{
                     </div>
                 </div>
 
-                    <div className={styles.favorito} onClick={cambioStyle}>
-                        <i className={styles.materialIcons} style={{color: dato.fav? "red" : "whitesmoke"}} >favorite</i>
-                    </div>
+                <div className={styles.favorito} onClick={cambioStyle}>
+                    <i className={styles.materialIcons} style={{color: dato.fav ? "red" : "whitesmoke"}}>favorite</i>
+                </div>
 
 
                 <div className={styles.recurso}>
-                    <Image src={dato.imagen} className={styles.libro} />
+                    <Image src={dato.imagen} className={styles.libro}/>
                     <div className={styles.estrellas}>
-                        <i className={styles.materialIcons2} style={{color: dato.avg >=1 ? "yellow" : "whitesmoke" }}>star</i>
-                        <i className={styles.materialIcons2} style={{color: dato.avg >=2 ? "yellow" : "whitesmoke" }}>star</i>
-                        <i className={styles.materialIcons2} style={{color: dato.avg >=3 ? "yellow" : "whitesmoke" }}>star</i>
-                        <i className={styles.materialIcons2} style={{color: dato.avg >=4 ? "yellow" : "whitesmoke" }}>star</i>
-                        <i className={styles.materialIcons2} style={{color: dato.avg >=5 ? "yellow" : "whitesmoke" }}>star</i>
+                        <i className={styles.materialIcons2}
+                           style={{color: dato.avg >= 1 ? "yellow" : "whitesmoke"}}>star</i>
+                        <i className={styles.materialIcons2}
+                           style={{color: dato.avg >= 2 ? "yellow" : "whitesmoke"}}>star</i>
+                        <i className={styles.materialIcons2}
+                           style={{color: dato.avg >= 3 ? "yellow" : "whitesmoke"}}>star</i>
+                        <i className={styles.materialIcons2}
+                           style={{color: dato.avg >= 4 ? "yellow" : "whitesmoke"}}>star</i>
+                        <i className={styles.materialIcons2}
+                           style={{color: dato.avg >= 5 ? "yellow" : "whitesmoke"}}>star</i>
 
                     </div>
                 </div>
@@ -167,20 +169,23 @@ const Detail=(props)=>{
                         <Form>
                             <Form.Group controlId="formBasicEmail" className={styles.space}>
                                 <Form.Label>{dato.nombre}</Form.Label>
-                                <Form.Control type="text" value={dato.contenido} />
+                                <Form.Control type="text" value={dato.contenido}/>
                             </Form.Group>
 
                             {/*<Link href={`https://digibook-ffb1b.web.app/comments/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${props.match.params.id_r}`}>*/}
-                            <Link href={`http://localhost:3000/comments/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${props.match.params.id_r}`}>
-                                <a id={styles.mas} href={`http://localhost:3000/comments/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${props.match.params.id_r}`}> Ver más</a>
-                            {/*    <a id={styles.mas} href={`https://digibook-ffb1b.web.app/comments/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${props.match.params.id_r}`}> Ver más</a>*/}
+                            <Link
+                                href={`http://localhost:3000/comments/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${props.match.params.id_r}`}>
+                                <a id={styles.mas}
+                                   href={`http://localhost:3000/comments/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${props.match.params.id_r}`}> Ver
+                                    más</a>
+                                {/*    <a id={styles.mas} href={`https://digibook-ffb1b.web.app/comments/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${props.match.params.id_r}`}> Ver más</a>*/}
                             </Link>
 
-                        <div className={styles.botones}>
-                            {dato.premium?
-                                <Button type="submit" className={styles.botonI}>Descargar</Button>
-                             : ''}
-                        </div>
+                            <div className={styles.botones}>
+                                {dato.premium ?
+                                    <ModalDescargarRecurso id_r={props.match.params.id_r}/>
+                                    : ''}
+                            </div>
                             <ModalComments id={props.match.params.id} id_r={props.match.params.id_r}/>
                         </Form>
                     </div>

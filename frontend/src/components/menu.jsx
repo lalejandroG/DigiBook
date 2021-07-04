@@ -62,7 +62,7 @@ const MenuDesplegable =(props)=>{
                     <Button className={styles.boton}>Suscripciones</Button>{' '}
                     <Button className={styles.boton}>Nosotros</Button>{' '}
                     <Button className={styles.boton}>Contáctanos</Button>{' '}
-                    {definirOpciones(props.path) && !props.path.includes("/store/") && !props.path.includes("/revision/") && !props.path.includes("/usuarios/") && !props.path.includes("/profile/")?
+                    {definirOpciones(props.path) && !props.path.includes("/store/") && !props.path.includes("/revision/") && !props.path.includes("/usuarios/") && !props.path.includes("/profile/") && !props.path.includes("/favorite/")?
                         // <Link href={`https://digibook-ffb1b.web.app/store${props.path.substring((props.path.length - 4), props.path.length -2)}`}>
                         <Link href={`http://localhost:3000/store${props.path.substring((props.path.length - 4), props.path.length -2)}`}>
                             <a href={`http://localhost:3000/store${props.path.substring((props.path.length - 4), props.path.length -2)}`} className={styles.botones} >
@@ -71,7 +71,7 @@ const MenuDesplegable =(props)=>{
                             </a>
                         </Link>
                     : ''}
-                    {definirOpciones(props.path) && props.path.includes("/profile/")?
+                    {definirOpciones(props.path) && (props.path.includes("/profile/") || props.path.includes("/favorite/"))?
                         // <Link href={`https://digibook-ffb1b.web.app/store${props.path.substring((props.path.length - 2), props.path.length)}`}>
                         <Link href={`http://localhost:3000/store${props.path.substring((props.path.length - 2), props.path.length )}`}>
                             <a href={`http://localhost:3000/store${props.path.substring((props.path.length - 2), props.path.length )}`} className={styles.botones} >
@@ -116,7 +116,7 @@ const MenuDesplegable =(props)=>{
                                     </Link>
                             </div>
                         : ''}
-                    {definirOpciones(props.path) && (props.path.includes("/store/") || props.path.includes("/profile/") ) && dato.admin === true?
+                    {definirOpciones(props.path) && (props.path.includes("/store/") || props.path.includes("/profile/") || props.path.includes("/favorite/")) && dato.admin === true?
                         <div className={styles.urls}>
                              {/*<Link href={`https://digibook-ffb1b.web.app/usuarios{props.path.substring((props.path.length - 2), props.path.length)}`}>*/}
                             <Link href={`http://localhost:3000/usuarios${props.path.substring((props.path.length - 2), props.path.length)}`}>

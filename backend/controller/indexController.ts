@@ -13,7 +13,7 @@ class IndexController {
             if(Md5.hashStr(req.body.password) === user.rows[0].password){
                 console.log(Md5.hashStr(req.body.password) + " EN BD: " +user.rows[0].password)
                 console.log(user.rows[0])
-
+                const pago = await pool.query('UPDATE cuenta SET premium = premium WHERE id_cuenta = $1', [user.rows[0].id_cuenta])
                 res.json({data: user.rows[0], cod: "00"})
             }else{
 
@@ -198,10 +198,24 @@ class IndexController {
     public async perfil (req: Request, res: Response) {
         console.log(req.body)
         try {
-            const user = await pool.query('SELECT cu.nombre, cu.imagen_perfil, cu.admin, cu.premium, cu.biografia, r.titulo, r.fecha, r.aprobado, r.imagen, r.id_recurso FROM cuenta as cu, recurso as r WHERE cu.id_cuenta = $1 AND r.id_cuenta_publicador = $1 AND r.eliminado = false', [req.body.id])
+            const user = await pool.query('SELECT * FROM cuenta WHERE id_cuenta = $1', [req.body.id])
             console.log(user.rows)
 
             res.json({data: user, cod: "00"})
+
+        } catch (error) {
+
+            res.json({msg: "No se pudo completar su petición", cod: "01", error: error})
+        }
+    }
+
+    public async publicados (req: Request, res: Response) {
+        console.log(req.body)
+        try {
+            const publicados = await pool.query('SELECT * FROM recurso WHERE id_cuenta_publicador = $1', [req.body.id])
+            console.log(publicados.rows)
+
+            res.json({data: publicados, cod: "00"})
 
         } catch (error) {
 
@@ -248,6 +262,18 @@ class IndexController {
         }
     }
 
+    public async insertarFactura (req: Request, res: Response) {
+
+        try {
+            const factura = await pool.query('INSERT INTO factura (id_cuenta, nombre, numero_tarjeta, expiry_month, expiry_year, cvv, fecha) VALUES ($1, $2, $3, $4, $5, $6, NOW())', [req.body.id, req.body.name, req.body.number, req.body.expiryMonth, req.body.expiryYear, req.body.cvv])
+
+        } catch (error) {
+
+            console.log(error)
+            res.json({msg: "No se pudo completar su petición", cod: "01", error: error})
+        }
+    }
+
     public async comments (req: Request, res: Response) {
 
         console.log(req.body)
@@ -264,6 +290,7 @@ class IndexController {
             res.json({msg: "No se pudo completar su petición", cod: "01", error: error})
         }
     }
+
     public async edit_profile (req: Request, res: Response) {
 
         console.log(req.body)
@@ -367,6 +394,54 @@ class IndexController {
         console.log(req.body.id)
         try {
             await pool.query('UPDATE recurso SET eliminado = true WHERE id_recurso = $1 ', [req.body.id])
+
+            res.json({cod: "00"})
+
+        } catch (error) {
+
+            console.log(error)
+            res.json({msg: "No se pudo completar su petición", cod: "01", error: error})
+        }
+    }
+
+    public async descargar (req: Request, res: Response) {
+
+        console.log(req.body)
+        console.log(req.body.id)
+        try {
+            const url = await pool.query('SELECT url FROM recurso WHERE id_recurso = $1 ', [req.body.id])
+
+            res.json({data: url, cod: "00"})
+
+        } catch (error) {
+
+            console.log(error)
+            res.json({msg: "No se pudo completar su petición", cod: "01", error: error})
+        }
+    }
+
+    public async cargar (req: Request, res: Response) {
+
+        console.log(req.body)
+        console.log(req.body.id)
+        try {
+            await pool.query('INSERT INTO recurso (id_cuenta_publicador, titulo, url, imagen, resumen)  VALUES ($1, $2, $3, $4, $5) ', [req.body.id, req.body.titulo, req.body.url, req.body.imagen, req.body.resumen])
+
+            res.json({cod: "00"})
+
+        } catch (error) {
+
+            console.log(error)
+            res.json({msg: "No se pudo completar su petición", cod: "01", error: error})
+        }
+    }
+
+    public async cargar_perfil (req: Request, res: Response) {
+
+        console.log(req.body)
+        console.log(req.body.id)
+        try {
+            await pool.query('UPDATE cuenta SET imagen_perfil = $2 WHERE id_cuenta = $1 ', [req.body.id, req.body.imagen])
 
             res.json({cod: "00"})
 
