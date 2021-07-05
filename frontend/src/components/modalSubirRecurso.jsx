@@ -30,6 +30,7 @@ const ModalSubirRecurso = (props) => {
             boxShadow: theme.shadows[5],
             padding: theme.spacing(2, 4, 3),
             overflowY: 'scroll',
+            overflowX: 'hidden',
             width: '97%',
             height: '90%'
 
@@ -66,6 +67,8 @@ const ModalSubirRecurso = (props) => {
         recursos: [],
         titulo: '',
         resumen: '',
+        autor: '',
+        categoria:'',
         url: '',
         url2: ''
 
@@ -159,7 +162,9 @@ const ModalSubirRecurso = (props) => {
             url: dato.url2,
             titulo: dato.titulo,
             resumen: dato.resumen,
-            id: props.id
+            id: props.id,
+            autor: dato.autor,
+            categoria: dato.categoria
         };
 
         console.log(dato.url)
@@ -313,6 +318,24 @@ const ModalSubirRecurso = (props) => {
                                         </div>
 
                                         <div>
+                                            <TextField
+                                                label="Autor:"
+                                                className={"col s12"}
+                                                name="autor"
+                                                onChange={handleChange2}
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <TextField
+                                                label="Categoria:"
+                                                className={"col s12"}
+                                                name="categoria"
+                                                onChange={handleChange2}
+                                            />
+                                        </div>
+
+                                        <div className={styles.subir}>
                                             <h5 id="transition-modal-title">Imagen</h5>
                                             <br/>
                                             <input type="file" onChange={handleChange}/>
@@ -325,7 +348,7 @@ const ModalSubirRecurso = (props) => {
                                             <embed src={dato.url} width={window.innerWidth} height="100px"/>
                                         </div>
 
-                                        <div>
+                                        <div className={styles.subir}>
                                             <h5 id="transition-modal-title">Recurso</h5>
                                             <br/>
                                             <input type="file" onChange={handleChange}/>

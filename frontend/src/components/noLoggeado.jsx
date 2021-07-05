@@ -8,7 +8,7 @@ const NoLoggeado =()=>{
         <>
             <div className={styles.login}>
                 <Link href="../pages/login">
-                    <a href="/Login" >
+                    <a href="/login" >
                         <Button
                             className={styles.botonSecundario}
                                  >Iniciar Sesión

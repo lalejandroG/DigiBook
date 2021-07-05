@@ -52,7 +52,6 @@ const Revision = (props) => {
                 // const perfil = await axios.post(`http://localhost:5000/profile`, newPostObj)
 
                 console.log(recurso.data.data.rows)
-                console.log(recurso.data.data.rows[0].imagen)
 
                 if (recurso.data.cod === "00" && perfil.data.cod === "00") {
                     setData({
