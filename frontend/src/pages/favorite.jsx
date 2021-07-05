@@ -13,12 +13,13 @@ import RemoveIcon from '@material-ui/icons/Remove';
 const Favorite = (props) => {
 
     const [dato, setData] = useState({
-        recursos: []
+        recursos: [],
+        loggeado: false
     });
 
     const detalles = (id) => {
-        window.location.href = `http://localhost:3000/detail/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${id}`
-        // window.location.href= `https://digibook-ffb1b.web.app/detail/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${id}`
+        // window.location.href = `http://localhost:3000/detail/${props.match.params.id}${id}`
+        window.location.href = `https://digibook-ffb1b.web.app/detail/${props.match.params.id}${id}`
 
     }
 
@@ -32,8 +33,8 @@ const Favorite = (props) => {
         console.log(newPostObj)
 
         try {
-            //const recurso = await axios.post(`https://digibook-backend.herokuapp.com/eliminar_fav`, newPostObj)
-            const recurso = await axios.post(`http://localhost:5000/eliminar_fav`, newPostObj)
+            const recurso = await axios.post(`https://digibook-backend.herokuapp.com/eliminar_fav`, newPostObj)
+            // const recurso = await axios.post(`http://localhost:5000/eliminar_fav`, newPostObj)
 
             if (recurso.data.cod === "00") {
                 window.location.href = window.location.href
@@ -56,15 +57,21 @@ const Favorite = (props) => {
             console.log(newPostObj)
 
             try {
-                //const recurso = await axios.post(`https://digibook-backend.herokuapp.com/favorite`, newPostObj)
-                const recurso = await axios.post(`http://localhost:5000/favorite`, newPostObj)
-                console.log(recurso.data.data.rows)
-                console.log(recurso.data.data.rows[0].imagen)
+                const recurso = await axios.post(`https://digibook-backend.herokuapp.com/favorite`, newPostObj)
+                // const recurso = await axios.post(`http://localhost:5000/favorite`, newPostObj)
 
-                if (recurso.data.cod === "00") {
+                const perfil = await axios.post(`https://digibook-backend.herokuapp.com/profile`, newPostObj)
+                // const perfil = await axios.post(`http://localhost:5000/profile`, newPostObj)
+
+                console.log(recurso.data.data.rows)
+                console.log(recurso.data.cod)
+                console.log(perfil.data.cod)
+
+                if (recurso.data.cod === "00" && perfil.data.cod === "00") {
                     setData({
                         ...dato,
-                        recursos: recurso.data.data.rows
+                        recursos: recurso.data.data.rows,
+                        loggeado: perfil.data.data.rows[0].loggeado
                     })
                     console.log(dato.recursos)
 
@@ -107,6 +114,7 @@ const Favorite = (props) => {
 
     return (
         <>
+            {dato.loggeado &&
             <div className={styles.fondo}>
                 <div className={styles.suscribe}>
                     <p className={styles.titulo}>FAVORITES</p>
@@ -119,6 +127,8 @@ const Favorite = (props) => {
                     }
                 </div>
             </div>
+            }
+
 
         </>
 

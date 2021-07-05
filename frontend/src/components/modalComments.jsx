@@ -64,8 +64,8 @@ const ModalComments = (props) => {
 
             console.log(newPostObj)
 
-            //const recurso = await axios.post(`https://digibook-backend.herokuapp.com/comentar`, newPostObj)
-            const recurso = await axios.post(`http://localhost:5000/comentar`, newPostObj)
+            const recurso = await axios.post(`https://digibook-backend.herokuapp.com/comentar`, newPostObj)
+            // const recurso = await axios.post(`http://localhost:5000/comentar`, newPostObj)
 
             console.log(recurso.data.cod)
 

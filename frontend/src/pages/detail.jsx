@@ -26,7 +26,8 @@ const Detail = (props) => {
         titulo: '',
         url: '',
         fav: false,
-        premium: false
+        premium: false,
+        loggeado: false
     });
 
 
@@ -37,21 +38,25 @@ const Detail = (props) => {
                 console.log(props.match.params.id_r)
                 console.log(props.match.params.id)
                 let newPostObj = {
-                    id: props.match.params.id_r,
-                    id_c: props.match.params.id
+                    id_r: props.match.params.id_r,
+                    id: props.match.params.id
                 };
 
                 console.log(newPostObj)
 
-                //const recurso = await axios.post(`https://digibook-backend.herokuapp.com/detalle`, newPostObj)
-                const recurso = await axios.post(`http://localhost:5000/detalle`, newPostObj)
+                const recurso = await axios.post(`https://digibook-backend.herokuapp.com/detalle`, newPostObj)
+                // const recurso = await axios.post(`http://localhost:5000/detalle`, newPostObj)
+
+                const perfil = await axios.post(`https://digibook-backend.herokuapp.com/profile`, newPostObj)
+                // const perfil = await axios.post(`http://localhost:5000/profile`, newPostObj)
 
                 console.log(recurso.data.cod)
                 console.log(recurso.data.fav)
                 console.log(recurso.data.premium)
                 console.log(recurso.data.data.rows[0].avg)
+                console.log(perfil.data.cod)
 
-                if (recurso.data.cod === "00") {
+                if (recurso.data.cod === "00" && perfil.data.cod === "00") {
                     setData({
                         ...dato,
                         avg: recurso.data.data.rows[0].avg,
@@ -63,7 +68,8 @@ const Detail = (props) => {
                         titulo: recurso.data.data.rows[0].titulo,
                         url: recurso.data.data.rows[0].url,
                         fav: recurso.data.fav,
-                        premium: recurso.data.premium
+                        premium: recurso.data.premium,
+                        loggeado: perfil.data.data.rows[0].loggeado
                     })
 
                 } else {
@@ -91,8 +97,8 @@ const Detail = (props) => {
 
                 console.log(newPostObj)
 
-                //const recurso = await axios.post(`https://digibook-backend.herokuapp.com/eliminar_fav`, newPostObj)
-                const recurso = await axios.post(`http://localhost:5000/eliminar_fav`, newPostObj)
+                const recurso = await axios.post(`https://digibook-backend.herokuapp.com/eliminar_fav`, newPostObj)
+                // const recurso = await axios.post(`http://localhost:5000/eliminar_fav`, newPostObj)
 
                 console.log(recurso.data.cod)
 
@@ -110,8 +116,8 @@ const Detail = (props) => {
         } else {
             try {
 
-                //const recurso = await axios.post(`https://digibook-backend.herokuapp.com/agregar_fav`, newPostObj)
-                const recurso = await axios.post(`http://localhost:5000/agregar_fav`, newPostObj)
+                const recurso = await axios.post(`https://digibook-backend.herokuapp.com/agregar_fav`, newPostObj)
+                // const recurso = await axios.post(`http://localhost:5000/agregar_fav`, newPostObj)
 
                 console.log(recurso.data.cod)
 
@@ -131,6 +137,7 @@ const Detail = (props) => {
 
     return (
         <>
+            {dato.loggeado &&
             <div className={styles.suscribe}>
                 <div className={styles.elementos}>
                     <div className={styles.resumen}>
@@ -172,13 +179,14 @@ const Detail = (props) => {
                                 <Form.Control type="text" value={dato.contenido}/>
                             </Form.Group>
 
-                            {/*<Link href={`https://digibook-ffb1b.web.app/comments/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${props.match.params.id_r}`}>*/}
                             <Link
-                                href={`http://localhost:3000/comments/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${props.match.params.id_r}`}>
+                                href={`https://digibook-ffb1b.web.app/comments/${props.match.params.id}${props.match.params.id_r}`}>
+                                {/*<Link href={`http://localhost:3000/comments/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${props.match.params.id_r}`}>*/}
+                                {/*    <a id={styles.mas} href={`http://localhost:3000/comments/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${props.match.params.id_r}`}> Ver*/}
+                                {/*        más</a>*/}
                                 <a id={styles.mas}
-                                   href={`http://localhost:3000/comments/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${props.match.params.id_r}`}> Ver
+                                   href={`https://digibook-ffb1b.web.app/comments/${props.match.params.id}${props.match.params.id_r}`}> Ver
                                     más</a>
-                                {/*    <a id={styles.mas} href={`https://digibook-ffb1b.web.app/comments/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${props.match.params.id_r}`}> Ver más</a>*/}
                             </Link>
 
                             <div className={styles.botones}>
@@ -195,6 +203,8 @@ const Detail = (props) => {
 
 
             </div>
+            }
+
         </>
 
     )

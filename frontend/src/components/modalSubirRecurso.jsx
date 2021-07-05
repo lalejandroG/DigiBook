@@ -80,8 +80,8 @@ const ModalSubirRecurso = (props) => {
 
         async function fetchMyAPI() {
             try {
-                //const recurso = await axios.post(`https://digibook-backend.herokuapp.com/publicados`, newPostObj)
-                const recurso = await axios.post(`http://localhost:5000/publicados`, newPostObj)
+                const recurso = await axios.post(`https://digibook-backend.herokuapp.com/publicados`, newPostObj)
+                // const recurso = await axios.post(`http://localhost:5000/publicados`, newPostObj)
 
 
                 if (recurso.data.cod === "00") {
@@ -114,8 +114,8 @@ const ModalSubirRecurso = (props) => {
         console.log(newPostObj)
 
         try {
-            //const recurso = await axios.post(`https://digibook-backend.herokuapp.com/eliminar_recurso`, newPostObj)
-            const recurso = await axios.post(`http://localhost:5000/eliminar_recurso`, newPostObj)
+            const recurso = await axios.post(`https://digibook-backend.herokuapp.com/eliminar_recurso`, newPostObj)
+            // const recurso = await axios.post(`http://localhost:5000/eliminar_recurso`, newPostObj)
 
             if (recurso.data.cod === "00") {
                 window.location.href = window.location.href
@@ -166,8 +166,8 @@ const ModalSubirRecurso = (props) => {
         console.log(dato.url2)
 
         try {
-            // const login = await axios.post(`https://digibook-backend.herokuapp.com/cargar`, newPostObj)
-            const login = await axios.post(`http://localhost:5000/cargar`, newPostObj)
+            const login = await axios.post(`https://digibook-backend.herokuapp.com/cargar`, newPostObj)
+            // const login = await axios.post(`http://localhost:5000/cargar`, newPostObj)
             console.log(login.data.cod)
 
             if (login.data.cod === "00") {

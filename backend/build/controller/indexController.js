@@ -217,9 +217,9 @@ class IndexController {
             console.log(req.body);
             console.log(req.body.id);
             try {
-                const recurso = yield elephantsql_1.default.query('SELECT r.resumen, r.titulo, r.imagen, r.url, co.id_cuenta, co.contenido, avg(co.calificacion), cu.nombre FROM recurso as r, comentario as co, cuenta as cu WHERE r.id_recurso = $1 AND co.id_recurso = $1 AND cu.id_cuenta = co.id_cuenta GROUP BY co.calificacion, r.resumen, r.titulo, r.imagen, r.url, co.id_cuenta, co.contenido, cu.nombre ORDER BY co.contenido LIMIT 1 ', [req.body.id]);
-                const fav = yield elephantsql_1.default.query('SELECT * FROM favoritos WHERE id_recurso = $1 AND id_cuenta = $2 ', [req.body.id, req.body.id_c]);
-                const premium = yield elephantsql_1.default.query('SELECT premium FROM cuenta WHERE id_cuenta = $1 ', [req.body.id_c]);
+                const recurso = yield elephantsql_1.default.query('SELECT r.resumen, r.titulo, r.imagen, r.url, co.id_cuenta, co.contenido, avg(co.calificacion), cu.nombre FROM recurso as r LEFT JOIN comentario as co ON r.id_recurso = co.id_recurso LEFT JOIN cuenta as cu ON cu.id_cuenta = co.id_cuenta WHERE r.id_recurso = $1 GROUP BY co.calificacion, r.resumen, r.titulo, r.imagen, r.url, co.id_cuenta, co.contenido, cu.nombre  ORDER BY co.contenido LIMIT 1', [req.body.id_r]);
+                const fav = yield elephantsql_1.default.query('SELECT * FROM favoritos WHERE id_recurso = $1 AND id_cuenta = $2 ', [req.body.id_r, req.body.id]);
+                const premium = yield elephantsql_1.default.query('SELECT premium FROM cuenta WHERE id_cuenta = $1 ', [req.body.id]);
                 console.log(recurso.rows);
                 console.log(premium.rows);
                 if (fav.rows.length > 0) {
@@ -262,9 +262,9 @@ class IndexController {
     comments(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log(req.body);
-            console.log(req.body.id);
+            console.log(req.body.id_r);
             try {
-                const comments = yield elephantsql_1.default.query('SELECT co.id_cuenta, co.contenido, cu.nombre, co.calificacion FROM comentario as co, cuenta as cu WHERE co.id_recurso = $1 AND cu.id_cuenta = co.id_cuenta ', [req.body.id]);
+                const comments = yield elephantsql_1.default.query('SELECT co.id_cuenta, co.contenido, cu.nombre, co.calificacion FROM comentario as co, cuenta as cu WHERE co.id_recurso = $1 AND cu.id_cuenta = co.id_cuenta ', [req.body.id_r]);
                 console.log(comments.rows);
                 res.json({ data: comments, cod: "00" });
             }
@@ -280,6 +280,32 @@ class IndexController {
             console.log(req.body.id);
             try {
                 yield elephantsql_1.default.query('UPDATE cuenta SET nombre = $1, biografia = $2 WHERE id_cuenta = $3 ', [req.body.nombre, req.body.biografia, req.body.id]);
+                res.json({ cod: "00" });
+            }
+            catch (error) {
+                console.log(error);
+                res.json({ msg: "No se pudo completar su petición", cod: "01", error: error });
+            }
+        });
+    }
+    loggeado(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log(req.body.id_cuenta);
+            try {
+                yield elephantsql_1.default.query('UPDATE cuenta SET loggeado = true WHERE id_cuenta = $1 ', [parseInt(req.body.id_cuenta)]);
+                res.json({ cod: "00" });
+            }
+            catch (error) {
+                console.log(error);
+                res.json({ msg: "No se pudo completar su petición", cod: "01", error: error });
+            }
+        });
+    }
+    desloggeado(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log(req.body.id);
+            try {
+                yield elephantsql_1.default.query('UPDATE cuenta SET loggeado = false WHERE id_cuenta = $1 ', [parseInt(req.body.id)]);
                 res.json({ cod: "00" });
             }
             catch (error) {

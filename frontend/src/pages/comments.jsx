@@ -14,89 +14,100 @@ import StarIcon from '@material-ui/icons/Star';
 import ModalComments from "../components/modalComments";
 import {Label} from "@material-ui/icons";
 
-const Comments=(props)=>{
+const Comments = (props) => {
 
-     const [dato, setData] = useState({
-         comentarios: [45]
+    const [dato, setData] = useState({
+        comentarios: [],
+        loggeado: false
     });
 
-      const {handleSubmit} = useForm({
-        reValidateMode:'onSubmit'
+    const {handleSubmit} = useForm({
+        reValidateMode: 'onSubmit'
     });
 
-      useEffect(()=>
-    {
+    useEffect(() => {
         async function fetchMyAPI() {
             try {
 
                 console.log(props.match.params.id_r)
                 let newPostObj = {
-                    id: props.match.params.id_r
+                    id_r: props.match.params.id_r,
+                    id: props.match.params.id
                 };
 
                 console.log(newPostObj)
 
-                //const recurso = await axios.post(`https://digibook-backend.herokuapp.com/comments`, newPostObj)
-                const recurso = await axios.post(`http://localhost:5000/comments`, newPostObj)
+                const recurso = await axios.post(`https://digibook-backend.herokuapp.com/comments`, newPostObj)
+                // const recurso = await axios.post(`http://localhost:5000/comments`, newPostObj)
+
+                const perfil = await axios.post(`https://digibook-backend.herokuapp.com/profile`, newPostObj)
+                // const perfil = await axios.post(`http://localhost:5000/profile`, newPostObj)
 
                 console.log(recurso.data.cod)
 
-                if(recurso.data.cod === "00"){
+                if (recurso.data.cod === "00" && perfil.data.cod === "00") {
                     setData({
                         ...dato,
-                        comentarios: recurso.data.data.rows
+                        comentarios: recurso.data.data.rows,
+                        loggeado: perfil.data.data.rows[0].loggeado
                     })
 
-                }else{
+                } else {
                     console.log(recurso.data.error)
                 }
 
             } catch (error) {
                 console.log(error)
             }
-          }
+        }
 
-          fetchMyAPI()
+        fetchMyAPI()
 
     }, []);
 
 
-       const comenntarios = () => (
-            dato.comentarios.map((key) =>(
-                <Form className={styles.form}>
-                    <Form.Group controlId="formBasicEmail" className={styles.space}>
-                        <Form.Label className={styles.autor}>{key.nombre}</Form.Label>
-                        <Form.Label className={styles.comment}>{key.contenido}</Form.Label>
-                    </Form.Group>
-                    {dato.comentarios && estrellas(key.calificacion)}
-                </Form>
-          ))
-        );
+    const comenntarios = () => (
+        dato.comentarios.map((key) => (
+            <Form className={styles.form}>
+                <Form.Group controlId="formBasicEmail" className={styles.space}>
+                    <Form.Label className={styles.autor}>{key.nombre}</Form.Label>
+                    <Form.Label className={styles.comment}>{key.contenido}</Form.Label>
+                </Form.Group>
+                {dato.comentarios && estrellas(key.calificacion)}
+            </Form>
+        ))
+    );
 
-       const estrellas = (calificacion) =>(
-           <div className={styles.agrupar}>
-               <div className={styles.estrellas}>
-                   <i className={styles.materialIcons2} style={{color: calificacion >=1 ? "yellow" : "whitesmoke" }} >star</i>
-                   <i className={styles.materialIcons2} style={{color: calificacion >=2 ? "yellow" : "whitesmoke" }}>star</i>
-                   <i className={styles.materialIcons2} style={{color: calificacion >=3 ? "yellow" : "whitesmoke" }}>star</i>
-                   <i className={styles.materialIcons2} style={{color: calificacion >=4 ? "yellow" : "whitesmoke" }}>star</i>
-                   <i className={styles.materialIcons2} style={{color: calificacion >=5 ? "yellow" : "whitesmoke" }}>star</i>
-               </div>
-           </div>
-       )
+    const estrellas = (calificacion) => (
+        <div className={styles.agrupar}>
+            <div className={styles.estrellas}>
+                <i className={styles.materialIcons2}
+                   style={{color: calificacion >= 1 ? "yellow" : "whitesmoke"}}>star</i>
+                <i className={styles.materialIcons2}
+                   style={{color: calificacion >= 2 ? "yellow" : "whitesmoke"}}>star</i>
+                <i className={styles.materialIcons2}
+                   style={{color: calificacion >= 3 ? "yellow" : "whitesmoke"}}>star</i>
+                <i className={styles.materialIcons2}
+                   style={{color: calificacion >= 4 ? "yellow" : "whitesmoke"}}>star</i>
+                <i className={styles.materialIcons2}
+                   style={{color: calificacion >= 5 ? "yellow" : "whitesmoke"}}>star</i>
+            </div>
+        </div>
+    )
 
-    return(
+    return (
         <>
-             <div className={styles.suscribe}>
+            {dato.loggeado &&
+            <div className={styles.suscribe}>
 
                 <div className={styles.resenas}>
                     <p id={styles.titulo}>Reseñas</p>
 
                     <div className={styles.datos}>
-                         <div className=".col-md-*">
+                        <div className=".col-md-*">
                             {dato.comentarios && comenntarios()}
                             <ModalComments id={props.match.params.id} id_r={props.match.params.id_r}/>
-                         </div>
+                        </div>
                     </div>
 
 
@@ -104,6 +115,8 @@ const Comments=(props)=>{
 
 
             </div>
+            }
+
         </>
 
     )

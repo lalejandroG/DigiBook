@@ -17,8 +17,9 @@ import styles2 from "../styles/filtro.module.css";
 const Revision = (props) => {
 
     const [dato, setData] = useState({
-        recursos: [45],
-        aprobados: []
+        recursos: [],
+        aprobados: [],
+        loggeado: false
     });
 
     const handleChange = e => {
@@ -37,17 +38,27 @@ const Revision = (props) => {
     }
 
     useEffect(() => {
+
+        let newPostObj = {
+            id: props.match.params.id
+        };
+
         async function fetchMyAPI() {
             try {
-                //const recurso = await axios.get(`https://digibook-backend.herokuapp.com/revision`)
-                const recurso = await axios.get(`http://localhost:5000/revision`)
+                const recurso = await axios.get(`https://digibook-backend.herokuapp.com/revision`)
+                // const recurso = await axios.get(`http://localhost:5000/revision`)
+
+                const perfil = await axios.post(`https://digibook-backend.herokuapp.com/profile`, newPostObj)
+                // const perfil = await axios.post(`http://localhost:5000/profile`, newPostObj)
+
                 console.log(recurso.data.data.rows)
                 console.log(recurso.data.data.rows[0].imagen)
 
-                if (recurso.data.cod === "00") {
+                if (recurso.data.cod === "00" && perfil.data.cod === "00") {
                     setData({
                         ...dato,
-                        recursos: recurso.data.data.rows
+                        recursos: recurso.data.data.rows,
+                        loggeado: perfil.data.data.rows[0].loggeado
                     })
                     console.log(dato.recursos)
 
@@ -67,22 +78,22 @@ const Revision = (props) => {
     const libros = () => (
         dato.recursos.map((key) => (
             dato.recursos.length > 0 ?
-            <div className=".col-md-*">
-                <div className={styles.revision}>
-                    <Card key={key.id_recurso} className={styles.libro}>
-                        <Card.Img className={styles.img} variant="top" src={key.imagen}/>
-                        <Card.Body className={styles.nombreLibro}>
-                            <Card.Title className={styles.tituloLibro}>{key.titulo}</Card.Title>
-                        </Card.Body>
-                    </Card>
-                    <div>
-                        <input className={styles.marcador} type="checkbox" value="" id={key.id_recurso}
-                               onChange={handleChange}/>
+                <div className=".col-md-*">
+                    <div className={styles.revision}>
+                        <Card key={key.id_recurso} className={styles.libro}>
+                            <Card.Img className={styles.img} variant="top" src={key.imagen}/>
+                            <Card.Body className={styles.nombreLibro}>
+                                <Card.Title className={styles.tituloLibro}>{key.titulo}</Card.Title>
+                            </Card.Body>
+                        </Card>
+                        <div>
+                            <input className={styles.marcador} type="checkbox" value="" id={key.id_recurso}
+                                   onChange={handleChange}/>
+                        </div>
                     </div>
-                </div>
 
-            </div>
-                :''
+                </div>
+                : ''
 
         ))
     );
@@ -94,8 +105,8 @@ const Revision = (props) => {
                 let newPostObj = {
                     id: dato.aprobados[i]
                 };
-                //const recurso = await axios.post(`https://digibook-backend.herokuapp.com/aprobar`, newPostObj)
-                const recurso = await axios.post(`http://localhost:5000/aprobar`, newPostObj)
+                const recurso = await axios.post(`https://digibook-backend.herokuapp.com/aprobar`, newPostObj)
+                // const recurso = await axios.post(`http://localhost:5000/aprobar`, newPostObj)
 
                 if (recurso.data.cod === "00") {
                     dato.aprobados.pop()
@@ -114,6 +125,7 @@ const Revision = (props) => {
 
     return (
         <>
+            {dato.loggeado &&
             <div className={styles.fondo}>
                 <label id={styles.titulo}>
                     Aprobar recursos subidos
@@ -125,6 +137,7 @@ const Revision = (props) => {
                     <Button className={styles.botonI2} onClick={(e) => aprobar()}>Aprobar</Button>
                 </div>
             </div>
+            }
 
         </>
 

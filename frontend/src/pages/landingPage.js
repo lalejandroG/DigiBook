@@ -28,8 +28,8 @@ const LandigPage=()=>{
 
                     </ul>
                 </div>
-                    <Link href="../pages/login">
-                    <a href="/login">
+                    <Link href="../pages/registro">
+                    <a href="/registro">
                         <a className={styles.prueba}>
                             <Button className={styles.boton}>GET FREE</Button>{' '}
                         </a>

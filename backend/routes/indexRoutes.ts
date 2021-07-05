@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import {Router} from 'express';
 import indexController from '../controller/indexController';
 
 class IndexRoutes {
@@ -33,6 +33,8 @@ class IndexRoutes {
         this.router.post('/cargar', indexController.cargar);
         this.router.post('/descargar', indexController.descargar);
         this.router.post('/cargar_perfil', indexController.cargar_perfil);
+        this.router.post('/loggeado', indexController.loggeado);
+        this.router.post('/desloggeado', indexController.desloggeado);
 
     }
 }

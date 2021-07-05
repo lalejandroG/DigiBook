@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {BrowserRouter as Router,Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import styled from 'styled-components';
 import styles from "../styles/comments.module.css";
 import {Button} from "react-bootstrap";
@@ -11,10 +11,10 @@ import axios from "axios";
 
 
 function getDisplayCardNumber(numberInput) {
-  const placeholder = "****************";
-  const newPlaceholder = placeholder.substr(numberInput.length);
+    const placeholder = "****************";
+    const newPlaceholder = placeholder.substr(numberInput.length);
 
-  return numberInput.concat("", newPlaceholder).match(/.{1,4}/g);
+    return numberInput.concat("", newPlaceholder).match(/.{1,4}/g);
 }
 
 const StyledCard = styled.div`
@@ -91,7 +91,7 @@ const StyledTextInput = styled.div`
 
   input:focus {
     border-color: #64b5f6;
-}
+  }
 `;
 
 const StyledCardForm = styled.div`
@@ -101,20 +101,12 @@ const StyledCardForm = styled.div`
   height: 60%;
   overflow-y: scroll;
   padding: 1em 2em;
-  box-shadow: 2px 2px 8px 0 rgba(0,0,0,0.5);
+  box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.5);
 
-  //h2 {
-  //  color: #343a40;
-  //  margin: 0;
-  //  padding-top: .25em;
-  //  border-bottom: 1px solid #aeaeae;
-  //  padding-bottom: .75em;
-  //}
-  //
   ul {
     list-style: none;
     padding: 0;
-  
+
     li:not(:last-child) {
       margin-bottom: 15px;
     }
@@ -122,147 +114,147 @@ const StyledCardForm = styled.div`
 `;
 
 const StyledApp = styled.main`
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-padding: 3em;
-justify-content: space-around;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 3em;
+  justify-content: space-around;
 
   & > div:not(:last-child) {
     margin-bottom: 2em;
   }
 `
 
-const TextInput = ({ label, type = "text", id, value, ...props }) => (
-  <StyledTextInput>
-    {label && <label for={id}>{label}</label>}
-    <input id={id} type={type} value={value} {...props} />
-  </StyledTextInput>
+const TextInput = ({label, type = "text", id, value, ...props}) => (
+    <StyledTextInput>
+        {label && <label for={id}>{label}</label>}
+        <input id={id} type={type} value={value} {...props} />
+    </StyledTextInput>
 );
 
 const CreditCard = ({
-  cardInfo: { name, number, expiryMonth, expiryYear, cvv }
-}) => {
-  let cardNumber = getDisplayCardNumber(number);
-  let cardName = name < 1 ? "Name" : name;
-  let expiry =
-    expiryMonth < 1 && expiryYear < 1
-      ? "00/00"
-      : `${expiryMonth}/${expiryYear}`;
+                        cardInfo: {name, number, expiryMonth, expiryYear, cvv}
+                    }) => {
+    let cardNumber = getDisplayCardNumber(number);
+    let cardName = name < 1 ? "Name" : name;
+    let expiry =
+        expiryMonth < 1 && expiryYear < 1
+            ? "00/00"
+            : `${expiryMonth}/${expiryYear}`;
 
-  return (
-    <StyledCard>
-      <div className="card">
-        <div className="cardNumber">
-          <span className="numberSection">{cardNumber[0]}</span>
-          <span className="numberSection">{cardNumber[1]}</span>
-          <span className="numberSection">{cardNumber[2]}</span>
-          <span className="numberSection">{cardNumber[3]}</span>
-          {cardNumber[4] && (
-            <span className="numberSection">{cardNumber[4]}</span>
-          )}
-        </div>
-        <div className="cardInfo">
-          <div className="cardName">
-            <span>Card Holder</span>
-            <p>{cardName}</p>
-          </div>
-          <div className="cardExpiry">
-            <span>Expires</span>
-            <p>{expiry}</p>
-          </div>
-        </div>
-      </div>
-    </StyledCard>
-  );
+    return (
+        <StyledCard>
+            <div className="card">
+                <div className="cardNumber">
+                    <span className="numberSection">{cardNumber[0]}</span>
+                    <span className="numberSection">{cardNumber[1]}</span>
+                    <span className="numberSection">{cardNumber[2]}</span>
+                    <span className="numberSection">{cardNumber[3]}</span>
+                    {cardNumber[4] && (
+                        <span className="numberSection">{cardNumber[4]}</span>
+                    )}
+                </div>
+                <div className="cardInfo">
+                    <div className="cardName">
+                        <span>Card Holder</span>
+                        <p>{cardName}</p>
+                    </div>
+                    <div className="cardExpiry">
+                        <span>Expires</span>
+                        <p>{expiry}</p>
+                    </div>
+                </div>
+            </div>
+        </StyledCard>
+    );
 };
 
 const CardForm = ({
-  cardInfo: { name, number, expiryMonth, expiryYear, cvv },
-  onChange
-}) => (
-  <StyledCardForm>
-    <form>
-      <ul>
-        <li>
-          <TextInput
-            label="Card Holder Name"
-            id="name"
-            type="text"
-            value={name}
-            onChange={e => onChange({ key: "name", value: e.target.value })}
-            minLength="1"
-            maxLength="40"
-            required
-          />
-        </li>
-        <li>
-          <TextInput
-            label="Card Number"
-            id="number"
-            type="text"
-            value={number}
-            onChange={e => onChange({ key: "number", value: e.target.value })}
-            placeholder="**** **** **** ****"
-            minLength="12"
-            maxLength="19"
-            required
-          />
-        </li>
-        <li>
-          <TextInput
-            label="Expiry Month"
-            id="expiryMonth"
-            type="text"
-            value={expiryMonth}
-            onChange={e =>
-              onChange({ key: "expiryMonth", value: e.target.value })
-            }
-            placeholder="MM"
-            minLength="2"
-            maxLength="2"
-            required
-          />
-        </li>
-        <li>
-          <TextInput
-            label="Expiry Year"
-            id="expiryYear"
-            type="text"
-            value={expiryYear}
-            onChange={e =>
-              onChange({ key: "expiryYear", value: e.target.value })
-            }
-            placeholder="YY"
-            minLength="2"
-            maxLength="4"
-            required
-          />
-        </li>
-        <li>
-          <TextInput
-            label="CVV"
-            id="cvv"
-            type="text"
-            value={cvv}
-            onChange={e => onChange({ key: "cvv", value: e.target.value })}
-            minLength="3"
-            maxLength="4"
-          />
-        </li>
-      </ul>
-    </form>
-  </StyledCardForm>
+                      cardInfo: {name, number, expiryMonth, expiryYear, cvv},
+                      onChange
+                  }) => (
+    <StyledCardForm>
+        <form>
+            <ul>
+                <li>
+                    <TextInput
+                        label="Card Holder Name"
+                        id="name"
+                        type="text"
+                        value={name}
+                        onChange={e => onChange({key: "name", value: e.target.value})}
+                        minLength="1"
+                        maxLength="40"
+                        required
+                    />
+                </li>
+                <li>
+                    <TextInput
+                        label="Card Number"
+                        id="number"
+                        type="text"
+                        value={number}
+                        onChange={e => onChange({key: "number", value: e.target.value})}
+                        placeholder="**** **** **** ****"
+                        minLength="12"
+                        maxLength="19"
+                        required
+                    />
+                </li>
+                <li>
+                    <TextInput
+                        label="Expiry Month"
+                        id="expiryMonth"
+                        type="text"
+                        value={expiryMonth}
+                        onChange={e =>
+                            onChange({key: "expiryMonth", value: e.target.value})
+                        }
+                        placeholder="MM"
+                        minLength="2"
+                        maxLength="2"
+                        required
+                    />
+                </li>
+                <li>
+                    <TextInput
+                        label="Expiry Year"
+                        id="expiryYear"
+                        type="text"
+                        value={expiryYear}
+                        onChange={e =>
+                            onChange({key: "expiryYear", value: e.target.value})
+                        }
+                        placeholder="YY"
+                        minLength="2"
+                        maxLength="4"
+                        required
+                    />
+                </li>
+                <li>
+                    <TextInput
+                        label="CVV"
+                        id="cvv"
+                        type="text"
+                        value={cvv}
+                        onChange={e => onChange({key: "cvv", value: e.target.value})}
+                        minLength="3"
+                        maxLength="4"
+                    />
+                </li>
+            </ul>
+        </form>
+    </StyledCardForm>
 );
 
 const ModalCreditCard = (props) => {
-  const initialState = {
-    name: "",
-    number: "",
-    expiryMonth: "",
-    expiryYear: "",
-    cvv: ""
-  };
+    const initialState = {
+        name: "",
+        number: "",
+        expiryMonth: "",
+        expiryYear: "",
+        cvv: ""
+    };
     const useStyles = makeStyles((theme) => ({
         modal: {
             display: 'flex',
@@ -277,7 +269,7 @@ const ModalCreditCard = (props) => {
             boxShadow: theme.shadows[5],
             padding: theme.spacing(2, 4, 3),
             display: 'flex',
-            flexDirection:'column',
+            flexDirection: 'column',
             alignItems: 'space-between',
             alignContent: 'space-between',
             width: '90%',
@@ -296,90 +288,90 @@ const ModalCreditCard = (props) => {
     };
 
 
-  const inputReducer = (state, action) => {
-    return { ...state, [action.key]: action.value };
-  };
+    const inputReducer = (state, action) => {
+        return {...state, [action.key]: action.value};
+    };
 
-  const [cardInfo, handleOnChange] = React.useReducer(
-    inputReducer,
-    initialState
-  );
+    const [cardInfo, handleOnChange] = React.useReducer(
+        inputReducer,
+        initialState
+    );
 
-  const clicker = async () => {
+    const clicker = async () => {
 
-    let newPostObj = {
-      correo: props.correo,
-      password: props.password
-      };
-      console.log(newPostObj)
-      try {
-          // const login = await axios.post(`https://digibook-backend.herokuapp.com/login`, newPostObj)
-          const login = await axios.post(`http://localhost:5000/login`, newPostObj)
-          console.log(login.data)
-          console.log(login.data.cod)
-          if(login.data.cod === "00"){
-                
+        let newPostObj = {
+            correo: props.correo,
+            password: props.password
+        };
+        console.log(newPostObj)
+        try {
+            const login = await axios.post(`https://digibook-backend.herokuapp.com/login`, newPostObj)
+            // const login = await axios.post(`http://localhost:5000/login`, newPostObj)
+            console.log(login.data)
+            console.log(login.data.cod)
+            if (login.data.cod === "00") {
+
                 let newPostObj2 = {
-                     id: login.data.data.id_cuenta,
-                     name: cardInfo.name,
-                     number: cardInfo.number,
-                     expiryMonth: cardInfo.expiryMonth,
-                     expiryYear: cardInfo.expiryYear,
-                     cvv: cardInfo.cvv
-                    
-                 };
-                 console.log(newPostObj2)
-                     try {
-                         //const busqueda = await axios.post(`https://digibook-backend.herokuapp.com/insertarFactura`, newPostObj2)
-                         const busqueda = await axios.post(`http://localhost:5000/insertarFactura`, newPostObj2)
-                     } catch (error) {
-                         console.log(error)
-                     }
-          }else{
-              console.log(login.data.error)
-          }
-      } catch (error) {
-          console.log(error)
-      }
+                    id: login.data.data.id_cuenta,
+                    name: cardInfo.name,
+                    number: cardInfo.number,
+                    expiryMonth: cardInfo.expiryMonth,
+                    expiryYear: cardInfo.expiryYear,
+                    cvv: cardInfo.cvv
 
-}
+                };
+                console.log(newPostObj2)
+                try {
+                    const busqueda = await axios.post(`https://digibook-backend.herokuapp.com/insertarFactura`, newPostObj2)
+                    // const busqueda = await axios.post(`http://localhost:5000/insertarFactura`, newPostObj2)
+                } catch (error) {
+                    console.log(error)
+                }
+            } else {
+                console.log(login.data.error)
+            }
+        } catch (error) {
+            console.log(error)
+        }
 
-  return (
-      <>
-      <div className={styles.botones2} onClick={handleOpen}>
-        <Button className={styles.botonI}>Datos de tarjeta</Button>{' '}
-      </div>
-    <StyledApp>
+    }
+
+    return (
+        <>
+            <div className={styles.botones2} onClick={handleOpen}>
+                <Button className={styles.botonI}>Datos de tarjeta</Button>{' '}
+            </div>
+            <StyledApp>
 
 
-      <Modal
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
-                className={classes.modal}
-                open={open}
-                onClose={handleClose}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}
-            >
-                <Fade in={open}>
-                    <div className={classes.paper}>
-                        <h4 className={styles.espacio}>Datos de pago</h4>
-                        <CreditCard cardInfo={cardInfo}/>
-                        <CardForm cardInfo={cardInfo} onChange={handleOnChange}/>
-                        <div className={styles.botones2} >
-                            <Button onClick={clicker} className={styles.botonI2}>Pagar</Button>
+                <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    className={classes.modal}
+                    open={open}
+                    onClose={handleClose}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={open}>
+                        <div className={classes.paper}>
+                            <h4 className={styles.espacio}>Datos de pago</h4>
+                            <CreditCard cardInfo={cardInfo}/>
+                            <CardForm cardInfo={cardInfo} onChange={handleOnChange}/>
+                            <div className={styles.botones2}>
+                                <Button onClick={clicker} className={styles.botonI2}>Pagar</Button>
+                            </div>
                         </div>
-                    </div>
-                </Fade>
+                    </Fade>
 
-      </Modal>
+                </Modal>
 
-    </StyledApp>
-      </>
+            </StyledApp>
+        </>
 
-  );
+    );
 };
 export default ModalCreditCard;

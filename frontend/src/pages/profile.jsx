@@ -29,7 +29,8 @@ const Profile = (props) => {
         premium: false,
         error: false,
         recursos: [],
-        archivo: ""
+        archivo: "",
+        loggeado: false
     });
 
     const [image, setImage] = useState(null);
@@ -46,12 +47,11 @@ const Profile = (props) => {
 
                 console.log(newPostObj)
 
-                //const recurso = await axios.post(`https://digibook-backend.herokuapp.com/profile`, newPostObj)
-                const recurso = await axios.post(`http://localhost:5000/profile`, newPostObj)
-                const publicados = await axios.post(`http://localhost:5000/publicados`, newPostObj)
+                const recurso = await axios.post(`https://digibook-backend.herokuapp.com/profile`, newPostObj)
+                // const recurso = await axios.post(`http://localhost:5000/profile`, newPostObj)
 
-                // //const datos = await axios.post(`https://digibook-backend.herokuapp.com/published`, newPostObj)
-                // const datos = await axios.post(`http://localhost:5000/published`, newPostObj)
+                const datos = await axios.post(`https://digibook-backend.herokuapp.com/publicados`, newPostObj)
+                // const publicados = await axios.post(`http://localhost:5000/publicados`, newPostObj)
 
                 console.log(recurso.data.cod)
 
@@ -62,7 +62,8 @@ const Profile = (props) => {
                         nombre: recurso.data.data.rows[0].nombre,
                         biografia: recurso.data.data.rows[0].biografia,
                         premium: recurso.data.data.rows[0].premium,
-                        recursos: publicados.data.data.rows
+                        recursos: publicados.data.data.rows,
+                        loggeado: recurso.data.data.rows[0].loggeado
                     })
 
 
@@ -101,8 +102,8 @@ const Profile = (props) => {
         console.log(newPostObj)
 
         try {
-            // const perfil = await axios.post(`https://digibook-apis.herokuapp.com/edit_profile`, newPostObj)
-            const perfil = await axios.post(`http://localhost:5000/edit_profile`, newPostObj)
+            const perfil = await axios.post(`https://digibook-apis.herokuapp.com/edit_profile`, newPostObj)
+            // const perfil = await axios.post(`http://localhost:5000/edit_profile`, newPostObj)
 
             console.log(perfil.data.cod)
 
@@ -174,8 +175,8 @@ const Profile = (props) => {
         };
 
         try {
-            // const login = await axios.post(`https://digibook-backend.herokuapp.com/cargar_perfil`, newPostObj)
-            const login = await axios.post(`http://localhost:5000/cargar_perfil`, newPostObj)
+            const login = await axios.post(`https://digibook-backend.herokuapp.com/cargar_perfil`, newPostObj)
+            // const login = await axios.post(`http://localhost:5000/cargar_perfil`, newPostObj)
             console.log(login.data.cod)
 
             if (login.data.cod === "00") {
@@ -195,15 +196,17 @@ const Profile = (props) => {
 
     return (
         <>
+            {dato.loggeado &&
             <div className={styles.suscribe}>
                 <div className={styles.elementos}>
                     <div className={styles.favorito}>
-                        {/*<Link href={`https://digibook-ffb1b.web.app/favorite/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}`}>*/}
-                        <Link
-                            href={`http://localhost:3000/favorite/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}`}>
+                        <Link href={`https://digibook-ffb1b.web.app/favorite/${props.match.params.id}`}>
+                            {/*<Link*/}
+                            {/*    href={`http://localhost:3000/favorite/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}`}>*/}
+                            {/*    <a id={styles.mas}*/}
+                            {/*       href={`http://localhost:3000/favorite/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}`}>*/}
                             <a id={styles.mas}
-                               href={`http://localhost:3000/favorite/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}`}>
-                                {/*<a id={styles.mas} href={`https://digibook-ffb1b.web.app/favorite/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}`}>*/}
+                               href={`https://digibook-ffb1b.web.app/favorite/${props.match.params.id}`}>
                                 <a className={styles.prueba}>
                                     <i className={styles.materialIcons}>favorite</i>
                                 </a>
@@ -269,6 +272,8 @@ const Profile = (props) => {
                         </div>
                     </div> : ''}
             </div>
+            }
+
         </>
 
     )

@@ -36,12 +36,13 @@ const Store = (props) => {
         checksCategorias: [0],
         idsCategorias: [0],
         barraBusqueda: "",
-        admin: false
+        admin: false,
+        loggeado: false
     });
 
     const detalles = (id) => {
-        window.location.href = `http://localhost:3000/detail/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${id}`
-        //window.location.href = `https://digibook-ffb1b.web.app/detail/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${id}`
+        // window.location.href = `http://localhost:3000/detail/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${id}`
+        window.location.href = `https://digibook-ffb1b.web.app/detail/${props.match.params.id}${id}`
     }
 
     const onSubmit = async () => {
@@ -53,8 +54,8 @@ const Store = (props) => {
         };
         console.log(newPostObj)
         try {
-            //const busqueda = await axios.post(`https://digibook-backend.herokuapp.com/busqueda`, newPostObj)
-            const busqueda = await axios.post(`http://localhost:5000/busqueda`, newPostObj)
+            const busqueda = await axios.post(`https://digibook-backend.herokuapp.com/busqueda`, newPostObj)
+            // const busqueda = await axios.post(`http://localhost:5000/busqueda`, newPostObj)
             console.log(busqueda.data)
             console.log(busqueda.data.cod)
 
@@ -105,13 +106,13 @@ const Store = (props) => {
 
         async function fetchMyAPI() {
             try {
-                // const recurso = await axios.get(`https://digibook-backend.herokuapp.com/store`)
-                const recurso = await axios.get(`http://localhost:5000/store`)
-                // const categoria = await axios.get(`https://digibook-backend.herokuapp.com/categoria`)
-                const categoria = await axios.get(`http://localhost:5000/categoria`)
+                const recurso = await axios.get(`https://digibook-backend.herokuapp.com/store`)
+                // const recurso = await axios.get(`http://localhost:5000/store`)
+                const categoria = await axios.get(`https://digibook-backend.herokuapp.com/categoria`)
+                // const categoria = await axios.get(`http://localhost:5000/categoria`)
 
-                //const perfil = await axios.post(`https://digibook-backend.herokuapp.com/profile`, newPostObj)
-                const perfil = await axios.post(`http://localhost:5000/profile`, newPostObj)
+                const perfil = await axios.post(`https://digibook-backend.herokuapp.com/profile`, newPostObj)
+                // const perfil = await axios.post(`http://localhost:5000/profile`, newPostObj)
 
                 console.log(perfil.data.data.rows[0].admin)
                 const checkCategoria = [0];
@@ -129,7 +130,8 @@ const Store = (props) => {
                         categorias: categoria.data.data.rows,
                         checksCategorias: checkCategoria,
                         idsCategorias: id,
-                        admin: perfil.data.data.rows[0].admin
+                        admin: perfil.data.data.rows[0].admin,
+                        loggeado: perfil.data.data.rows[0].loggeado
                     })
                     console.log(dato.idsCategorias)
 
@@ -156,8 +158,8 @@ const Store = (props) => {
         console.log(newPostObj)
 
         try {
-            //const recurso = await axios.post(`https://digibook-backend.herokuapp.com/eliminar_recurso`, newPostObj)
-            const recurso = await axios.post(`http://localhost:5000/eliminar_recurso`, newPostObj)
+            const recurso = await axios.post(`https://digibook-backend.herokuapp.com/eliminar_recurso`, newPostObj)
+            // const recurso = await axios.post(`http://localhost:5000/eliminar_recurso`, newPostObj)
 
             if (recurso.data.cod === "00") {
                 window.location.href = window.location.href
@@ -299,6 +301,7 @@ const Store = (props) => {
 
     return (
         <>
+            {dato.loggeado &&
             <div className={styles.fondo}>
                 <Accordion>
                     <Form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
@@ -327,6 +330,7 @@ const Store = (props) => {
                     </div>
                     : ''}
             </div>
+            }
 
         </>
 

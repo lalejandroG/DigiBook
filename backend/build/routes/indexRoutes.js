@@ -34,6 +34,8 @@ class IndexRoutes {
         this.router.post('/cargar', indexController_1.default.cargar);
         this.router.post('/descargar', indexController_1.default.descargar);
         this.router.post('/cargar_perfil', indexController_1.default.cargar_perfil);
+        this.router.post('/loggeado', indexController_1.default.loggeado);
+        this.router.post('/desloggeado', indexController_1.default.desloggeado);
     }
 }
 const indexRoutes = new IndexRoutes();

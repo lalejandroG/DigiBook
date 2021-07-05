@@ -62,8 +62,8 @@ const ModalDescargarRecurso = (props) => {
 
                 console.log(newPostObj)
 
-                //const recurso = await axios.post(`https://digibook-backend.herokuapp.com/descargar`, newPostObj)
-                const recurso = await axios.post(`http://localhost:5000/descargar`, newPostObj)
+                const recurso = await axios.post(`https://digibook-backend.herokuapp.com/descargar`, newPostObj)
+                // const recurso = await axios.post(`http://localhost:5000/descargar`, newPostObj)
 
                 console.log(recurso.data.data.rows[0].url)
 
@@ -104,13 +104,14 @@ const ModalDescargarRecurso = (props) => {
                 }}
             >
                 <Fade in={open}>
-                    <div className={classes.paper} >
+                    <div className={classes.paper}>
                         <h3 id="transition-modal-title" className={styles.title}>Descargar recurso</h3>
                         <ResponsiveEmbed width="100%" height="50%">
                             <embed type="image/svg+xml" src={dato.url} width="100%" height="50%"/>
                         </ResponsiveEmbed>
                         <div className={styles.botones2}>
-                            <Button href={dato.url} className={styles.botonI2} style={{marginTop: "16px"}}>Descargar recurso</Button>
+                            <Button href={dato.url} className={styles.botonI2} style={{marginTop: "16px"}}>Descargar
+                                recurso</Button>
                         </div>
                     </div>
 
