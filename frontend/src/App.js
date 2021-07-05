@@ -28,65 +28,42 @@ function App() {
 
     return (
         <>
-            {!user.hasEmitted &&
-            <>
-                <div className={styles.navbarWrapper}>
-                    <Router>
-                        <Switch>
-                            <Route exact path='/' component={Navbar}/>
-                            <Route exact path="/login" component={NavbarInicio}/>
-                            <Route exact path="/registro" component={NavbarInicio}/>
-                            <Route exact path="/recuperar" component={NavbarInicio}/>
-                            <Route exact path='/pago' component={NavbarInicio}/>
-
-                        </Switch>
-                    </Router>
-                </div>
-                <section className={styles.mainSection}>
-                    <Router>
-                        <Switch>
-                            <Route exact path='/' component={LandingPage}/>
-                            <Route exact path="/login" component={Login}/>
-                            <Route exact path="/registro" component={Registro}/>
-                            <Route exact path="/recuperar" component={Recuperar}/>
-                            <Route exact path='/pago' component={Pago}/>
-
-                        </Switch>
-                    </Router>
-                </section>
-            </>
-            }
-
-            {user.hasEmitted &&
-            <>
-                <div className={styles.navbarWrapper}>
-                    <Router>
-                        <Switch>
-                            <Route exact path="/store/:id" component={Navbar}/>
-                            <Route exact path="/revision/:id" component={Navbar}/>
-                            <Route exact path="/usuarios/:id" component={Navbar}/>
-                            <Route exact path="/profile/:id" component={Navbar}/>
-                            <Route exact path="/favorite/:id" component={Navbar}/>
-                            <Route exact path="/detail/:id/:id_r" component={Navbar}/>
-                            <Route exact path="/comments/:id/:id_r" component={Navbar}/>
-                        </Switch>
-                    </Router>
-                </div>
-                <section className={styles.mainSection}>
-                    <Router>
-                        <Switch>
-                            <Route exact path="/store/:id" component={Store}/>
-                            <Route exact path="/revision/:id" component={Revision}/>
-                            <Route exact path="/usuarios/:id" component={Usuarios}/>
-                            <Route exact path="/profile/:id" component={Profile}/>
-                            <Route exact path="/favorite/:id" component={Favorite}/>
-                            <Route exact path="/detail/:id/:id_r" component={Detail}/>
-                            <Route exact path="/comments/:id/:id_r" component={Comments}/>
-                        </Switch>
-                    </Router>
-                </section>
-            </>
-            }
+            <div className={styles.navbarWrapper}>
+                <Router>
+                    <Switch>
+                        <Route exact path='/' component={Navbar}/>
+                        <Route exact path="/login" component={NavbarInicio}/>
+                        <Route exact path="/registro" component={NavbarInicio}/>
+                        <Route exact path="/recuperar" component={NavbarInicio}/>
+                        <Route exact path='/pago' component={NavbarInicio}/>
+                        <Route exact path="/store/:id" component={Navbar}/>
+                        <Route exact path="/revision/:id" component={Navbar}/>
+                        <Route exact path="/usuarios/:id" component={Navbar}/>
+                        <Route exact path="/profile/:id" component={Navbar}/>
+                        <Route exact path="/favorite/:id" component={Navbar}/>
+                        <Route exact path="/detail/:id/:id_r" component={Navbar}/>
+                        <Route exact path="/comments/:id/:id_r" component={Navbar}/>
+                    </Switch>
+                </Router>
+            </div>
+            <section className={styles.mainSection}>
+                <Router>
+                    <Switch>
+                        <Route exact path='/' component={LandingPage}/>
+                        <Route exact path="/login" component={Login}/>
+                        <Route exact path="/registro" component={Registro}/>
+                        <Route exact path="/recuperar" component={Recuperar}/>
+                        <Route exact path='/pago' component={Pago}/>
+                        <Route exact path="/store/:id" component={Store}/>
+                        <Route exact path="/revision/:id" component={Revision}/>
+                        <Route exact path="/usuarios/:id" component={Usuarios}/>
+                        <Route exact path="/profile/:id" component={Profile}/>
+                        <Route exact path="/favorite/:id" component={Favorite}/>
+                        <Route exact path="/detail/:id/:id_r" component={Detail}/>
+                        <Route exact path="/comments/:id/:id_r" component={Comments}/>
+                    </Switch>
+                </Router>
+            </section>
 
         </>
     );
