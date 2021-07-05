@@ -21,10 +21,6 @@ import {useFirebaseApp, useUser} from "reactfire";
 
 
 function App() {
-    const firebase = useFirebaseApp();
-    const user = useUser();
-    console.log(firebase)
-    console.log(user)
 
     return (
         <>

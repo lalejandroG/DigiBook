@@ -16,6 +16,7 @@ const Loggeado = (props) => {
         id: ''
     })
 
+
     const salir = async () => {
         console.log("no entiendo")
         // setDato({
