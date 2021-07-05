@@ -17,14 +17,18 @@ const Loggeado = (props) => {
     })
 
     const salir = async () => {
+        console.log("no entiendo")
+        // setDato({
+        //     ...dato,
+        //     id: arrayDeCadenas[2]
+        // })
 
-        setDato({
-            ...dato,
+        let obj = {
             id: arrayDeCadenas[2]
-        })
+        }
 
         try {
-            const loggeado = await axios.post(`https://digibook-backend.herokuapp.com/desloggeado`, dato)
+            const loggeado = await axios.post(`https://digibook-backend.herokuapp.com/desloggeado`, obj)
             // const loggeado = await axios.post(`http://localhost:5000/desloggeado`, dato)
             console.log(loggeado.data.cod)
 
