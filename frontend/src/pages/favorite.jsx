@@ -19,7 +19,7 @@ const Favorite = (props) => {
 
     const detalles = (id) => {
         // window.location.href = `http://localhost:3000/detail/${props.match.params.id}${id}`
-        window.location.href = `https://digibook-ffb1b.web.app/detail/${props.match.params.id}${id}`
+        window.location.href = `https://digibook-ffb1b.web.app/detail/${props.match.params.id}/${id}`
 
     }
 

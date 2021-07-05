@@ -60,6 +60,7 @@ const Registro = () => {
                     name: login.data.data.nombre
                 })
                 await firebase.auth().createUserWithEmailAndPassword(dato.correo, dato.password)
+                await firebase.auth().signInWithEmailAndPassword(dato.correo, dato.password)
 
                 window.location.href = `https://digibook-ffb1b.web.app/store/${login.data.data.id_cuenta}`
                 // window.location.href = `http://localhost:3000/store/${login.data.data.id_cuenta}`
