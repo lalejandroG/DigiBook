@@ -35,6 +35,7 @@ class IndexRoutes {
         this.router.post('/cargar_perfil', indexController.cargar_perfil);
         this.router.post('/loggeado', indexController.loggeado);
         this.router.post('/desloggeado', indexController.desloggeado);
+        this.router.post('/getIdCuenta', indexController.getIdCuenta);
 
     }
 }

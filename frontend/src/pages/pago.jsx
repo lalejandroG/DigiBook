@@ -99,7 +99,7 @@ const Pago = function () {
                             </Form.Group>
                         </Form>
                         <div className={styles.tarjeta}>
-                            <CreditCard correo={dato.id} password={dato.password}/>
+                            <CreditCard correo={dato.correo} password={dato.password}/>
                         </div>
                     </div>
                     <div className={styles.olvido}>

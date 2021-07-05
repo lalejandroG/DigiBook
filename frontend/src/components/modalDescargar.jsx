@@ -106,13 +106,13 @@ const ModalDescargarRecurso = (props) => {
                 <Fade in={open}>
                     <div className={classes.paper}>
                         <h3 id="transition-modal-title" className={styles.title}>Descargar recurso</h3>
-                        <ResponsiveEmbed width="100%" height="50%">
-                            <embed type="image/svg+xml" src={dato.url} width="100%" height="50%"/>
+                        <ResponsiveEmbed width="100%" height="90%">
+                            <embed type="image/svg+xml" src={dato.url} width="100%" height="90%"/>
                         </ResponsiveEmbed>
-                        <div className={styles.botones2}>
-                            <Button href={dato.url} className={styles.botonI2} style={{marginTop: "16px"}}>Descargar
-                                recurso</Button>
-                        </div>
+                        {/*<div className={styles.botones2}>*/}
+                        {/*    <Button href={dato.url} className={styles.botonI2} style={{marginTop: "16px"}}>Descargar*/}
+                        {/*        recurso</Button>*/}
+                        {/*</div>*/}
                     </div>
 
                 </Fade>

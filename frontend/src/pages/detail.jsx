@@ -27,6 +27,7 @@ const Detail = (props) => {
         url: '',
         fav: false,
         premium: false,
+        admin: false,
         loggeado: false
     });
 
@@ -53,7 +54,8 @@ const Detail = (props) => {
                 console.log(recurso.data.cod)
                 console.log(recurso.data.fav)
                 console.log(recurso.data.premium)
-                console.log(recurso.data.data.rows[0].avg)
+
+                console.log(recurso.data.premium.admin)
                 console.log(perfil.data.cod)
 
                 if (recurso.data.cod === "00" && perfil.data.cod === "00") {
@@ -68,7 +70,8 @@ const Detail = (props) => {
                         titulo: recurso.data.data.rows[0].titulo,
                         url: recurso.data.data.rows[0].url,
                         fav: recurso.data.fav,
-                        premium: recurso.data.premium,
+                        premium: recurso.data.premium.premium,
+                        admin: recurso.data.premium.admin,
                         loggeado: perfil.data.data.rows[0].loggeado
                     })
 
@@ -191,6 +194,9 @@ const Detail = (props) => {
 
                             <div className={styles.botones}>
                                 {dato.premium ?
+                                    <ModalDescargarRecurso id_r={props.match.params.id_r}/>
+                                    : ''}
+                                {dato.admin ?
                                     <ModalDescargarRecurso id_r={props.match.params.id_r}/>
                                     : ''}
                             </div>
