@@ -59,11 +59,33 @@ const Registro = () => {
                     imagen: login.data.data.imagen_perfil,
                     name: login.data.data.nombre
                 })
-                await firebase.auth().createUserWithEmailAndPassword(dato.correo, dato.password)
-                await firebase.auth().signInWithEmailAndPassword(dato.correo, dato.password)
 
-                window.location.href = `https://digibook-ffb1b.web.app/store/${login.data.data.id_cuenta}`
-                // window.location.href = `http://localhost:3000/store/${login.data.data.id_cuenta}`
+                try {
+                    const loggeado = await axios.post(`https://digibook-backend.herokuapp.com/loggeado`, login.data.data)
+                    // const loggeado = await axios.post(`http://localhost:5000/loggeado`, login.data.data)
+                    console.log(loggeado.data.cod)
+
+                    if (loggeado.data.cod === "00") {
+                        await firebase.auth().createUserWithEmailAndPassword(dato.correo, dato.password)
+                        await firebase.auth().signInWithEmailAndPassword(dato.correo, dato.password)
+
+                        window.location.href = `https://digibook-ffb1b.web.app/store/${login.data.data.id_cuenta}`
+                        // window.location.href = `http://localhost:3000/store/${login.data.data.id_cuenta}`
+
+                    } else {
+                        setData({
+                            ...dato,
+                            loggeado: false,
+                            alerta: login.data.msg,
+                            error: true
+                        })
+                        console.log(login.data.error)
+                    }
+                } catch
+                    (error) {
+                    console.log(error)
+                }
+
             } else {
                 setData({
                     ...dato,

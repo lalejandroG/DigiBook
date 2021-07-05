@@ -7,40 +7,40 @@ import {useHistory} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import axios from "axios";
 
-const RecuperarPsw=()=>{
+const RecuperarPsw = () => {
 
     let history = useHistory()
 
-     const {handleSubmit} = useForm({
-        reValidateMode:'onSubmit'
+    const {handleSubmit} = useForm({
+        reValidateMode: 'onSubmit'
     });
 
-     const [dato, setData] = useState({
-        correo:'',
-        password:'',
-        passwordValidate:'',
+    const [dato, setData] = useState({
+        correo: '',
+        password: '',
+        passwordValidate: '',
         loggeado: false,
-        id:'',
-        admin:0,
-        biografia:'',
-        imagen:'',
-        nombre:'',
+        id: '',
+        admin: 0,
+        biografia: '',
+        imagen: '',
+        nombre: '',
         validado: true,
-        alerta:'',
+        alerta: '',
         error: false
     });
 
-    const onSubmit=async()=> {
+    const onSubmit = async () => {
 
         let newPostObj = {
-        correo: dato.correo,
-        password: dato.password,
-        passwordValidate: dato.passwordValidate
+            correo: dato.correo,
+            password: dato.password,
+            passwordValidate: dato.passwordValidate
         };
 
         console.log(newPostObj)
 
-        if(dato.password === dato.passwordValidate){
+        if (dato.password === dato.passwordValidate) {
 
             setData({
                 ...dato,
@@ -55,19 +55,22 @@ const RecuperarPsw=()=>{
                 console.log(login.data)
                 console.log(login.data.cod)
 
-                if(login.data.cod === "00"){
+                if (login.data.cod === "00") {
                     setData({
                         ...dato,
                         loggeado: true
                     })
-                    window.location.href= '/store'
+                    alert("Clave cambiada con exito  ");
+                    window.location.href = `https://digibook-ffb1b.web.app/`
+                    // window.location.href = `http://localhost:3000/`
 
-                }else{
-                     setData({
+                } else {
+                    setData({
                         ...dato,
                         alerta: login.data.msg,
                         error: true
                     })
+                    alert("La clave no pudo ser cambiada  ");
                     console.log(login.data.error)
                 }
 
@@ -75,7 +78,7 @@ const RecuperarPsw=()=>{
                 console.log(error)
             }
 
-        }else{
+        } else {
             setData({
                 ...dato,
                 validado: false
@@ -84,46 +87,47 @@ const RecuperarPsw=()=>{
 
     }
 
-     const handleChange = e =>{
-          setData({
-              ...dato,
-              [e.target.name] : e.target.value
-          })
-         console.log(dato.password)
-         console.log(dato.correo)
+    const handleChange = e => {
+        setData({
+            ...dato,
+            [e.target.name]: e.target.value
+        })
+        console.log(dato.password)
+        console.log(dato.correo)
 
-      }
+    }
 
 
-
-    return(
+    return (
         <>
             <div className={styles.suscribe}>
                 {!dato.validado ?
                     <Alert variant="danger" className={styles.alertas}>Las contraseñas deben ser iguales</Alert>
-                :''
+                    : ''
                 }
                 {dato.error ?
                     <Alert variant="danger" className={styles.alertas}>{dato.alerta}</Alert>
-                :''
+                    : ''
                 }
                 <div className={styles.form}>
                     <div>
                         <p className={styles.titulo}>Recuperar contraseña</p>
                     </div>
                     <div className={styles.content}>
-                            <Form onSubmit={handleSubmit(onSubmit)}>
-                                <Form.Group controlId="formBasicEmail" className={style.space}>
-                                    <Form.Label>Email address</Form.Label>
-                                    <Form.Control type="email" name={"correo"} placeholder="Enter email" onChange={handleChange} />
-                              </Form.Group>
+                        <Form onSubmit={handleSubmit(onSubmit)}>
+                            <Form.Group controlId="formBasicEmail" className={style.space}>
+                                <Form.Label>Email address</Form.Label>
+                                <Form.Control type="email" name={"correo"} placeholder="Enter email"
+                                              onChange={handleChange}/>
+                            </Form.Group>
 
-                              <Form.Group controlId="formBasicPassword">
+                            <Form.Group controlId="formBasicPassword">
                                 <Form.Label>New password</Form.Label>
-                                <Form.Control type="password" name={"password"} placeholder=" New password" onChange={handleChange}/>
-                              </Form.Group>
+                                <Form.Control type="password" name={"password"} placeholder=" New password"
+                                              onChange={handleChange}/>
+                            </Form.Group>
 
-                              <Form.Group controlId="formBasicPassword" className={style.space}>
+                            <Form.Group controlId="formBasicPassword" className={style.space}>
                                 <Form.Label>Repeat password</Form.Label>
                                 <Form.Control
                                     type="password"
@@ -131,20 +135,20 @@ const RecuperarPsw=()=>{
                                     placeholder="Repeat password"
                                     onChange={handleChange}
                                 />
-                              </Form.Group>
+                            </Form.Group>
 
-                              <div className={styles.botones}>
-                                  <Button type="submit" className={styles.botonI}>Recuperar</Button>{' '}
-                              </div>
+                            <div className={styles.botones}>
+                                <Button type="submit" className={styles.botonI}>Recuperar</Button>{' '}
+                            </div>
 
-                            </Form>
+                        </Form>
                     </div>
                     <div className={style.olvido}>
                         <Link href="../pages/landingPage">
                             <a href="/" className={styles.botonO}>
                                 Cancelar
                             </a>
-                    </Link>
+                        </Link>
                     </div>
                 </div>
 
