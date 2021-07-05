@@ -64,14 +64,17 @@ const MenuDesplegable = (props) => {
                     {/*<Button className={styles.boton}>Suscripciones</Button>{' '}*/}
                     {/*<Button className={styles.boton}>Nosotros</Button>{' '}*/}
                     {/*<Button className={styles.boton}>Contáctanos</Button>{' '}*/}
-                    <Link href={`https://digibook-ffb1b.web.app/store/${arrayDeCadenas[2]}`}>
-                        {/*<Link href={`http://localhost:3000/store/${arrayDeCadenas[2]}`}>*/}
-                        {/*    <a href={`http://localhost:3000/store/${arrayDeCadenas[2]}`} className={styles.botones}>*/}
-                        <a href={`https://digibook-ffb1b.web.app/store/${arrayDeCadenas[2]}`}
-                           className={styles.botones}>
-                            <Button className={styles.boton}>Tienda</Button>{' '}
-                        </a>
-                    </Link>
+                    {definirOpciones(props.path) ?
+                        <Link href={`https://digibook-ffb1b.web.app/store/${arrayDeCadenas[2]}`}>
+                            {/*<Link href={`http://localhost:3000/store/${arrayDeCadenas[2]}`}>*/}
+                            {/*    <a href={`http://localhost:3000/store/${arrayDeCadenas[2]}`} className={styles.botones}>*/}
+                            <a href={`https://digibook-ffb1b.web.app/store/${arrayDeCadenas[2]}`}
+                               className={styles.botones}>
+                                <Button className={styles.boton}>Tienda</Button>{' '}
+                            </a>
+                        </Link>
+                        : ''
+                    }
 
                     {definirOpciones(props.path) && dato.admin === true ?
                         <div className={styles.urls}>

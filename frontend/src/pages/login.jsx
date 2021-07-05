@@ -49,7 +49,7 @@ const Login = function () {
                     id: login.data.data.id_cuenta,
                 })
                 try {
-                    const loggeado = await axios.post(`https://digibook-backend.herokuapp.com/loggeado`, login.data.data.id_cuenta)
+                    const loggeado = await axios.post(`https://digibook-backend.herokuapp.com/loggeado`, login.data.data)
                     // const loggeado = await axios.post(`http://localhost:5000/loggeado`, login.data.data)
                     console.log(loggeado.data.cod)
 

@@ -50,7 +50,7 @@ const Profile = (props) => {
                 const recurso = await axios.post(`https://digibook-backend.herokuapp.com/profile`, newPostObj)
                 // const recurso = await axios.post(`http://localhost:5000/profile`, newPostObj)
 
-                const datos = await axios.post(`https://digibook-backend.herokuapp.com/publicados`, newPostObj)
+                const publicados = await axios.post(`https://digibook-backend.herokuapp.com/publicados`, newPostObj)
                 // const publicados = await axios.post(`http://localhost:5000/publicados`, newPostObj)
 
                 console.log(recurso.data.cod)

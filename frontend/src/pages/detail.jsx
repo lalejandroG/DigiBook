@@ -180,12 +180,12 @@ const Detail = (props) => {
                             </Form.Group>
 
                             <Link
-                                href={`https://digibook-ffb1b.web.app/comments/${props.match.params.id}${props.match.params.id_r}`}>
+                                href={`https://digibook-ffb1b.web.app/comments/${props.match.params.id}/${props.match.params.id_r}`}>
                                 {/*<Link href={`http://localhost:3000/comments/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${props.match.params.id_r}`}>*/}
                                 {/*    <a id={styles.mas} href={`http://localhost:3000/comments/${props.match.params.id.substring((props.match.params.id.length - 2), props.match.params.id.length)}/${props.match.params.id_r}`}> Ver*/}
                                 {/*        más</a>*/}
                                 <a id={styles.mas}
-                                   href={`https://digibook-ffb1b.web.app/comments/${props.match.params.id}${props.match.params.id_r}`}> Ver
+                                   href={`https://digibook-ffb1b.web.app/comments/${props.match.params.id}/${props.match.params.id_r}`}> Ver
                                     más</a>
                             </Link>
 
